@@ -1,9 +1,16 @@
 {
-  "name": "uber-lint",
+  "name": "lint-trap",
   "version": "0.1.0",
   "description": "JavaScript linter module for Uber projects",
   "author": "Andrew de Andrade <aandrade@uber.com>",
-  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uber/lint-trap"
+  },
+  "bugs": {
+    "url": "https://github.com/uber/lint-trap/issues"
+  },
+  "main": "./lib/index.js",
   "keywords": [
     "lint",
     "jshint",
@@ -11,6 +18,9 @@
     "eslint",
     "uber"
   ],
+  "bin": {
+    "lint-trap": "./bin/lint-trap.js"
+  },
   "dependencies": {
     "jshint": "~2.5.6",
     "eslint": "~0.8.2",
@@ -34,7 +44,7 @@
   },
   "scripts": {
     "test": "tape test/**/*.tape.js",
-    "lint": "bin/uber-lint"
+    "lint": "./bin/uber-lint"
   },
   "license": "MIT"
 }
