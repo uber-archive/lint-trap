@@ -1,15 +1,15 @@
 'use strict';
+require('array.prototype.find');
 var lint = require('../lib/lint-stream')();
 var path = require('path');
-var console = require('console');
+//var console = require('console');
 var getJavaScriptFiles = require('../lib/get-javascript-files');
 var fixturesPath = path.join(__dirname, 'fixtures');
 var test = require('tape');
 var testResults = require(path.join(fixturesPath, 'results.json'));
-require('array.prototype.find');
 var rootDir = path.resolve(__dirname, '..');
 
-test('Correct JSON Results', function(t) {
+test('lint-trap JSON stream results', function testStream(t) {
     t.plan(testResults.length +  1);
 
     getJavaScriptFiles(fixturesPath, function lintFilesCallback(err, jsfiles) {
@@ -30,7 +30,7 @@ test('Correct JSON Results', function(t) {
 
             testResults.forEach(function checkTestResult(expected) {
 
-                var actual = streamMessages.find(function (message) {
+                var actual = streamMessages.find(function match(message) {
                     return message.file === expected.file;
                 });
 
@@ -38,7 +38,6 @@ test('Correct JSON Results', function(t) {
                     path.relative(rootDir, expected.file));
             });
 
-            //console.log(JSON.stringify(streamMessages, null, 4));
         });
     });
 

@@ -1,13 +1,28 @@
 'use strict';
-var lintTrap = require('../lib/');
 var path = require('path');
-var console = require('console');
-var getJavaScriptFiles = require('../lib/get-javascript-files');
-var fixturesPath = path.join(__dirname, 'fixtures');
+var fs = require('fs');
+var test = require('tape');
 
-getJavaScriptFiles(fixturesPath, function lintFilesCallback(err, jsfiles) {
-    if (err) {
-        return console.error(err);
-    }
-    lintTrap(jsfiles);
+var execFile = require('child_process').execFile;
+
+var fixturesPath = path.join(__dirname, 'fixtures');
+var binPath = path.resolve(__dirname, '../bin/lint-trap.js');
+
+var expectedStdoutPath = path.join(fixturesPath, 'results.stdout');
+var expectedStdout = fs.readFileSync(expectedStdoutPath, 'utf8');
+
+test('Command Line Interface', function testCLI(t) {
+    t.plan(2);
+
+    var args = [fixturesPath];
+    var opts = {};
+
+    execFile(binPath, args, opts, function callback(err, stdout, stderr) {
+        if (err) {
+            t.fail(err);
+        }
+
+        t.equal(stderr, '', 'No output on stderr');
+        t.equal(stdout, expectedStdout, 'Correct output on stdout');
+    });
 });
