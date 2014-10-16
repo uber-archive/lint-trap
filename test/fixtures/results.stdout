@@ -1,0 +1,6 @@
+globals-invalid.js
+    error  eslint     9:8    'process' is not defined.
+    error  eslint    10:8    'global' is not defined.
+    error  eslint    11:8    'exports' is not defined.
+    error  eslint    12:8    'console' is not defined.
+
