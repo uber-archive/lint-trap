@@ -1,0 +1,5 @@
+node_modules/
+test/fixtures/sirvice.git/
+.jscsrc
+.jshintrc
+.eslintrc
