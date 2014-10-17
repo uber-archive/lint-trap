@@ -8,7 +8,7 @@ var execFile = require('child_process').execFile;
 var fixturesPath = path.join(__dirname, 'fixtures');
 var binPath = path.resolve(__dirname, '../bin/lint-trap.js');
 
-var expectedStdoutPath = path.join(fixturesPath, 'results.stdout');
+var expectedStdoutPath = path.join(fixturesPath, 'rules.stdout');
 var expectedStdout = fs.readFileSync(expectedStdoutPath, 'utf8');
 
 test('Command Line Interface', function testCLI(t) {

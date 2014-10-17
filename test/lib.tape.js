@@ -2,11 +2,10 @@
 require('array.prototype.find');
 var lint = require('../lib/lint-stream')();
 var path = require('path');
-//var console = require('console');
 var getJavaScriptFiles = require('../lib/get-javascript-files');
 var fixturesPath = path.join(__dirname, 'fixtures');
 var test = require('tape');
-var testResults = require(path.join(fixturesPath, 'results.json'));
+var testResults = require(path.join(fixturesPath, 'rules.json'));
 var rootDir = path.resolve(__dirname, '..');
 
 test('lint-trap JSON stream results', function testStream(t) {
