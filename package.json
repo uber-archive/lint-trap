@@ -49,8 +49,7 @@
   },
   "scripts": {
     "test": "tape test/**/*.tape.js",
-    "lint": "./bin/lint-trap.js .",
-    "postinstall": "node ./scripts/postinstall.js"
+    "lint": "./bin/lint-trap.js ."
   },
   "license": "MIT"
 }
