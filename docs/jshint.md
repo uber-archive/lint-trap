@@ -222,3 +222,30 @@ If you want any other globals you can require them. i.e.
  - `require('process')`
  - `require('global')`
  - `require('console')`
+
+## Additions
+
+Below is a list of options not currently set that should
+    probably be set.
+
+#### `"freeze": true`
+
+Setting to true bans native prototype mutation. Native prototype
+    mutation is a terrible idea and breaks the npm modularity
+    system by running into name collisions.
+
+#### `"maxcomplexity": 10`
+
+We should set a default on cyclomatic complexity. Cyclomatic
+    complexity is not something that should be enforce perse but
+    it's a great guideline to prompt the application developer
+    to either break his code into smaller functions or add an
+    exclusion comment.
+
+#### `"maxlen": 80`
+
+We should have a line limit for consistency. I recommend 80 as
+    it's the most common and standard limit.
+
+It's also incredibly useful for being able to view multiple
+    buffers side by side in either your editor or terminal.
