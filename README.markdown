@@ -20,40 +20,38 @@ project's `package.json` manifest file, like so:
             ...
             "lint": "lint-trap",
             ...
-        }
+        },
         ...
     }
 
 ... and then you can invoke it by executing `npm run lint`.
 
-TODO
-----
 
-- Investigate which (if any) of the command line flags from each linter should
-  be available in lint-trap
-- Project conversion helpers
-  - Find and consolidate all .ignore files as .lintignore
-    - jscs is a special case (`excludeFiles` in `.jscsrc`)
-  - purge linter configuration and ignore files from repo
-  - purge linter scripts from package.json
-  - purge `jshintConfig` property from package.json if exists
-- post-install script
-  - check if lint-trap has been installed in a project by checking if parent 
-    folder is `node_modules/`, then checking if parent of `node_modules/` 
-    contains lint-trap in the `devDependencies` of the package.json file. 
-    - If lint-trap has been installed:
-      - add `.jshintrc`, `.eslintrc` and `.jscsrc` to `.gitignore`
-      - Support text editor linters by symlinking from project's root folder to 
-        linter configuration files in `./node_modules/lint-trap/lib/rc/`
-- JSON reporter
-- TAP reporter
+Overriding Rules
+----------------
 
-linters need to be run once per directory with unique rc files
+Since lint-trap is meant to enforce good coding style and consistency across
+many projects from the same organization, there is no equivalent to `.jscsrc`,
+`.jshintrc` and `.eslintrc` files, where you can configure rules, nor
+are there any plans to support this feature at this time. 
 
-The only way to overwrite uber jshint, jscs and eslint rules is per file. If
-you want to overwrite it per project, file a github issue in this repo since
-this might be a use case or linting rule we should consider for inclusion in
-this project.
+If there are rules that you feel you absolutely must override, you can do so
+within any files producing the error. If you find yourself ignoring or
+modifying a specific rule on a file by file basis very frequently, please check
+the [rules documentation][docs] to understand the technical reasons for why
+that rule has been encluded and enforced. If you disagree with the
+justifications outlined in the docs, [check the issues][issues] to see whether
+or not someone has already filed an issue raising the same concerns as you. If
+you still think your exception has merit, and no one has yes raised that issue,
+please [file a new issue][file-an-issue]. 
+
+If you want to override the rules for a specific linter, see the documentation
+for the linter producing the error or warning thrown.
+
+ - [Configuring ESLint][configuring-eslint]
+ - [Configuring JSHint][configuring-jshint]
+ - [Configuring JSCS][configuring-jscs]
+
 
 Indentation
 -----------
@@ -82,6 +80,7 @@ detected is as follows:
 
 See [set-indent-rule.js][set-indent-rule.js] for the implementation.
 
+
 Globals
 -------
 
@@ -97,6 +96,11 @@ include the following two modules in your project:
  - https://github.com/defunctzombie/node-process
 
 
+[configuring-eslint]: http://eslint.org/docs/configuring/
+[configuring-jshint]: http://www.jshint.com/docs/
+[configuring-jscs]: https://github.com/jscs-dev/node-jscs#error-suppression
+[issues]: https://github.com/uber/lint-trap/issues
+[file-an-issue]: https://github.com/uber/lint-trap/issues/new
 [docs]: https://github.com/uber/lint-trap/tree/master/docs
 [wadlers-law]: http://www.haskell.org/haskellwiki/Wadler's_Law
 [set-indent-rule.js]: https://github.com/uber/lint-trap/blob/master/lib/set-indent-rule.js
