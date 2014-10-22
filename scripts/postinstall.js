@@ -111,29 +111,30 @@ function finished(err) {
     debug('finished');
 }
 
+function deleteFilesCallback(err, parentModulePath) {
+    if (err) {
+        return debug(err);
+    }
+    debug('deleted linter .rc files in %s', parentModulePath);
+    symlinkLinterConfigurationFiles(parentModulePath, finished);
+}
+
+function cleanRepoCallback(err, parentModulePath) {
+    if (err) {
+        return debug(err);
+    }
+    debug('Cleaned manifest in %s', parentModulePath);
+    var cb = deleteFilesCallback.bind(null, parentModulePath);
+    deleteLinterConfigurationFiles(parentModulePath, cb);
+}
+
 function main() {
     // Path to which lint-trap is installed
     var parentPath = path.dirname(rootPath);
-
     if (path.basename(parentPath) === 'node_modules') {
         var parentModulePath = path.dirname(parentPath);
-
-        cleanRepo(parentModulePath, function cleanRepoCallback(err) {
-            if (err) {
-                return debug(err);
-            }
-            debug('Cleaned manifest in %s', parentModulePath);
-
-            deleteLinterConfigurationFiles(parentModulePath, function (err) {
-                if (err) {
-                    return debug(err);
-                }
-                debug('deleted linter .rc files in %s', parentModulePath);
-
-                symlinkLinterConfigurationFiles(parentModulePath, finished);
-            });
-
-        });
+        var cb = cleanRepoCallback.bind(null, parentModulePath);
+        cleanRepo(parentModulePath, cb);
     } else {
         symlinkLinterConfigurationFiles(rootPath, finished);
     }

@@ -3,3 +3,4 @@ test/fixtures/*.git/
 /.jscsrc
 /.jshintrc
 /.eslintrc
+*.log
