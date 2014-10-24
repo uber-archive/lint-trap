@@ -1,6 +1,0 @@
-node_modules/
-test/fixtures/*.git/
-/.jscsrc
-/.jshintrc
-/.eslintrc
-*.log
