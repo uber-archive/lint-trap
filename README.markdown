@@ -27,6 +27,31 @@ project's `package.json` manifest file, like so:
 ... and then you can invoke it by executing `npm run lint`.
 
 
+Linting Support in Text Editors
+-------------------------------
+
+With linting rules moved to an npm module, linters such as [SublimeLinter][sl]
+for Sublime Text, [syntastic][syn] for vim and [flycheck][fc] for emacs, will
+be unable to to find the lint-trap linting rules for the project.
+
+In the short term this can be fixed by copying those files from lint-trap to
+your project and adding them to your `.gitignore`. From the root of your
+project:
+
+    cp ./node_modules/lint-trap/lib/rc/.{jscs,eslint,jshint}rc .
+    rc=( .{jscs,eslint,jshint}rc )
+    for c in "${rc[@]}"; do echo $c >> .gitignore; done;
+
+Symlinking was preferred here, but SublimeLinter won't load symlinked linter
+configuration files.
+
+In the future, we will have lint-trap plugin for lint-trap so that you don't
+need to install plugins for all the linters that lint-trap supports. In the
+meantime, you should consult the documentation for the linting engine available
+for your code editor to discover how to enable support for jscs, jshint and
+eslint.
+
+
 Overriding Rules
 ----------------
 
@@ -96,6 +121,45 @@ include the following two modules in your project:
  - https://github.com/defunctzombie/node-process
 
 
+Contributing
+------------
+
+Contributions to lint-trap are welcome, but since lint-trap is effectively a
+module that encapsulates a set of opinions and throws errors and warnings at
+you when you violate those opinions, there is a lot of room to debate over
+[what color to paint our bikeshed][bikeshed].
+
+Before you begin filing an issue to argue why you think your color of paint is
+superior, it's worth knowing how the current set of rules were determined. The
+engineers on web core, realtime developer productivity and dispatch/realtime
+teams were the first to go through all the rules and debate the merit of each.
+This group is consists of developers that collectively have seen tons of code
+and tons of bugs in production systems that arose from poor choice of coding 
+style and conventions.
+
+The rules and the reasoning behind each should all be documented or will be
+over time. Before we bikeshed over a rule, please check the rules
+[documentation][docs]. If a rule hasn't been documented or hasn't yet been
+documented adequately, open an issue asking for clarification and better 
+documentation *first*. If a rule has been documented and you still disagree,
+feel free to bikeshed. We all love bikeshedding, but we would like to keep it
+to a minimum.
+
+
+[sl]: http://sublimelinter.readthedocs.org/
+[syn]: https://github.com/scrooloose/syntastic
+[fc]: http://flycheck.readthedocs.org/
+
+[sl-jshint]: https://github.com/SublimeLinter/SublimeLinter-jshint
+[sl-jscs]: https://github.com/SublimeLinter/SublimeLinter-jscs/
+[sl-eslint]: https://github.com/roadhump/SublimeLinter-eslint
+
+[syn-jshint]: https://github.com/scrooloose/syntastic/wiki/JavaScript%3A---jshint
+[syn-jscs]: https://github.com/scrooloose/syntastic/wiki/JavaScript%3A---jscs
+[syn-eslint]: https://github.com/scrooloose/syntastic/wiki/JavaScript%3A---eslint
+
+[fs-javascript]: http://flycheck.readthedocs.org/en/latest/guide/languages.html#javascript
+
 [configuring-eslint]: http://eslint.org/docs/configuring/
 [configuring-jshint]: http://www.jshint.com/docs/
 [configuring-jscs]: https://github.com/jscs-dev/node-jscs#error-suppression
@@ -104,3 +168,5 @@ include the following two modules in your project:
 [docs]: https://github.com/uber/lint-trap/tree/master/docs
 [wadlers-law]: http://www.haskell.org/haskellwiki/Wadler's_Law
 [set-indent-rule.js]: https://github.com/uber/lint-trap/blob/master/lib/set-indent-rule.js
+
+[bikeshed]: http://red.bikeshed.com/
