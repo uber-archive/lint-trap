@@ -1,4 +1,4 @@
-# JShint guidelines.
+# ESLint guidelines.
 
 ## Status quo.
 
