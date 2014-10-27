@@ -1,8 +1,8 @@
 'use strict';
 require('array.prototype.find');
-var lint = require('../lib/lint-stream')();
+var lint = require('../lint-stream')();
 var path = require('path');
-var getJavaScriptFiles = require('../lib/get-javascript-files');
+var getJavaScriptFiles = require('../get-javascript-files');
 var fixturesPath = path.join(__dirname, 'fixtures');
 var test = require('tape');
 var testResults = require(path.join(fixturesPath, 'rules.json'));
