@@ -6,8 +6,8 @@ function makeFileStream(type, files) {
     var currentFile = null;
     var fileErrors = [];
 
-    function enqueueEmpty(file) {
-        this.queue({
+    function pushEmpty(file) {
+        this.push({
             type: 'file',
             file: file,
             linter: type,
@@ -15,15 +15,15 @@ function makeFileStream(type, files) {
         });
     }
 
-    function enqueueUpToAndIncludingCurrentFile() {
+    function pushUpToAndIncludingCurrentFile() {
         // Emit a file message for all previous files that did not contain
         // errors
         var index = files.indexOf(currentFile);
-        files.slice(0, index).forEach(enqueueEmpty.bind(this));
+        files.slice(0, index).forEach(pushEmpty.bind(this));
 
         // Emit a file message for the current file with errors
 
-        this.queue({
+        this.push({
             type: 'file',
             file: currentFile,
             linter: type,
@@ -46,7 +46,7 @@ function makeFileStream(type, files) {
         // If we've moved on to a different file, emit stream data for the
         // previous file.
         if (errorMessage.file !== currentFile) {
-            enqueueUpToAndIncludingCurrentFile.call(this);
+            pushUpToAndIncludingCurrentFile.call(this);
             currentFile = errorMessage.file;
         }
 
@@ -61,14 +61,14 @@ function makeFileStream(type, files) {
 
     function end() {
         if (currentFile) {
-            enqueueUpToAndIncludingCurrentFile.call(this);
+            pushUpToAndIncludingCurrentFile.call(this);
         }
         // Emit a file message for all remaining files that do not contain
         // errors
-        files.forEach(enqueueEmpty.bind(this));
+        files.forEach(pushEmpty.bind(this));
 
         // Terminate stream
-        this.queue(null);
+        this.push(null);
     }
 
     return through(write, end);
