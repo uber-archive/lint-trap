@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/uber/lint-trap/issues"
   },
-  "main": "./lib/index.js",
+  "main": "./lint.js",
   "keywords": [
     "lint",
     "jshint",

@@ -53,7 +53,7 @@ function deleteLinterConfigurationFiles(repoPath, cb) {
 }
 
 function symlinkLinterConfigurationFiles(modulePath, cb) {
-    var lintTrapRCFilesPath = path.resolve(rootPath, 'lib/rc/');
+    var lintTrapRCFilesPath = path.resolve(rootPath, './rc/');
 
     async.each(linterConfigurationFiles, function symlinkFile(filename, done) {
         var target = path.resolve(lintTrapRCFilesPath, filename);
