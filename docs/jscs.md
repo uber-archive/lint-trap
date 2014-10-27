@@ -141,7 +141,7 @@ yourself writing lots of `handleError` callback functions in the same file:
     }
 
 Overall, this rule that requires that all functions be named may same tedious
-at firct, but it almost invariably forces you to refactor a lot of your code
+at first, but it almost invariably forces you to refactor a lot of your code
 for the better, since it prevents you from abusing lambdas. If you encounter
 a use case where you think it is particularly challenging to satisfy this rule,
 feel free to open up an issue, and we'll help you figure out how refactor your
