@@ -1,12 +1,12 @@
 [
     {
         "type": "file",
-        "file": "/home/uber/code/lint-trap/test/fixtures/rules/func-names-invalid.js",
+        "file": "func-names-invalid.js",
         "errors": [
             {
                 "type": "error",
                 "linter": "jscs",
-                "file": "/home/uber/code/lint-trap/test/fixtures/rules/func-names-invalid.js",
+                "file": "func-names-invalid.js",
                 "line": 7,
                 "column": 19,
                 "rule": "disallowSpacesInNamedFunctionExpression",
@@ -15,7 +15,7 @@
             {
                 "type": "error",
                 "linter": "eslint",
-                "file": "/home/uber/code/lint-trap/test/fixtures/rules/func-names-invalid.js",
+                "file": "func-names-invalid.js",
                 "line": 4,
                 "column": 10,
                 "rule": "func-names",
@@ -25,17 +25,17 @@
     },
     {
         "type": "file",
-        "file": "/home/uber/code/lint-trap/test/fixtures/rules/func-names-valid.js",
+        "file": "func-names-valid.js",
         "errors": []
     },
     {
         "type": "file",
-        "file": "/home/uber/code/lint-trap/test/fixtures/rules/globals-invalid.js",
+        "file": "globals-invalid.js",
         "errors": [
             {
                 "type": "error",
                 "linter": "eslint",
-                "file": "/home/uber/code/lint-trap/test/fixtures/rules/globals-invalid.js",
+                "file": "globals-invalid.js",
                 "line": 9,
                 "column": 8,
                 "rule": "no-undef",
@@ -44,7 +44,7 @@
             {
                 "type": "error",
                 "linter": "eslint",
-                "file": "/home/uber/code/lint-trap/test/fixtures/rules/globals-invalid.js",
+                "file": "globals-invalid.js",
                 "line": 10,
                 "column": 8,
                 "rule": "no-undef",
@@ -53,7 +53,7 @@
             {
                 "type": "error",
                 "linter": "eslint",
-                "file": "/home/uber/code/lint-trap/test/fixtures/rules/globals-invalid.js",
+                "file": "globals-invalid.js",
                 "line": 11,
                 "column": 8,
                 "rule": "no-undef",
@@ -62,7 +62,7 @@
             {
                 "type": "error",
                 "linter": "eslint",
-                "file": "/home/uber/code/lint-trap/test/fixtures/rules/globals-invalid.js",
+                "file": "globals-invalid.js",
                 "line": 12,
                 "column": 8,
                 "rule": "no-undef",
@@ -72,7 +72,7 @@
     },
     {
         "type": "file",
-        "file": "/home/uber/code/lint-trap/test/fixtures/rules/globals-valid.js",
+        "file": "globals-valid.js",
         "errors": []
     }
 ]
