@@ -2,7 +2,7 @@
 require('array.prototype.find');
 var lint = require('../lint-stream')();
 var path = require('path');
-var getJavaScriptFiles = require('../lib/get-javascript-files');
+var getJavaScriptFiles = require('../get-javascript-files');
 var fixturesPath = path.join(__dirname, 'fixtures/rules');
 var test = require('tape');
 var testResults = require(path.join(fixturesPath, 'output.json'));
