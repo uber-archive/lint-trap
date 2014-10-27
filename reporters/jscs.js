@@ -7,7 +7,6 @@ function writeError(file, error) {
         type: 'error',
         linter: 'jscs',
         file: file,
-        error: error,
         line: error.line,
         column: error.column,
         rule: error.rule,

@@ -1,6 +1,35 @@
 [
     {
         "type": "file",
+        "file": "/home/uber/code/lint-trap/test/fixtures/rules/func-names-invalid.js",
+        "errors": [
+            {
+                "type": "error",
+                "linter": "jscs",
+                "file": "/home/uber/code/lint-trap/test/fixtures/rules/func-names-invalid.js",
+                "line": 7,
+                "column": 19,
+                "rule": "disallowSpacesInNamedFunctionExpression",
+                "message": "Illegal space before opening round brace"
+            },
+            {
+                "type": "error",
+                "linter": "eslint",
+                "file": "/home/uber/code/lint-trap/test/fixtures/rules/func-names-invalid.js",
+                "line": 4,
+                "column": 10,
+                "rule": "func-names",
+                "message": "Missing function expression name."
+            }
+        ]
+    },
+    {
+        "type": "file",
+        "file": "/home/uber/code/lint-trap/test/fixtures/rules/func-names-valid.js",
+        "errors": []
+    },
+    {
+        "type": "file",
         "file": "/home/uber/code/lint-trap/test/fixtures/rules/globals-invalid.js",
         "errors": [
             {
