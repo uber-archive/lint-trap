@@ -116,7 +116,7 @@
         "dot-notation": 2,
         "eol-last": 2,
         "eqeqeq": 2,
-        "func-names": 0,
+        "func-names": 2,
         "func-style": [0, "declaration"],
         "global-strict": [2, "always"],
         "guard-for-in": 0,
