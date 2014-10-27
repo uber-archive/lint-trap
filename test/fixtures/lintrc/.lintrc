@@ -1,0 +1,7 @@
+{
+    "eslint": {
+        "rules": {
+            "func-names": false
+        }
+    }
+}
