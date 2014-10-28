@@ -3,7 +3,7 @@
 'use strict';
 var process = require('process');
 var argv = require('minimist')(process.argv.slice(2));
-var lintTrap = require('../lib/');
+var lintTrap = require('../lint');
 
 var files = argv._.length === 0 ? [process.cwd()] : argv._;
 

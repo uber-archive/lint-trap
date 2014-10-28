@@ -81,7 +81,7 @@ function main(cb) {
 function testSymlink(t, fixturePath, linter) {
     var rcFile = '.' + linter + 'rc';
     var rcPath = path.join(fixturePath, rcFile);
-    var symlinkPath = './node_modules/lint-trap/lib/rc/';
+    var symlinkPath = './node_modules/lint-trap/rc/';
     var symlinkDest = path.join(fixturePath, symlinkPath, rcFile);
     var lstat = fs.lstatSync(rcPath);
 

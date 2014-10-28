@@ -103,4 +103,4 @@ include the following two modules in your project:
 [file-an-issue]: https://github.com/uber/lint-trap/issues/new
 [docs]: https://github.com/uber/lint-trap/tree/master/docs
 [wadlers-law]: http://www.haskell.org/haskellwiki/Wadler's_Law
-[set-indent-rule.js]: https://github.com/uber/lint-trap/blob/master/lib/set-indent-rule.js
+[set-indent-rule.js]: https://github.com/uber/lint-trap/blob/master/set-indent-rule.js
