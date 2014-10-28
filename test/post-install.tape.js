@@ -9,7 +9,6 @@ var which = require('which');
 var test = require('tape');
 var debug = require('debug')('post-install');
 var rimraf = require('rimraf');
-var process = require('process');
 var temp = require('temp');
 temp.track();
 var testFolder = temp.path({prefix: 'lint-trap-post-install'});
@@ -19,7 +18,7 @@ function makeFixture(f, cb) {
 
     var folderName = path.basename(f);
     var repoPath = path.join(testFolder, folderName);
-    fs.exists(repoPath, function(exists) {
+    fs.exists(repoPath, function existsCallback(exists) {
         if (exists) {
             debug('fixture %s already exists. skipping clone.', f);
             cb(null, repoPath);
@@ -53,7 +52,7 @@ function installLintTrap(fixturePath, cb) {
     }
 
     debug('installing lint-tap into %s', fixturePath);
-    which('npm', function(err, npmPath) {
+    which('npm', function whichNPMCallback(err, npmPath) {
         var rootPath = path.resolve(__dirname, '..');
 
         var args = [ 'install', '--save-dev', rootPath ];
@@ -72,9 +71,11 @@ function main(cb) {
         if (err) {
             return cb(err);
         }
-        async.eachSeries(fixturePaths, installLintTrap, function(err) {
+        async.eachSeries(fixturePaths, installLintTrap, eachCallback);
+
+        function eachCallback(err) {
             cb(err, fixturePaths);
-        });
+        }
     });
 }
 
@@ -87,25 +88,28 @@ function testSymlink(t, fixturePath, linter) {
 
     var isSymlinkMsg = './' + rcFile + ' is a symlink';
     t.ok(lstat.isSymbolicLink(), isSymlinkMsg);
-    var correctSymlinkMsg = './' + rcFile + ' is symlinked to ' + symlinkPath + rcFile;
+
+    var correctSymlinkMsg = './' + rcFile + ' is symlinked to ' +
+        symlinkPath + rcFile;
     t.equal(fs.readlinkSync(rcPath), symlinkDest, correctSymlinkMsg);
 }
 
 function testSymlinks(t, fixturePath) {
-    ['jshint', 'eslint', 'jscs'].forEach(testSymlink.bind(null, t, fixturePath));
+    var eachFn = testSymlink.bind(null, t, fixturePath);
+    ['jshint', 'eslint', 'jscs'].forEach(eachFn);
 }
 
 test('postinstall script', function testPostInstall(t) {
     main(function runTests(err, fixturePaths) {
         if (err) {
             debug('main', err);
-            return process.exit(1);
+            return test.fail();
         }
         debug('running tests ...');
 
         t.plan(6);
         fixturePaths.forEach(testSymlinks.bind(null, t));
-        async.each(fixturePaths, rimraf, function(){
+        async.each(fixturePaths, rimraf, function eachCallback() {
             t.end();
         });
     });

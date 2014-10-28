@@ -1,13 +1,13 @@
 'use strict';
-var through = require('through');
+var through = require('through2');
 
 function makeFileStream(type, files) {
     /*jshint validthis:true */
     var currentFile = null;
     var fileErrors = [];
 
-    function enqueueEmpty(file) {
-        this.queue({
+    function pushEmpty(file) {
+        this.push({
             type: 'file',
             file: file,
             linter: type,
@@ -15,15 +15,15 @@ function makeFileStream(type, files) {
         });
     }
 
-    function enqueueUpToAndIncludingCurrentFile() {
+    function pushUpToAndIncludingCurrentFile() {
         // Emit a file message for all previous files that did not contain
         // errors
         var index = files.indexOf(currentFile);
-        files.slice(0, index).forEach(enqueueEmpty.bind(this));
+        files.slice(0, index).forEach(pushEmpty.bind(this));
 
         // Emit a file message for the current file with errors
 
-        this.queue({
+        this.push({
             type: 'file',
             file: currentFile,
             linter: type,
@@ -37,7 +37,7 @@ function makeFileStream(type, files) {
         fileErrors = [];
     }
 
-    function write(errorMessage) {
+    function transform(errorMessage, enc, callback) {
         // currentFile is undefined for the first message received.
         if (!currentFile) {
             currentFile = errorMessage.file;
@@ -46,7 +46,7 @@ function makeFileStream(type, files) {
         // If we've moved on to a different file, emit stream data for the
         // previous file.
         if (errorMessage.file !== currentFile) {
-            enqueueUpToAndIncludingCurrentFile.call(this);
+            pushUpToAndIncludingCurrentFile.call(this);
             currentFile = errorMessage.file;
         }
 
@@ -57,21 +57,23 @@ function makeFileStream(type, files) {
         }
 
         currentFile = errorMessage.file;
+        callback();
     }
 
-    function end() {
+    function flush(callback) {
         if (currentFile) {
-            enqueueUpToAndIncludingCurrentFile.call(this);
+            pushUpToAndIncludingCurrentFile.call(this);
         }
         // Emit a file message for all remaining files that do not contain
         // errors
-        files.forEach(enqueueEmpty.bind(this));
+        files.forEach(pushEmpty.bind(this));
 
         // Terminate stream
-        this.queue(null);
+        this.push(null);
+        callback();
     }
 
-    return through(write, end);
+    return through({ objectMode: true }, transform, flush);
 }
 
 module.exports = makeFileStream;
