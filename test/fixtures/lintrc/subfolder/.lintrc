@@ -1,0 +1,7 @@
+{
+    "eslint": {
+        "rules": {
+            "no-underscore-dangle": 1
+        }
+    }
+}
