@@ -7,15 +7,28 @@
 While the default value is 4, this rule is dynamically generated based on the
 indentation style already used in a project.
 
+**We may want to re-evaluate** this in the near future. Raynos recommends that
+we change to 8 spaces. 8 spaces forces you to allocated and abuse closures
+willy nilly. It also forces you to break nested functions out into function
+declarations.
+
+Making it harder to write messy code raises the average code quality. Making it
+harder to write closures removes memory leaks from real production code.
+
 
     "maximumLineLength": {
         "value": 80
     }
 
-Long lines make code harder to read and are usually indicative of poor quality
-code. Also, since 80-character lines has been a common standard across many
-languages for so long, many developers have optimized their development 
-workflow to use 80-character code editor windows and panes.
+We should have a line limit for consistency. Long lines make code harder to
+read and are usually indicative of poor quality code. Also, since 80-character
+lines has been a common standard across many languages for so long, many
+developers have optimized their development workflow to use 80-character code
+editor windows and panes. It's incredibly useful for being able to view
+multiple buffers side by side in either your editor or terminal. Writing code
+within 80 characters is not hard. People have been doing it effectively for
+decades. Furthermore, research also suggest that the optimum line length for
+reading text is between 50 and 60 characters.
 
 
     "maximumLineLength": {
@@ -88,15 +101,17 @@ curly bracket.
     "disallowTrailingComma": true
 
 Trailing commas are always unnecessary and can cause parsing issues in some
-tools.
+tools. Furthermore, trailing commas break in JSON, they also break in older
+browsers. We should not use them to make authoring JS & JSON consistent.
 
 
     "requireBlocksOnNewline": true
 
-This improves readability in 99% of cases. Pretty much the only case in which
-readability is reduced is single-line `if` statements, and even then some will
-argue that `if` statements with only one line in its block is more readable
-with newlines.
+This improves readability in 99% of cases. If your going to use a block then
+use a new line. putting a block in a single line encourages terse and
+unreadable code.Pretty much the only case in which readability is reduced is
+single-line `if` statements, and even then some will argue that `if` statements
+with only one line in its block is more readable with newlines.
 
 
     "requireCurlyBraces": [
@@ -114,14 +129,18 @@ with newlines.
 Requiring curly braces makes explicit what code is being handled by the special
 keywords above, removing any potential ambiguities. Furthermore, requiring
 curly braces eliminates a common source of errors where code is inadvertedly
-included or excluded from code block due to indentation/formatting errors.
+included or excluded from code block due to indentation/formatting errors. We
+should encourage using curly braces as it avoids the multiple statements bug
+and also discourages long terse lines
 
 
     "disallowMultipleVarDecl": true
 
-This rule enforces consistency and eliminates a source of runtime bugs when a
-comma-separated variable declaration list is modified, resulting in a missing
-comma or extraneous comma.
+Var statements should be one per line. This rule enforces consistency and
+eliminates a source of runtime bugs when a comma-separated variable declaration
+list is modified, resulting in a missing comma or extraneous comma. This makes
+variable declarations easier to move around and refactor without messing around
+with commas and semicolons.
 
 
     "disallowEmptyBlocks": true
@@ -129,14 +148,15 @@ comma or extraneous comma.
 Missing blocks are either a sign that a developer intended to do something, but
 forgot to implement it or its a sign that a developer is not following the
 [YAGNI][yagni] rule. The only case where it's appropriate to have an empty
-block is `function noop() {};`.
+block is `function noop() {};`. Empty blocks are generally bad. Especially if
+you have an empty catch block.
 
 
     "disallowSpaceAfterObjectKeys": true
 
 This rule enforces consistency that is pretty much the status quo in the
 JavaScript community and the format that pretty much every JSON stringifier
-uses.
+uses. Object literals should be consistent in terms of whitespace.
 
 
     "requireCommaBeforeLineBreak": true
@@ -198,13 +218,17 @@ the object they operate on.
 
 The `with` keyword is generally [considered harmful][with-considered-harmful],
 although there are a few extreme cases where it might be useful. [1][with1]
-[2][with2]
+[2][with2]. Also, `with` is banned in strict mode and thus banned in JSCS.
 
 In JavaScript, and especially NodeJS, you should only ever throw an error when
-a programmer has made and error (i.e. a bug). For operational errors, the error
-should be returned to the callee, who can then determine how to handle it. The
-only exception to this rule is using `JSON.parse` with malformed JSON or
-`JSON.stringify` on an object with circular dependencies. 
+a programmer has made and error (i.e. a bug). As such, `try`, `catch`,
+`finally` are also banned. In JavaScript one should not use try catch for
+control flow. For operational errors, the error should be returned to the
+callee, who can then determine how to handle it.
+
+The only exception where `try`/`catch`/`finally` are unavoidable (only because
+it is too late to go back and change history) is using `JSON.parse` with
+malformed JSON or `JSON.stringify` on an object with circular dependencies. 
 
 In the case of parsing and stringifying JSON, we recommend that you use the
 [raynos/safe-json-parse][safe-json-parse]. If you are parsing after reading a
@@ -235,15 +259,16 @@ for newlines.
         "escape": true
     }
 
-All strings should use single quotes, however double quotes are allowed only in
-cases where the string contains single quotes and the developer would like to
-avoid having to escape them. The goal is consistency with an exception made for
-readability.
+We should have consistent quote marks. Mixing the two causes overhead and
+confusion. All strings should use single quotes, however double quotes are
+allowed only in cases where the string contains single quotes and the developer
+would like to avoid having to escape them. The goal is consistency with an
+exception made for readability. 
 
 
     "disallowMixedSpacesAndTabs": true
 
-This rule requires no explanation.
+This rule requires no explanation. People that mix spaces and tabs are evil.
 
 
     "disallowTrailingWhitespace" : true
@@ -257,7 +282,25 @@ eliminate a common source of unnecessary diffs in git commits.
     ]
 
 Since the `requireBlocksOnNewline` rule is already enforced, allowing `else` to
-occur on a newline would reduce readability.
+occur on a newline would reduce readability. Our if statements should be
+consistent.
+
+Favour:
+
+    if (foo) {
+        x
+    } else {
+        y
+    }
+
+Do not use:
+
+    if (foo) {
+        x
+    }
+    else {
+        y
+    }
 
 
     "requireLineFeedAtFileEnd": true
@@ -269,13 +312,11 @@ whitespace.
 
     "requireDotNotation": true
 
-All objects should be accessed via dot notation unless the object key cannot be
-expressed in dot notation. This makes code more readable and maximally
-minifiable. The only legitimate reason to revisit this rule is to allow us to
-use Google's Closure Compiler in advanced compression mode.
-
-
-
+Property access should be consistent. All objects should be accessed via dot
+notation unless the object key cannot be expressed in dot notation. This makes
+code more readable and maximally minifiable. The only legitimate reason to
+revisit this rule is to allow us to use Google's Closure Compiler in advanced
+compression mode.
 
 
 
