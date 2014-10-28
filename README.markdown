@@ -142,8 +142,10 @@ over time. Before we bikeshed over a rule, please check the rules
 [documentation][docs]. If a rule hasn't been documented or hasn't yet been
 documented adequately, open an issue asking for clarification and better 
 documentation *first*. If a rule has been documented and you still disagree,
-feel free to bikeshed. We all love bikeshedding, but we would like to keep it
-to a minimum.
+there is one task you must perform before you are allowed to bikeshed. You must
+first read Clay Shirky's essay [A Group is its Own Worst Enemy][group-enemy].
+At the end of the day, we all love bikeshedding, but we would like to keep it
+to a minimum, so we can all get work done.
 
 
 [sl]: http://sublimelinter.readthedocs.org/
@@ -169,3 +171,4 @@ to a minimum.
 [wadlers-law]: http://www.haskell.org/haskellwiki/Wadler's_Law
 [set-indent-rule.js]: https://github.com/uber/lint-trap/blob/master/set-indent-rule.js
 [bikeshed]: http://red.bikeshed.com/
+[group-enemy]: http://www.shirky.com/writings/herecomeseverybody/group_enemy.html
