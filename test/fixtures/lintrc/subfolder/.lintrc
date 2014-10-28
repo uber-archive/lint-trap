@@ -1,7 +1,6 @@
 {
     "eslint": {
-        "rules": {
-            "no-underscore-dangle": 1
-        }
+        "no-underscore-dangle": false,
+        "func-names": true
     }
 }

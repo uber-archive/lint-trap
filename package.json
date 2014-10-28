@@ -41,7 +41,11 @@
     "detect-indent": "^1.0.1",
     "extend": "^2.0.0",
     "find-parent-dir": "^0.3.0",
-    "through2": "^0.6.3"
+    "through2": "^0.6.3",
+    "xtend": "~4.0.0",
+    "deep-merge": "~0.3.1",
+    "deap": "~1.0.0",
+    "deep-extend": "~0.3.2"
   },
   "devDependencies": {
     "tape": "~3.0.0",

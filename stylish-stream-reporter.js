@@ -19,7 +19,8 @@ function createTableRow(message) {
         message.type,
         linter,
         location,
-        message.message
+        message.message,
+        message.rule
     ];
 }
 
@@ -37,7 +38,8 @@ function printTable(data) {
                 chalk.red(row[1]),
                 chalk.magenta(row[2]),
                 row[3],
-                chalk.white(row[4])
+                chalk.white(row[4]),
+                chalk.yellow(row[5])
             ];
         });
         console.log(table(data) + '\n');

@@ -9,8 +9,9 @@ var findParentDir = require('find-parent-dir');
 var commondir = require('commondir');
 var through2 = require('through2');
 var setIndentRule = require('./set-indent-rule');
-var makeFileStream = require('./error-to-file-stream');
-var clusterFileMessages = require('./group-file-messages-stream');
+var makeFileStream = require('./error-to-file-transform');
+var clusterFileMessages = require('./group-file-messages-transform');
+var severityTransform = require('./severity-transform');
 
 function makeArgs(type) {
     return [
@@ -48,6 +49,23 @@ function makeRelativePathFn(dir) {
     };
 }
 
+function updateRules(dir, firstFile, callback) {
+    setIndentRule(dir, firstFile, function setIndentRuleCallback(err) {
+        if (err) {
+            return callback(err);
+        }
+
+        findParentDir(__dirname, '.git', function findCallback(err, dir) {
+            if (err) {
+                return callback(err);
+            }
+
+            //console.log('GIT:', dir);
+            callback();
+        });
+    });
+}
+
 function execLinter(type, dir, files) {
 
     var jsonMessages = JSONStream.parse('*');
@@ -62,36 +80,30 @@ function execLinter(type, dir, files) {
         callback();
     });
 
-    setIndentRule(dir, files[0], function setIndentRuleCallback(err) {
+    updateRules(dir, files[0], function updatedRulesCallback(err) {
         if (err) {
             lintMessages.emit('error', err);
             return;
         }
 
-        findParentDir(__dirname, '.git', function findCallback(err, dir) {
+        getBinPath(type, function getBinPathCallback(err, binPath) {
             if (err) {
                 lintMessages.emit('error', err);
                 return;
             }
 
-            //console.log('GIT:', dir);
-
-            getBinPath(type, function getBinPathCallback(err, binPath) {
-                if (err) {
-                    lintMessages.emit('error', err);
-                    return;
-                }
-
-                var args = makeArgs(type).concat(files);
-                var opts = {};
-                var onError = makeErrorEmitter(type, jsonMessages);
-                var lintProcess = spawn(binPath, args, opts);
-                lintProcess.stdout.pipe(jsonMessages).pipe(lintMessages);
-                lintProcess.stderr.on('data', onError);
-                lintProcess.on('error', onError);
-            });
-
+            var args = makeArgs(type).concat(files);
+            var opts = {};
+            var onError = makeErrorEmitter(type, jsonMessages);
+            var lintProcess = spawn(binPath, args, opts);
+            lintProcess.stdout
+                .pipe(jsonMessages)
+                .pipe(severityTransform())
+                .pipe(lintMessages);
+            lintProcess.stderr.on('data', onError);
+            lintProcess.on('error', onError);
         });
+
     });
 
     return lintMessages;

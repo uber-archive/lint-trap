@@ -1,14 +1,11 @@
 'use strict';
 var path = require('path');
 var findParentDir = require('find-parent-dir');
-var fs = require('fs');
-var DeepMerge = require("deep-merge");
-var extend = require('xtend');
 var jf = require('jsonfile');
+var async = require('async');
+var deepExtend = require('deep-extend');
 
-var merge = DeepMerge(function mergeStrategy(target, source, key) {
-    return [].concat(target, source)
-});
+var memoizedReadJSONFile = async.memoize(jf.readFile);
 
 function loadSeverityConfig(folder, callback) {
 
@@ -21,7 +18,7 @@ function loadSeverityConfig(folder, callback) {
             return callback(null, {});
         }
 
-        jf.readFile(path.join(dir, '.lintrc'), function(err, config) {
+        function readJSONCallback(err, config) {
             var parent = path.dirname(dir);
 
             // null condition
@@ -29,16 +26,20 @@ function loadSeverityConfig(folder, callback) {
                 return callback(null, config);
             }
 
-            // recurse
-            loadSeverityConfig(parent, function(err, parentConfig) {
+            function recurCallback(err, parentConfig) {
                 if (err) {
                     return callback(err);
                 }
 
-                callback(null, merge(parentConfig, config));
-            });
-        });
+                callback(null, deepExtend(parentConfig, config));
+            }
+
+            // recurse
+            loadSeverityConfig(parent, recurCallback);
+        }
+
+        memoizedReadJSONFile(path.join(dir, '.lintrc'), readJSONCallback);
     });
 }
 
-module.exports = loadSeverityConfig;
+module.exports = async.memoize(loadSeverityConfig);

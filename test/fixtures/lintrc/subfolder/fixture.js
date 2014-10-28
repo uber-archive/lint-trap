@@ -2,8 +2,8 @@
 
 var _foo = true;
 
-function bar() {
+var bar = function () {
     return _foo;
-}
+};
 
 module.exports = bar;
