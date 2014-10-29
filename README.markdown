@@ -79,6 +79,11 @@ a `.lintrc` file to the root of your project:
         }
     }
 
+`.lintrc` files can be added to subfolders and you can turn rules back to error
+level by setting the value for that rule to true. While `.lintrc` files can be
+put in subfolders, you really shouldn't have any projects that are so large
+that you need to use this feature.
+
 Rules cannot be turned off entirely in `.lintrc`, only attenuated. If there are
 rules that you feel you absolutely must override, you can do so within the
 files producing the error. If you find yourself ignoring or modifying a
