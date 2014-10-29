@@ -3,13 +3,13 @@ require('array.prototype.find');
 var lint = require('../lint-stream')();
 var path = require('path');
 var getJavaScriptFiles = require('../get-javascript-files');
-var fixturesPath = path.join(__dirname, 'fixtures');
+var fixturesPath = path.join(__dirname, 'fixtures/rules');
 var test = require('tape');
-var testResults = require(path.join(fixturesPath, 'rules.json'));
+var testResults = require(path.join(fixturesPath, 'output.json'));
 var rootDir = path.resolve(__dirname, '..');
 
 test('lint-trap JSON stream results', function testStream(t) {
-    t.plan(testResults.length +  1);
+    t.plan(testResults.length + 1);
 
     getJavaScriptFiles(fixturesPath, function lintFilesCallback(err, jsfiles) {
         if (err) {

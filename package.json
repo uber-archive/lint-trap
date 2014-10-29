@@ -23,8 +23,8 @@
   },
   "dependencies": {
     "jshint": "~2.5.6",
-    "eslint": "~0.8.2",
-    "jscs": "~1.6.2",
+    "eslint": "~0.9.1",
+    "jscs": "~1.7.3",
     "minimist": "~1.1.0",
     "fstream-ignore": "~1.0.1",
     "JSONStream": "~0.9.0",
@@ -38,9 +38,11 @@
     "async": "~0.9.0",
     "debug": "^2.1.0",
     "npm-which": "^1.0.1",
-    "detect-indent": "^1.0.1",
-    "extend": "^2.0.0",
-    "through2": "^0.6.3"
+    "detect-indent": "^2.0.0",
+    "find-parent-dir": "^0.3.0",
+    "through2": "^0.6.3",
+    "deep-extend": "~0.3.2",
+    "extend": "^2.0.0"
   },
   "devDependencies": {
     "tape": "~3.0.0",
@@ -51,7 +53,7 @@
     "temp": "^0.8.1"
   },
   "scripts": {
-    "test": "tape test/**/*.tape.js",
+    "test": "npm run lint && tape test/**/*.tape.js",
     "lint": "./bin/lint-trap.js"
   },
   "license": "MIT"

@@ -2,7 +2,6 @@
 'use strict';
 var table = require('text-table');
 var console = require('console');
-var path = require('path');
 var process = require('process');
 var isTTY = process.stdout.isTTY;
 var chalk = require('chalk');
@@ -20,7 +19,8 @@ function createTableRow(message) {
         message.type,
         linter,
         location,
-        message.message
+        message.message,
+        message.rule
     ];
 }
 
@@ -38,24 +38,23 @@ function printTable(data) {
                 chalk.red(row[1]),
                 chalk.magenta(row[2]),
                 row[3],
-                chalk.white(row[4])
+                chalk.white(row[4]),
+                chalk.yellow(row[5])
             ];
         });
         console.log(table(data) + '\n');
     }
 }
 
-function makeTablePrinter(dir) {
-    return function printFileErrorTable(message) {
-        if (message.type === 'file') {
-            var fileTableData = message.errors.map(createTableRow);
-            var relativeFilePath = path.relative(dir, message.file);
-            if (fileTableData.length > 0) {
-                printFilePath(relativeFilePath);
-                printTable(fileTableData);
-            }
+function printFileErrorTable(message) {
+    if (message.type === 'file') {
+        var fileTableData = message.errors.map(createTableRow);
+
+        if (fileTableData.length > 0) {
+            printFilePath(message.file);
+            printTable(fileTableData);
         }
-    };
+    }
 }
 
-module.exports = makeTablePrinter;
+module.exports = printFileErrorTable;
