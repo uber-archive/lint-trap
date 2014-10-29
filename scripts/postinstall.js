@@ -70,7 +70,6 @@ function symlinkLinterConfigurationFiles(modulePath, cb) {
 // function removeLintersFromManifestScripts (packageJSON) {
 //   if (packageJSON.scripts) {
 //     Object.keys(packageJSON.scripts).forEach(function (scriptName) {
-//
 //     });
 //   }
 // }
@@ -94,8 +93,8 @@ function cleanRepo(modulePath, cb) {
                     return cb(err);
                 }
                 manifest = removeDependenciesFromManifest(manifest);
-                //deleteLinterConfigurationFiles(modulePath);
-                //deleteLinterIgnoreFiles(modulePath);
+                // deleteLinterConfigurationFiles(modulePath);
+                // deleteLinterIgnoreFiles(modulePath);
 
                 fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2),
                     'utf8', cb);

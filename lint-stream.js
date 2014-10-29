@@ -5,7 +5,6 @@ var path = require('path');
 var es = require('event-stream');
 var fs = require('fs');
 var which = require('npm-which');
-var findParentDir = require('find-parent-dir');
 var commondir = require('commondir');
 var through2 = require('through2');
 var setIndentRule = require('./set-indent-rule');
@@ -49,23 +48,6 @@ function makeRelativePathFn(dir) {
     };
 }
 
-function updateRules(dir, firstFile, callback) {
-    setIndentRule(dir, firstFile, function setIndentRuleCallback(err) {
-        if (err) {
-            return callback(err);
-        }
-
-        findParentDir(__dirname, '.git', function findCallback(err, dir) {
-            if (err) {
-                return callback(err);
-            }
-
-            //console.log('GIT:', dir);
-            callback();
-        });
-    });
-}
-
 function execLinter(type, dir, files) {
 
     var jsonMessages = JSONStream.parse('*');
@@ -80,7 +62,7 @@ function execLinter(type, dir, files) {
         callback();
     });
 
-    updateRules(dir, files[0], function updatedRulesCallback(err) {
+    setIndentRule(dir, files[0], function setIndentRuleCallback(err) {
         if (err) {
             lintMessages.emit('error', err);
             return;

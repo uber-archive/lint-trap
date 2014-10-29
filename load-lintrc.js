@@ -19,6 +19,9 @@ function loadSeverityConfig(folder, callback) {
         }
 
         function readJSONCallback(err, config) {
+            if (err) {
+                return callback(err);
+            }
             var parent = path.dirname(dir);
 
             // null condition

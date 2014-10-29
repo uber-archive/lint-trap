@@ -67,6 +67,50 @@
                 "column": 8,
                 "rule": "no-undef",
                 "message": "'console' is not defined."
+            },
+            {
+                "type": "error",
+                "linter": "eslint",
+                "file": "globals-invalid.js",
+                "line": 13,
+                "column": 8,
+                "rule": "no-undef",
+                "message": "'clearInterval' is not defined."
+            },
+            {
+                "type": "error",
+                "linter": "eslint",
+                "file": "globals-invalid.js",
+                "line": 14,
+                "column": 8,
+                "rule": "no-undef",
+                "message": "'setInterval' is not defined."
+            },
+            {
+                "type": "error",
+                "linter": "eslint",
+                "file": "globals-invalid.js",
+                "line": 15,
+                "column": 8,
+                "rule": "no-undef",
+                "message": "'clearTimeout' is not defined."
+            }, {
+                "type": "error",
+                "linter": "eslint",
+                "file": "globals-invalid.js",
+                "line": 16,
+                "column": 8,
+                "rule": "no-undef",
+                "message": "'setTimeout' is not defined."
+            },
+            {
+                "type": "error",
+                "linter": "eslint",
+                "file": "globals-invalid.js",
+                "line": 17,
+                "column": 8,
+                "rule": "no-undef",
+                "message": "'Buffer' is not defined."
             }
         ]
     },

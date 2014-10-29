@@ -2,7 +2,7 @@
 var process = require('process');
 
 function writeError(file, error) {
-    //console.log(errors.explainError(error, true) + '\n');
+    // console.log(errors.explainError(error, true) + '\n');
     process.stdout.write(JSON.stringify({
         type: 'error',
         linter: 'jscs',

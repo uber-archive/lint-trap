@@ -10,7 +10,6 @@ function writeError(file, error) {
         type: getErrorType(error),
         linter: 'eslint',
         file: file,
-        //error: error,
         line: error.line || 0,
         column: error.column || 0,
         rule: error.ruleId || '',
