@@ -9,7 +9,7 @@ var binPath = path.resolve(__dirname, '../bin/lint-trap.js');
 var lintrcFixture = path.resolve(__dirname, './fixtures/lintrc');
 
 test('lintrc file allows downgrading errors to warnings', function tape(t) {
-    t.plan(2);
+    t.plan(3);
 
     var args = [path.join(lintrcFixture, './fixture.js')];
     var opts = {};
@@ -18,7 +18,7 @@ test('lintrc file allows downgrading errors to warnings', function tape(t) {
     var expectedStdout = fs.readFileSync(expectedStdoutPath, 'utf8');
 
     execFile(binPath, args, opts, function cb(err, stdout, stderr) {
-        //t.error(err, 'No error code');
+        t.error(err, 'No error code');
         t.equal(stdout, expectedStdout, 'Errors reduced to warnings');
         t.equal(stderr, '', 'No output on stdout');
     });

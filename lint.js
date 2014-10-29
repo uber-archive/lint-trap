@@ -23,16 +23,20 @@ function findFiles(paths, callback) {
 }
 
 function lint(jsfiles, callback) {
-    var count = 0;
+    var exitCode = 0;
 
     var uberLintStream = lintStream(jsfiles);
     uberLintStream.on('data', function onMessage(message) {
-        count += message.errors.length;
+        message.errors.forEach(function checkSeverity(error) {
+            if (error.type === 'error') {
+                exitCode = 1;
+            }
+        });
         printFileErrorTable(message);
     });
     uberLintStream.on('error', onError);
     uberLintStream.on('end', function onEnd() {
-        callback(count > 0 ? new Error('Errors: ' + count) : null);
+        callback(exitCode === 1 ? new Error('Lint errors encountered') : null);
     });
 }
 
