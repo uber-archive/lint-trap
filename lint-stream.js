@@ -3,7 +3,6 @@ var spawn = require('child_process').spawn;
 var JSONStream = require('JSONStream');
 var path = require('path');
 var es = require('event-stream');
-var fs = require('fs');
 var which = require('npm-which');
 var commondir = require('commondir');
 var through2 = require('through2');
@@ -29,15 +28,7 @@ function makeErrorEmitter(type, lintErrorStream) {
 }
 
 function getBinPath(type, callback) {
-    var binPath = path.resolve(__dirname, '../node_modules/.bin/' + type);
-
-    fs.exists(binPath, function existsCallback(exists) {
-        if (exists) {
-            callback(null, binPath);
-        } else {
-            which(type, callback);
-        }
-    });
+    which(type, {cwd: __dirname}, callback);
 }
 
 function makeRelativePathFn(dir) {
