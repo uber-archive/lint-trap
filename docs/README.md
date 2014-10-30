@@ -8,6 +8,8 @@ checking until eslint supports proper indentation checking.
 
 ## ESLint
 
+* [globals][globals] List of allowed globals and workarounds for common globals we disallow
+
 ### errors
 
 * [no-alert][no-alert] - disallow the use of `alert`, `confirm`, and `prompt`
@@ -87,6 +89,7 @@ checking until eslint supports proper indentation checking.
 * [camelcase][camelcase] - require camel case names
 * [comma-spacing][comma-spacing] - enforce spacing before and after comma
 * [comma-style][comma-style] - enforce one true comma style
+* [complexity][complexity] - specify the maximum cyclomatic complexity allowed in a program
 * [consistent-return][consistent-return] - require `return` statements to either always or never specify values
 * [consistent-this][consistent-this] - enforces consistent naming when capturing the current execution context
 * [curly][curly] - specify curly brace conventions for all control statements
@@ -127,6 +130,7 @@ checking until eslint supports proper indentation checking.
 
 ### disabled
 
+* [env][env] - all env presets are disabled
 * [no-bitwise][no-bitwise] - disallow use of bitwise operators
 * [no-div-regex][no-div-regex] - disallow division operators explicitly at beginning of regular expression
 * [no-else-return][no-else-return] - disallow `else` after a `return` in an `if`
@@ -143,7 +147,7 @@ checking until eslint supports proper indentation checking.
 * [no-void][no-void] - disallow use of `void` operator
 * [no-warning-comments][no-warning-comments] - disallow usage of configurable warning terms in comments - e.g. `TODO` or `FIXME`
 * [block-scoped-var][block-scoped-var] - treat `var` statements as if they were block scoped
-* [complexity][complexity] - specify the maximum cyclomatic complexity allowed in a program
+
 * [func-style][func-style] - enforces use of function declarations or expressions
 * [one-var][one-var] - allow just one var statement per function
 * [padded-blocks][padded-blocks] - enforce padding within blocks
@@ -192,9 +196,11 @@ Once one of these other tools properly checks indentation, JSHint will be
 removed.
 
 
+[globals]: eslint/globals.md
+[env]: eslint/env.md
 [no-alert]: https://github.com/eslint/eslint/blob/master/docs/rules/no-alert.md
 [no-array-constructor]: https://github.com/eslint/eslint/blob/master/docs/rules/no-array-constructor.md
-[no-bitwise]: https://github.com/eslint/eslint/blob/master/docs/rules/no-bitwise.md
+[no-bitwise]: eslint/no-bitwise.md
 [no-caller]: https://github.com/eslint/eslint/blob/master/docs/rules/no-caller.md
 [no-catch-shadow]: https://github.com/eslint/eslint/blob/master/docs/rules/no-catch-shadow.md
 [no-comma-dangle]: https://github.com/eslint/eslint/blob/master/docs/rules/no-comma-dangle.md
@@ -275,14 +281,14 @@ removed.
 [no-unreachable]: https://github.com/eslint/eslint/blob/master/docs/rules/no-unreachable.md
 [no-unused-expressions]: https://github.com/eslint/eslint/blob/master/docs/rules/no-unused-expressions.md
 [no-unused-vars]: https://github.com/eslint/eslint/blob/master/docs/rules/no-unused-vars.md
-[no-use-before-define]: https://github.com/eslint/eslint/blob/master/docs/rules/no-use-before-define.md
+[no-use-before-define]: eslint/no-use-before-define.md
 [no-void]: https://github.com/eslint/eslint/blob/master/docs/rules/no-void.md
 [no-warning-comments]: https://github.com/eslint/eslint/blob/master/docs/rules/no-warning-comments.md
 [no-with]: https://github.com/eslint/eslint/blob/master/docs/rules/no-with.md
 [no-wrap-func]: https://github.com/eslint/eslint/blob/master/docs/rules/no-wrap-func.md
 [block-scoped-var]: https://github.com/eslint/eslint/blob/master/docs/rules/block-scoped-var.md
 [brace-style]: https://github.com/eslint/eslint/blob/master/docs/rules/brace-style.md
-[camelcase]: https://github.com/eslint/eslint/blob/master/docs/rules/camelcase.md
+[camelcase]: eslint/camelcase.md
 [comma-spacing]: https://github.com/eslint/eslint/blob/master/docs/rules/comma-spacing.md
 [comma-style]: https://github.com/eslint/eslint/blob/master/docs/rules/comma-style.md
 [complexity]: https://github.com/eslint/eslint/blob/master/docs/rules/complexity.md
@@ -292,11 +298,11 @@ removed.
 [default-case]: https://github.com/eslint/eslint/blob/master/docs/rules/default-case.md
 [dot-notation]: https://github.com/eslint/eslint/blob/master/docs/rules/dot-notation.md
 [eol-last]: https://github.com/eslint/eslint/blob/master/docs/rules/eol-last.md
-[eqeqeq]: https://github.com/eslint/eslint/blob/master/docs/rules/eqeqeq.md
-[func-names]: https://github.com/eslint/eslint/blob/master/docs/rules/func-names.md
+[eqeqeq]: eslint/eqeqeq.md
+[func-names]: eslint/func-names.md
 [func-style]: https://github.com/eslint/eslint/blob/master/docs/rules/func-style.md
-[global-strict]: https://github.com/eslint/eslint/blob/master/docs/rules/global-strict.md
-[guard-for-in]: https://github.com/eslint/eslint/blob/master/docs/rules/guard-for-in.md
+[global-strict]: eslint/global-strict.md
+[guard-for-in]: eslint/guard-for-in.md
 [handle-callback-err]: https://github.com/eslint/eslint/blob/master/docs/rules/handle-callback-err.md
 [key-spacing]: https://github.com/eslint/eslint/blob/master/docs/rules/key-spacing.md
 [max-depth]: https://github.com/eslint/eslint/blob/master/docs/rules/max-depth.md

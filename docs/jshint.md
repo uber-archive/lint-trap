@@ -1,69 +1,18 @@
 # JShint guidelines.
 
-## Status quo.
-
-#### `"bitwise": false`
-
-Bitwise operations are valuable sometimes. The hinting rules
-    should not ban them as bitwise operators are not a source of
-    bugs.
-
-#### `"camelcase": true`
-
-Combining multiple styles together is a source of frustration
-    in having to remember what the property names are.
-
-JavaScript does not have a good auto complete so knowing what
-    the casing of a property is makes working with JavaScript
-    easier.
-
-We should enforce camelcase. For the few use cases where you
-    need to access keys on JSON blobs coming from an external
-    process that has snake case you can use an exclude statement.
+JSHint is deprecated and will be removed entirely once ESLint or jscs 
+properly checks indentation for a whole project.
 
 #### `"globalstrict": true`
 
-The way commonJS works is that it wraps your file in a function
-    expression. This means that something which looks like a
-    global strict statement is actually isolated by a function
-    expression.
+ESLint already takes care of this linting issue, but we need to keep
+this in the JSHint file to override the JSHint defaults.
 
-This means that the globalstrict bug is actually impossible and
-    should not be an error.
 
-#### `"curly": false`
 
-For legacy reasons curly is turned off. In theory this would be
-    a good addition since it gaurds against bugs but it was
-    too "refactor expensive" to turn on.
 
-**We should change** this in the near future to `true`
 
-#### `"eqeqeq": true`
 
-Type coercion is a bad part of JavaScript and leads to real
-    production bugs where you accidentally treat numbers and
-    strings the same and then accidentally send a string instead
-    of a number down a response.
-
-There are no good use cases for `==`.
-
-#### `"forin": true`
-
-Not using `Object.hasOwnProperty` can lead to subtle bugs. It's
-    a good practice to make up for javascripts for loop semantics.
-
-However it should be noted that using `Object.keys(o)` is
-    preferred instead of the for in loop.
-
-#### `"immed": true`
-
-Having an immediately invoked function expression that is 200
-    lines long can be very easily mistaked for a function
-    declaration.
-
-Forcing people to wrap it in braces distinquishes it from a
-    function declaration and makes reasoning about code easier.
 
 #### `"indent": 4`
 
@@ -79,19 +28,6 @@ Making it harder to write messy code raises the average code
     quality. Making it harder to write closures removes memory
     leaks from real production code.
 
-#### `"latedef": "nofunc"`
-
-Variables should be declared before they are used. Since
-    javascript hoists variables to the top of the function then
-    the value is `undefined` if you use them before assignment
-    which is always the wrong thing.
-
-We exclude function declarations as those are hoisted with their
-    value. i.e. if you use a function declaration before it's
-    defined then you will always reference said function.
-
-The function declaration hoisting technique can also be used
-    to avoid circular dependencies.
 
 #### `"newcap": false`
 
