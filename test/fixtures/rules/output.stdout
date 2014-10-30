@@ -3,8 +3,13 @@ func-names-invalid.js
     error  eslint     4:10   Missing function expression name.         func-names
 
 globals-invalid.js
-    error  eslint     9:8    'process' is not defined.  no-undef
-    error  eslint    10:8    'global' is not defined.   no-undef
-    error  eslint    11:8    'exports' is not defined.  no-undef
-    error  eslint    12:8    'console' is not defined.  no-undef
+    error  eslint     9:8    'process' is not defined.        no-undef
+    error  eslint    10:8    'global' is not defined.         no-undef
+    error  eslint    11:8    'exports' is not defined.        no-undef
+    error  eslint    12:8    'console' is not defined.        no-undef
+    error  eslint    13:8    'clearInterval' is not defined.  no-undef
+    error  eslint    14:8    'setInterval' is not defined.    no-undef
+    error  eslint    15:8    'clearTimeout' is not defined.   no-undef
+    error  eslint    16:8    'setTimeout' is not defined.     no-undef
+    error  eslint    17:8    'Buffer' is not defined.         no-undef
 

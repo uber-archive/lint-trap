@@ -1,0 +1,3 @@
+# requireSpacesInConditionalExpression
+
+    "requireSpacesInConditionalExpression": true,

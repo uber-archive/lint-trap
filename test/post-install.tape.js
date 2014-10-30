@@ -4,7 +4,7 @@ var execFile = require('child_process').execFile;
 var async = require('async');
 var path = require('path');
 var fs = require('fs');
-//var jsonfile = require('jsonfile');
+// var jsonfile = require('jsonfile');
 var which = require('which');
 var test = require('tape');
 var debug = require('debug')('post-install');
@@ -53,6 +53,9 @@ function installLintTrap(fixturePath, cb) {
 
     debug('installing lint-tap into %s', fixturePath);
     which('npm', function whichNPMCallback(err, npmPath) {
+        if (err) {
+            return cb(err);
+        }
         var rootPath = path.resolve(__dirname, '..');
 
         var args = [ 'install', '--save-dev', rootPath ];

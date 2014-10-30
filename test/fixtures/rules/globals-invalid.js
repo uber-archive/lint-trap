@@ -9,7 +9,12 @@ function invalidGlobals() {
         process,
         global,
         exports,
-        console
+        console,
+        clearInterval,
+        setInterval,
+        clearTimeout,
+        setTimeout,
+        Buffer
     ];
 }
 

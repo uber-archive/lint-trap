@@ -20,8 +20,8 @@ var linterConfigurationFiles = ['.jscsrc', '.jshintrc', '.eslintrc'];
 /**
  * Removes linters from package.json
  *
- * @param  {[type]} manifest [description]
- * @return {[type]}          [description]
+ * @param  {Object} manifest package.json loaded as a JSON object
+ * @return {Object}          modified package.json JSON object
  */
 function removeDependenciesFromManifest(manifest) {
     linterNames.forEach(function removeDependencies(ln) {
@@ -70,7 +70,6 @@ function symlinkLinterConfigurationFiles(modulePath, cb) {
 // function removeLintersFromManifestScripts (packageJSON) {
 //   if (packageJSON.scripts) {
 //     Object.keys(packageJSON.scripts).forEach(function (scriptName) {
-//
 //     });
 //   }
 // }
@@ -80,25 +79,26 @@ function symlinkLinterConfigurationFiles(modulePath, cb) {
  *  - remove jshint, eslint and jscs from the package.json
  *  - remove the config files for the above linters
  *
- * @param  {[type]}   repoPath
- * @param  {Function} cb
- * @return {[type]}
+ * @param  {String}    modulePath  file path to the repo to which lint-trap was
+ *                                 installed
+ * @param  {Function}  callback    callback function
+ * @return {undefined}             undefined
  */
-function cleanRepo(modulePath, cb) {
+function cleanRepo(modulePath, callback) {
     var manifestPath = path.join(modulePath, 'package.json');
 
     fs.exists(manifestPath, function existsCallback(exists) {
         if (exists) {
             jsonfile.readFile(manifestPath, function cleanFile(err, manifest) {
                 if (err) {
-                    return cb(err);
+                    return callback(err);
                 }
                 manifest = removeDependenciesFromManifest(manifest);
-                //deleteLinterConfigurationFiles(modulePath);
-                //deleteLinterIgnoreFiles(modulePath);
+                // deleteLinterConfigurationFiles(modulePath);
+                // deleteLinterIgnoreFiles(modulePath);
 
                 fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2),
-                    'utf8', cb);
+                    'utf8', callback);
             });
         }
     });
