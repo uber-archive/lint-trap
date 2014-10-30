@@ -131,21 +131,6 @@ detected is as follows:
 See [set-indent-rule.js][set-indent-rule.js] for the implementation.
 
 
-Globals
--------
-
-The only whitelisted globals are `__dirname`, `__filename`, `module` and
-`require`.
-
-`exports` is not whitelisted. You should instead always access `exports` via a
-property on `module`. e.g. `module.exports = someObject;`
-
-For other globals such as `process`, `global`, `window`, `document`, you should
-include the following two modules in your project:
- - https://github.com/Raynos/global
- - https://github.com/defunctzombie/node-process
-
-
 Contributing
 ------------
 

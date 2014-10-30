@@ -9,6 +9,9 @@ actually isolated by a function expression.
 This means that the globalstrict bug is actually impossible and should not be
 an error.
 
+Strict mode also causes modifications to objects frozen with `Object.freeze`
+to throw TypeErrors, which is desirable.
+
 [Official `global-strict` ESLint Rule Documentation][global-strict-docs]
 
 [global-strict-docs]: https://github.com/eslint/eslint/blob/master/docs/rules/global-strict.md

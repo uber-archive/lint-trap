@@ -195,13 +195,16 @@ indentation-checking appears to be less restrictive in jscs than desired.
 Once one of these other tools properly checks indentation, JSHint will be
 removed.
 
+There are only a few items set in our `.jshintrc` rules file. These settings
+are documented in our [JSHint Documentation][jshint-docs].
+
 
 [globals]: eslint/globals.md
 [env]: eslint/env.md
-[no-alert]: https://github.com/eslint/eslint/blob/master/docs/rules/no-alert.md
+[no-alert]: eslint/no-alert.md
 [no-array-constructor]: https://github.com/eslint/eslint/blob/master/docs/rules/no-array-constructor.md
 [no-bitwise]: eslint/no-bitwise.md
-[no-caller]: https://github.com/eslint/eslint/blob/master/docs/rules/no-caller.md
+[no-caller]: eslint/no-caller.md
 [no-catch-shadow]: https://github.com/eslint/eslint/blob/master/docs/rules/no-catch-shadow.md
 [no-comma-dangle]: https://github.com/eslint/eslint/blob/master/docs/rules/no-comma-dangle.md
 [no-cond-assign]: https://github.com/eslint/eslint/blob/master/docs/rules/no-cond-assign.md
@@ -212,13 +215,13 @@ removed.
 [no-div-regex]: https://github.com/eslint/eslint/blob/master/docs/rules/no-div-regex.md
 [no-dupe-keys]: https://github.com/eslint/eslint/blob/master/docs/rules/no-dupe-keys.md
 [no-else-return]: https://github.com/eslint/eslint/blob/master/docs/rules/no-else-return.md
-[no-empty]: https://github.com/eslint/eslint/blob/master/docs/rules/no-empty.md
+[no-empty]: eslint/no-empty.md
 [no-empty-class]: https://github.com/eslint/eslint/blob/master/docs/rules/no-empty-class.md
 [no-empty-label]: https://github.com/eslint/eslint/blob/master/docs/rules/no-empty-label.md
 [no-eq-null]: https://github.com/eslint/eslint/blob/master/docs/rules/no-eq-null.md
 [no-eval]: https://github.com/eslint/eslint/blob/master/docs/rules/no-eval.md
 [no-ex-assign]: https://github.com/eslint/eslint/blob/master/docs/rules/no-ex-assign.md
-[no-extend-native]: https://github.com/eslint/eslint/blob/master/docs/rules/no-extend-native.md
+[no-extend-native]: eslint/no-extend-native.md
 [no-extra-bind]: https://github.com/eslint/eslint/blob/master/docs/rules/no-extra-bind.md
 [no-extra-boolean-cast]: https://github.com/eslint/eslint/blob/master/docs/rules/no-extra-boolean-cast.md
 [no-extra-parens]: https://github.com/eslint/eslint/blob/master/docs/rules/no-extra-parens.md
@@ -245,7 +248,7 @@ removed.
 [no-native-reassign]: https://github.com/eslint/eslint/blob/master/docs/rules/no-native-reassign.md
 [no-negated-in-lhs]: https://github.com/eslint/eslint/blob/master/docs/rules/no-negated-in-lhs.md
 [no-nested-ternary]: https://github.com/eslint/eslint/blob/master/docs/rules/no-nested-ternary.md
-[no-new]: https://github.com/eslint/eslint/blob/master/docs/rules/no-new.md
+[no-new]: eslint/no-new.md
 [no-new-func]: https://github.com/eslint/eslint/blob/master/docs/rules/no-new-func.md
 [no-new-object]: https://github.com/eslint/eslint/blob/master/docs/rules/no-new-object.md
 [no-new-require]: https://github.com/eslint/eslint/blob/master/docs/rules/no-new-require.md
@@ -254,7 +257,7 @@ removed.
 [no-octal]: https://github.com/eslint/eslint/blob/master/docs/rules/no-octal.md
 [no-octal-escape]: https://github.com/eslint/eslint/blob/master/docs/rules/no-octal-escape.md
 [no-path-concat]: https://github.com/eslint/eslint/blob/master/docs/rules/no-path-concat.md
-[no-plusplus]: https://github.com/eslint/eslint/blob/master/docs/rules/no-plusplus.md
+[no-plusplus]: eslint/no-plusplus.md
 [no-process-env]: https://github.com/eslint/eslint/blob/master/docs/rules/no-process-env.md
 [no-process-exit]: https://github.com/eslint/eslint/blob/master/docs/rules/no-process-exit.md
 [no-proto]: https://github.com/eslint/eslint/blob/master/docs/rules/no-proto.md
@@ -274,13 +277,13 @@ removed.
 [no-sync]: https://github.com/eslint/eslint/blob/master/docs/rules/no-sync.md
 [no-ternary]: https://github.com/eslint/eslint/blob/master/docs/rules/no-ternary.md
 [no-trailing-spaces]: https://github.com/eslint/eslint/blob/master/docs/rules/no-trailing-spaces.md
-[no-undef]: https://github.com/eslint/eslint/blob/master/docs/rules/no-undef.md
+[no-undef]: eslint/no-undef.md
 [no-undef-init]: https://github.com/eslint/eslint/blob/master/docs/rules/no-undef-init.md
 [no-undefined]: https://github.com/eslint/eslint/blob/master/docs/rules/no-undefined.md
 [no-underscore-dangle]: https://github.com/eslint/eslint/blob/master/docs/rules/no-underscore-dangle.md
 [no-unreachable]: https://github.com/eslint/eslint/blob/master/docs/rules/no-unreachable.md
 [no-unused-expressions]: https://github.com/eslint/eslint/blob/master/docs/rules/no-unused-expressions.md
-[no-unused-vars]: https://github.com/eslint/eslint/blob/master/docs/rules/no-unused-vars.md
+[no-unused-vars]: eslint/no-unused-vars.md
 [no-use-before-define]: eslint/no-use-before-define.md
 [no-void]: https://github.com/eslint/eslint/blob/master/docs/rules/no-void.md
 [no-warning-comments]: https://github.com/eslint/eslint/blob/master/docs/rules/no-warning-comments.md
@@ -291,7 +294,7 @@ removed.
 [camelcase]: eslint/camelcase.md
 [comma-spacing]: https://github.com/eslint/eslint/blob/master/docs/rules/comma-spacing.md
 [comma-style]: https://github.com/eslint/eslint/blob/master/docs/rules/comma-style.md
-[complexity]: https://github.com/eslint/eslint/blob/master/docs/rules/complexity.md
+[complexity]: eslint/complexity.md
 [consistent-return]: https://github.com/eslint/eslint/blob/master/docs/rules/consistent-return.md
 [consistent-this]: https://github.com/eslint/eslint/blob/master/docs/rules/consistent-this.md
 [curly]: https://github.com/eslint/eslint/blob/master/docs/rules/curly.md
@@ -305,12 +308,12 @@ removed.
 [guard-for-in]: eslint/guard-for-in.md
 [handle-callback-err]: https://github.com/eslint/eslint/blob/master/docs/rules/handle-callback-err.md
 [key-spacing]: https://github.com/eslint/eslint/blob/master/docs/rules/key-spacing.md
-[max-depth]: https://github.com/eslint/eslint/blob/master/docs/rules/max-depth.md
+[max-depth]: eslint/max-depth.md
 [max-len]: https://github.com/eslint/eslint/blob/master/docs/rules/max-len.md
 [max-nested-callbacks]: https://github.com/eslint/eslint/blob/master/docs/rules/max-nested-callbacks.md
-[max-params]: https://github.com/eslint/eslint/blob/master/docs/rules/max-params.md
+[max-params]: eslint/max-params.md
 [max-statements]: https://github.com/eslint/eslint/blob/master/docs/rules/max-statements.md
-[new-cap]: https://github.com/eslint/eslint/blob/master/docs/rules/new-cap.md
+[new-cap]: eslint/new-cap.md
 [new-parens]: https://github.com/eslint/eslint/blob/master/docs/rules/new-parens.md
 [one-var]: https://github.com/eslint/eslint/blob/master/docs/rules/one-var.md
 [padded-blocks]: https://github.com/eslint/eslint/blob/master/docs/rules/padded-blocks.md
@@ -332,7 +335,7 @@ removed.
 [valid-jsdoc]: https://github.com/eslint/eslint/blob/master/docs/rules/valid-jsdoc.md
 [valid-typeof]: https://github.com/eslint/eslint/blob/master/docs/rules/valid-typeof.md
 [vars-on-top]: https://github.com/eslint/eslint/blob/master/docs/rules/vars-on-top.md
-[wrap-iife]: https://github.com/eslint/eslint/blob/master/docs/rules/wrap-iife.md
+[wrap-iife]: eslint/wrap-iife.md
 [wrap-regex]: https://github.com/eslint/eslint/blob/master/docs/rules/wrap-regex.md
 [yoda]: https://github.com/eslint/eslint/blob/master/docs/rules/yoda.md
 
@@ -360,3 +363,6 @@ removed.
 [jscs-disallow-keywords-on-new-line]: jscs/disallow-keywords-on-new-line.md
 [jscs-require-line-feed-at-file-end]: jscs/require-line-feed-at-file-end.md
 [jscs-require-dot-notation]: jscs/require-dot-notation.md
+
+
+[jshint-docs]: jshint/jshint.md
