@@ -38,7 +38,7 @@ In the short term this can be fixed by copying those files from lint-trap to
 your project and adding them to your `.gitignore`. From the root of your
 project:
 
-    cp ./node_modules/lint-trap/lib/rc/.{jscs,eslint,jshint}rc .
+    cp ./node_modules/lint-trap/rc/.{jscs,eslint,jshint}rc .
     rc=( .{jscs,eslint,jshint}rc )
     for c in "${rc[@]}"; do echo $c >> .gitignore; done;
 
