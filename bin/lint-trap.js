@@ -14,7 +14,9 @@ var opts = {
 
 lintTrap(files, opts, function run(err, allFiles) {
     if (err) {
-        console.error(err);
+        if (err.message !== 'Lint errors encountered') {
+            console.error(err.message);
+        }
         return process.exit(1);
     }
     process.exit(0);
