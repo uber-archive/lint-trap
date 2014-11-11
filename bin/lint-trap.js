@@ -5,12 +5,18 @@ var process = require('process');
 var console = require('console');
 var argv = require('minimist')(process.argv.slice(2));
 var lintTrap = require('../lint-trap');
+var fmt = require('util').format;
 
 var files = argv._.length === 0 ? [process.cwd()] : argv._;
 
 var opts = {
     reporter: argv.reporter || argv.r || 'stylish'
 };
+
+if (argv.version) {
+    var pkg = require('../package.json');
+    return console.error(fmt('lint-trap v%s', pkg.version));
+}
 
 lintTrap(files, opts, function run(err, allFiles) {
     if (err) {
