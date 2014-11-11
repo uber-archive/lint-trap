@@ -1,6 +1,12 @@
 'use strict';
 var fmt = require('util').format;
 
+// ==== begin attribution =====================================================
+// The pairs object and encode function are borrowed from:
+// github.com/jshint/jshint src/reporters/checkstyle.js
+// Author: Boy Baukema, http://github.com/relaxnow
+// License MIT
+// This code should be replaced in a future commit of checkstyle-reporter.js
 var pairs = {
     '&': '&amp;',
     '"': '&quot;',
@@ -17,6 +23,7 @@ function encode(s) {
     }
     return s || '';
 }
+// ==== end attribution =======================================================
 
 function printCheckstyle(fileMessages) {
     fileMessages = fileMessages.filter(removeEmpty);
