@@ -15,15 +15,16 @@ var opts = {
 
 if (argv.version) {
     var pkg = require('../package.json');
-    return console.error(fmt('lint-trap v%s', pkg.version));
-}
-
-lintTrap(files, opts, function run(err, allFiles) {
-    if (err) {
-        if (err.message !== 'Lint errors encountered') {
-            console.error(err.message);
-        }
-        return process.exit(1);
-    }
+    console.error(fmt('lint-trap v%s', pkg.version));
     process.exit(0);
-});
+} else {
+    lintTrap(files, opts, function run(err, allFiles) {
+        if (err) {
+            if (err.message !== 'Lint errors encountered') {
+                console.error(err.message);
+            }
+            return process.exit(1);
+        }
+        process.exit(0);
+    });
+}
