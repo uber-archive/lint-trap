@@ -2,6 +2,7 @@
 var lintStream = require('./lint-stream')();
 var printFileErrorTable = require('./stylish-stream-reporter');
 var printCheckstyle = require('./checkstyle-reporter');
+var printJSON = require('./json-reporter');
 var async = require('async');
 var getJavaScriptFiles = require('./get-javascript-files');
 var es = require('event-stream');
@@ -26,6 +27,8 @@ function lint(jsfiles, opts, callback) {
         uberLintStream.on('data', onMessage);
     } else if (opts.reporter === 'checkstyle') {
         uberLintStream.pipe(es.writeArray(writeCheckstyleXML));
+    } else if (opts.reporter === 'json') {
+        uberLintStream.pipe(es.writeArray(writeJSON));
     } else {
         callback(new Error('Unknown reporter: ' + opts.reporter));
     }
@@ -53,6 +56,13 @@ function lint(jsfiles, opts, callback) {
             return callback(err);
         }
         process.stdout.write(printCheckstyle(fileMessages));
+    }
+
+    function writeJSON(err, fileMessages) {
+        if (err) {
+            return callback(err);
+        }
+        process.stdout.write(printJSON(fileMessages));
     }
 }
 
