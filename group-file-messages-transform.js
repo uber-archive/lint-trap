@@ -53,7 +53,7 @@ function clusterFileMessages(linters) {
         callback();
     }
 
-    return through({ objectMode: true }, transform, flush);
+    return through.obj(transform, flush);
 }
 
 module.exports = clusterFileMessages;

@@ -1,12 +1,16 @@
 'use strict';
 var lintStream = require('./lint-stream')();
-var printFileErrorTable = require('./stylish-stream-reporter');
+var makeStylishStreamWriter = require('./stylish-stream-reporter');
 var printCheckstyle = require('./checkstyle-reporter');
 var printJSON = require('./json-reporter');
 var async = require('async');
 var getJavaScriptFiles = require('./get-javascript-files');
 var es = require('event-stream');
 var process = require('process');
+var extend = require('xtend');
+var makeErrorMeter = require('./error-meter');
+var partial = require('partial');
+var printCompact = require('./compact-reporter');
 
 function findFiles(paths, callback) {
     async.reduce(paths, [], function accumulator(memo, pathArg, done) {
@@ -19,70 +23,67 @@ function findFiles(paths, callback) {
     }, callback);
 }
 
-function lint(jsfiles, opts, callback) {
-    var exitCode = 0;
-    var uberLintStream = lintStream(jsfiles);
-
-    if (opts.reporter === 'stylish') {
-        uberLintStream.on('data', onMessage);
-    } else if (opts.reporter === 'checkstyle') {
-        uberLintStream.pipe(es.writeArray(writeCheckstyleXML));
-    } else if (opts.reporter === 'json') {
-        uberLintStream.pipe(es.writeArray(writeJSON));
-    } else {
-        callback(new Error('Unknown reporter: ' + opts.reporter));
-    }
-
-    uberLintStream.once('error', callback);
-    uberLintStream.once('end', onEnd);
-
-    function onMessage(message) {
-        message.errors.forEach(checkSeverity);
-        printFileErrorTable(message);
-    }
-
-    function checkSeverity(error) {
-        if (error.type === 'error') {
-            exitCode = 1;
-        }
-    }
-
-    function onEnd() {
-        callback(exitCode === 1 ? new Error('Lint errors encountered') : null);
-    }
-
-    function writeCheckstyleXML(err, fileMessages) {
+function makeWriter(printer, callback) {
+    function writer(err, fileMessages) {
         if (err) {
             return callback(err);
         }
-        process.stdout.write(printCheckstyle(fileMessages));
-    }
 
-    function writeJSON(err, fileMessages) {
-        if (err) {
-            return callback(err);
-        }
-        process.stdout.write(printJSON(fileMessages));
+        process.stdout.write(printer(fileMessages));
     }
+    return es.writeArray(writer);
 }
 
-function run(paths, opts, callback) {
-    if (typeof opts === 'function') {
-        callback = opts;
-        opts = {
-            reporter: 'stylish'
-        };
+function onEnd(errorMeter, callback) {
+    var metrics = errorMeter.getMetrics();
+    var err = metrics.errorCode === 1 ?
+        new Error('Lint errors encountered') : null;
+    callback(err);
+}
+
+function lint(jsfiles, opts, callback) {
+    var uberLintStream = lintStream(jsfiles, opts.stdin);
+    var errorMeter = makeErrorMeter();
+    var writer;
+    var r = opts.reporter;
+
+    writer = (r === 'stylish') ? makeStylishStreamWriter() :
+             (r === 'checkstyle') ? makeWriter(printCheckstyle, callback) :
+             (r === 'json') ? makeWriter(printJSON, callback) :
+             (r === 'compact') ? makeWriter(printCompact, callback) : null;
+
+    if (!writer) {
+        return callback(new Error('Unknown reporter: ' + r));
     }
 
-    findFiles(paths, function fileFilesCallback(err, files) {
-        if (err) {
-            return callback(err);
-        }
-        if (files.length === 0) {
-            return callback(new Error('no files found'));
-        }
-        lint(files, opts, callback);
-    });
+    uberLintStream
+        .pipe(errorMeter.meter)
+        .pipe(writer);
+
+    uberLintStream.once('error', callback);
+    uberLintStream.once('end', partial(onEnd, errorMeter, callback));
+}
+
+function run(opts, callback) {
+    opts = extend({
+        files: [],
+        reporter: 'stylish',
+        stdin: false
+    }, opts);
+
+    if (opts.stdin) {
+        lint(['stdin'], opts, callback);
+    } else {
+        findFiles(opts.files, function fileFilesCallback(err, files) {
+            if (err) {
+                return callback(err);
+            }
+            if (files.length === 0) {
+                return callback(new Error('no files found'));
+            }
+            lint(files, opts, callback);
+        });
+    }
 }
 
 module.exports = run;

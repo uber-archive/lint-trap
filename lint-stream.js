@@ -1,6 +1,6 @@
 'use strict';
 var spawn = require('child_process').spawn;
-var JSONStream = require('JSONStream');
+var JSONStream = require('jsonstream2');
 var path = require('path');
 var es = require('event-stream');
 var which = require('npm-which');
@@ -10,14 +10,24 @@ var setIndentRule = require('./set-indent-rule');
 var makeFileStream = require('./error-to-file-transform');
 var clusterFileMessages = require('./group-file-messages-transform');
 var severityTransform = require('./severity-transform');
+var process = require('process');
+var makeDedupeTransform = require('./dedupe-transform');
 
-function makeArgs(type) {
-    return [
+function makeArgs(type, files, readFromStdin) {
+    var args = [
         '--config',
         path.resolve(__dirname, 'rc', '.' + type + 'rc'),
         (type === 'eslint') ? '--format' : '--reporter',
         path.resolve(__dirname, 'reporters', type + '.js')
     ];
+
+    if (readFromStdin) {
+        args.push(type === 'eslint' ? '--stdin' : '-');
+    } else {
+        args = args.concat(files);
+    }
+
+    return args;
 }
 
 function makeErrorEmitter(type, lintErrorStream) {
@@ -39,12 +49,8 @@ function makeRelativePathFn(dir) {
     };
 }
 
-function execLinter(type, dir, files) {
-
-    var jsonMessages = JSONStream.parse('*');
-    var makeRelativePath = makeRelativePathFn(dir);
-
-    var lintMessages = through2.obj(function transform(message, enc, callback) {
+function makeRelativePathTransform(makeRelativePath) {
+    return through2.obj(function transform(message, enc, callback) {
         // If commondir and message.file are the same, we are linting a
         // single file. This makes sure that the file name is printed in
         // that case.
@@ -52,6 +58,13 @@ function execLinter(type, dir, files) {
         this.push(message);
         callback();
     });
+}
+
+function execLinter(type, dir, files, readFromStdin) {
+
+    var makeRelativePath = makeRelativePathFn(dir);
+
+    var lintMessages = makeRelativePathTransform(makeRelativePath);
 
     setIndentRule(dir, files[0], function setIndentRuleCallback(err) {
         if (err) {
@@ -65,14 +78,24 @@ function execLinter(type, dir, files) {
                 return;
             }
 
-            var args = makeArgs(type).concat(files);
-            var opts = {};
-            var onError = makeErrorEmitter(type, jsonMessages);
-            var lintProcess = spawn(binPath, args, opts);
+            var args = makeArgs(type, files, readFromStdin);
+            var onError = makeErrorEmitter(type, lintMessages);
+            var lintProcess = spawn(binPath, args);
+
+            if (readFromStdin) {
+                process.stdin.pipe(lintProcess.stdin);
+
+                process.stdin.on('end', function onStdinEnd() {
+                    lintProcess.stdin.end();
+                });
+            }
+
             lintProcess.stdout
-                .pipe(jsonMessages)
+                .pipe(JSONStream.parse('*'))
                 .pipe(severityTransform())
-                .pipe(lintMessages);
+                .pipe(lintMessages)
+                .on('error', onError);
+
             lintProcess.stderr.on('data', onError);
             lintProcess.on('error', onError);
         });
@@ -82,26 +105,29 @@ function execLinter(type, dir, files) {
     return lintMessages;
 }
 
-function lintStream(type, files) {
+function lintStream(type, files, readFromStdin) {
     var dir = commondir(files);
     var fileStream = makeFileStream(type, files.map(makeRelativePathFn(dir)));
-    execLinter(type, dir, files).pipe(fileStream);
+    execLinter(type, dir, files, readFromStdin).pipe(fileStream);
     return fileStream;
 }
 
 function lintTrapStream(linters) {
     linters = linters || ['jscs', 'jshint', 'eslint'];
 
-    return function lint(files) {
+    return function lint(files, readFromStdin) {
         files.sort();
         var streams = linters.map(function initLinter(linterName) {
-            var stream = lintStream(linterName, files);
+            var stream = lintStream(linterName, files, readFromStdin);
             return stream;
         });
 
         var mergedLintStream = es.merge.apply(es, streams);
-        var finalStream = clusterFileMessages(linters);
-        mergedLintStream.pipe(finalStream);
+        var finalStream = makeDedupeTransform();
+
+        mergedLintStream
+            .pipe(clusterFileMessages(linters))
+            .pipe(finalStream);
 
         return finalStream;
     };

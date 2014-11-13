@@ -9,8 +9,14 @@ var fmt = require('util').format;
 
 var files = argv._.length === 0 ? [process.cwd()] : argv._;
 
+function readFromStdin(argv) {
+    return argv._.length === 1 && argv._[0] === '-';
+}
+
 var opts = {
-    reporter: argv.reporter || argv.r || 'stylish'
+    reporter: argv.reporter || argv.r || 'stylish',
+    files: files,
+    stdin: readFromStdin(argv)
 };
 
 if (argv.version) {
@@ -18,13 +24,15 @@ if (argv.version) {
     console.error(fmt('lint-trap v%s', pkg.version));
     process.exit(0);
 } else {
-    lintTrap(files, opts, function run(err, allFiles) {
-        if (err) {
-            if (err.message !== 'Lint errors encountered') {
-                console.error(err.message);
-            }
-            return process.exit(1);
+    lintTrap(opts, run);
+}
+
+function run(err) {
+    if (err) {
+        if (err.message !== 'Lint errors encountered') {
+            console.error(err.message);
         }
-        process.exit(0);
-    });
+        return process.exit(1);
+    }
+    process.exit(0);
 }
