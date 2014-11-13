@@ -6,7 +6,7 @@ function writeError(file, error) {
     process.stdout.write(JSON.stringify({
         type: 'error',
         linter: 'jscs',
-        file: file,
+        file: file === 'input' ? 'stdin' : file,
         line: error.line,
         column: error.column,
         rule: error.rule,

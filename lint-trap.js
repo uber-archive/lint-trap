@@ -41,7 +41,7 @@ function onEnd(errorMeter, callback) {
 }
 
 function lint(jsfiles, opts, callback) {
-    var uberLintStream = lintStream(jsfiles);
+    var uberLintStream = lintStream(jsfiles, opts.stdin);
     var errorMeter = makeErrorMeter();
     var writer;
     var r = opts.reporter;
@@ -65,18 +65,23 @@ function lint(jsfiles, opts, callback) {
 function run(opts, callback) {
     opts = extend({
         files: [],
-        reporter: 'stylish'
+        reporter: 'stylish',
+        stdin: false
     }, opts);
 
-    findFiles(opts.files, function fileFilesCallback(err, files) {
-        if (err) {
-            return callback(err);
-        }
-        if (files.length === 0) {
-            return callback(new Error('no files found'));
-        }
-        lint(files, opts, callback);
-    });
+    if (opts.stdin) {
+        lint(['stdin'], opts, callback);
+    } else {
+        findFiles(opts.files, function fileFilesCallback(err, files) {
+            if (err) {
+                return callback(err);
+            }
+            if (files.length === 0) {
+                return callback(new Error('no files found'));
+            }
+            lint(files, opts, callback);
+        });
+    }
 }
 
 module.exports = run;

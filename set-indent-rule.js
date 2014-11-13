@@ -4,6 +4,7 @@ var extend = require('extend');
 var path = require('path');
 var fs = require('fs');
 var jf = require('jsonfile');
+var process = require('process');
 jf.spaces = 4;
 
 function findReferenceFile(rootPath, firstFile, callback) {
@@ -41,6 +42,10 @@ function updateJSON(jsonPath, diff, callback) {
 }
 
 function setIndentRule(rootPath, firstFile, callback) {
+    if (firstFile === 'stdin') {
+        return process.nextTick(callback);
+    }
+
     function readFileCallback(err, content) {
         if (err) {
             return callback(err);

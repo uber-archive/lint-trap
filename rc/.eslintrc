@@ -127,7 +127,7 @@
         "max-len": [2, 80, 4],
         "max-nested-callbacks": [2, 3],
         "max-params": [2, 4],
-        "max-statements": [2, 10],
+        "max-statements": [2, 13],
         "new-cap": [2, { newIsCap: true, capIsNew: false }],
         "new-parens": 2,
         "one-var": 0,
