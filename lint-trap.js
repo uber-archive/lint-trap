@@ -10,6 +10,7 @@ var process = require('process');
 var extend = require('xtend');
 var makeErrorMeter = require('./error-meter');
 var partial = require('partial');
+var printCompact = require('./compact-reporter');
 
 function findFiles(paths, callback) {
     async.reduce(paths, [], function accumulator(memo, pathArg, done) {
@@ -48,7 +49,8 @@ function lint(jsfiles, opts, callback) {
 
     writer = (r === 'stylish') ? makeStylishStreamWriter() :
              (r === 'checkstyle') ? makeWriter(printCheckstyle, callback) :
-             (r === 'json') ? makeWriter(printJSON, callback) : null;
+             (r === 'json') ? makeWriter(printJSON, callback) :
+             (r === 'compact') ? makeWriter(printCompact, callback) : null;
 
     if (!writer) {
         return callback(new Error('Unknown reporter: ' + r));
