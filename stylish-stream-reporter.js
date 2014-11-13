@@ -5,6 +5,7 @@ var console = require('console');
 var process = require('process');
 var isTTY = process.stdout.isTTY;
 var chalk = require('chalk');
+var spy = require('through2-spy');
 
 function createTableRow(message) {
     var linter = (message.linter + '   ').slice(0, 6);
@@ -57,4 +58,8 @@ function printFileErrorTable(message) {
     }
 }
 
-module.exports = printFileErrorTable;
+function makeStylishStreamWriter() {
+    return spy.obj(printFileErrorTable);
+}
+
+module.exports = makeStylishStreamWriter;
