@@ -11,6 +11,7 @@ var makeFileStream = require('./error-to-file-transform');
 var clusterFileMessages = require('./group-file-messages-transform');
 var severityTransform = require('./severity-transform');
 var process = require('process');
+var makeDedupeTransform = require('./dedupe-transform');
 
 function makeArgs(type, files, readFromStdin) {
     var args = [
@@ -31,9 +32,8 @@ function makeArgs(type, files, readFromStdin) {
 
 function makeErrorEmitter(type, lintErrorStream) {
     return function emitError(error) {
-        // console.log(error.toString());
         error.linter = type;
-        // lintErrorStream.emit('error', error);
+        lintErrorStream.emit('error', error);
     };
 }
 
@@ -62,7 +62,6 @@ function makeRelativePathTransform(makeRelativePath) {
 
 function execLinter(type, dir, files, readFromStdin) {
 
-    var jsonMessages = JSONStream.parse('*');
     var makeRelativePath = makeRelativePathFn(dir);
 
     var lintMessages = makeRelativePathTransform(makeRelativePath);
@@ -79,11 +78,9 @@ function execLinter(type, dir, files, readFromStdin) {
                 return;
             }
 
-            var opts = {};
             var args = makeArgs(type, files, readFromStdin);
-
-            var onError = makeErrorEmitter(type, jsonMessages);
-            var lintProcess = spawn(binPath, args, opts);
+            var onError = makeErrorEmitter(type, lintMessages);
+            var lintProcess = spawn(binPath, args);
 
             if (readFromStdin) {
                 process.stdin.pipe(lintProcess.stdin);
@@ -94,9 +91,11 @@ function execLinter(type, dir, files, readFromStdin) {
             }
 
             lintProcess.stdout
-                .pipe(jsonMessages)
+                .pipe(JSONStream.parse('*'))
                 .pipe(severityTransform())
-                .pipe(lintMessages);
+                .pipe(lintMessages)
+                .on('error', onError);
+
             lintProcess.stderr.on('data', onError);
             lintProcess.on('error', onError);
         });
@@ -124,8 +123,11 @@ function lintTrapStream(linters) {
         });
 
         var mergedLintStream = es.merge.apply(es, streams);
-        var finalStream = clusterFileMessages(linters);
-        mergedLintStream.pipe(finalStream);
+        var finalStream = makeDedupeTransform();
+
+        mergedLintStream
+            .pipe(clusterFileMessages(linters))
+            .pipe(finalStream);
 
         return finalStream;
     };

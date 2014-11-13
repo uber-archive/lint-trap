@@ -1,0 +1,10 @@
+{
+    "eslint.eol-last": "jscs.requireLineFeedAtFileEnd",
+    "eslint.space-before-blocks": "jscs.requireSpacesInFunctionDeclaration",
+    "eslint.no-extra-semi": "jshint.W032",
+    "eslint.no-undef": "jshint.W117",
+    "eslint.no-trailing-spaces": "jscs.disallowTrailingWhitespace",
+    "eslint.semi": "jshint.W033",
+    "eslint.no-multiple-empty-lines": "jscs.disallowMultipleLineBreaks",
+    "eslint.max-len": "jscs.maximumLineLength"
+}
