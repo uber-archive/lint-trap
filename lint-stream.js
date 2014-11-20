@@ -68,14 +68,12 @@ function execLinter(type, dir, files, readFromStdin) {
 
     setIndentRule(dir, files[0], function setIndentRuleCallback(err) {
         if (err) {
-            lintMessages.emit('error', err);
-            return;
+            return lintMessages.emit('error', err);
         }
 
         getBinPath(type, function getBinPathCallback(err, binPath) {
             if (err) {
-                lintMessages.emit('error', err);
-                return;
+                return lintMessages.emit('error', err);
             }
 
             var args = makeArgs(type, files, readFromStdin);
@@ -85,7 +83,7 @@ function execLinter(type, dir, files, readFromStdin) {
             if (readFromStdin) {
                 process.stdin.pipe(lintProcess.stdin);
 
-                process.stdin.on('end', function onStdinEnd() {
+                process.stdin.once('end', function onStdinEnd() {
                     lintProcess.stdin.end();
                 });
             }
@@ -97,7 +95,6 @@ function execLinter(type, dir, files, readFromStdin) {
                 .on('error', onError);
 
             lintProcess.stderr.on('data', onError);
-            lintProcess.on('error', onError);
         });
 
     });

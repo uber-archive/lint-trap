@@ -21,7 +21,9 @@ function dedupe(possibleDupes, error, index, array) {
     var maybeDupes = possibleDupes[error.line];
     var key = [error.linter, error.rule].join('.');
     if (maybeDupes) {
-        isDupe = maybeDupes[key] && dedupeMap[maybeDupes[key]];
+        isDupe = maybeDupes[key] &&
+            dedupeMap[maybeDupes[key]] &&
+            error.linter !== 'eslint';
     }
 
     return !isDupe;
