@@ -36,7 +36,7 @@ function printTable(data) {
         data = data.map(function colorize(row) {
             return [
                 row[0],
-                chalk.red(row[1]),
+                row[1] === 'warning' ? chalk.yellow(row[1]) : chalk.red(row[1]),
                 chalk.magenta(row[2]),
                 row[3],
                 chalk.white(row[4]),
