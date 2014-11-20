@@ -66,37 +66,40 @@ function execLinter(type, dir, files, opts) {
 
     var lintMessages = makeRelativePathTransform(makeRelativePath);
 
-    setRules(dir, files[0], opts.lineLength, function setIndentRuleCallback(err) {
+    setRules(dir, files[0], opts.lineLength, setIndentRuleCallback);
+
+    function setIndentRuleCallback(err) {
+        if (err) {
+            return lintMessages.emit('error', err);
+        }
+        getBinPath(type, getBinPathCallback);
+    }
+
+    function getBinPathCallback(err, binPath) {
         if (err) {
             return lintMessages.emit('error', err);
         }
 
-        getBinPath(type, function getBinPathCallback(err, binPath) {
-            if (err) {
-                return lintMessages.emit('error', err);
-            }
+        var args = makeArgs(type, files, opts.stdin);
+        var onError = makeErrorEmitter(type, lintMessages);
+        var lintProcess = spawn(binPath, args);
 
-            var args = makeArgs(type, files, opts.stdin);
-            var onError = makeErrorEmitter(type, lintMessages);
-            var lintProcess = spawn(binPath, args);
+        if (opts.stdin) {
+            process.stdin.pipe(lintProcess.stdin);
 
-            if (opts.stdin) {
-                process.stdin.pipe(lintProcess.stdin);
+            process.stdin.once('end', function onStdinEnd() {
+                lintProcess.stdin.end();
+            });
+        }
 
-                process.stdin.once('end', function onStdinEnd() {
-                    lintProcess.stdin.end();
-                });
-            }
+        lintProcess.stdout
+            .pipe(JSONStream.parse('*'))
+            .pipe(severityTransform())
+            .pipe(lintMessages)
+            .on('error', onError);
 
-            lintProcess.stdout
-                .pipe(JSONStream.parse('*'))
-                .pipe(severityTransform())
-                .pipe(lintMessages)
-                .on('error', onError);
-
-            lintProcess.stderr.on('data', onError);
-        });
-    });
+        lintProcess.stderr.on('data', onError);
+    }
 
     return lintMessages;
 }
