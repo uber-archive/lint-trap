@@ -1,7 +1,7 @@
 {
     "validateIndentation": 4,
     "maximumLineLength": {
-        "value": 120,
+        "value": 80,
         "allowUrlComments": true,
         "allowComments": false,
         "allowRegex": false

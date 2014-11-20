@@ -42,7 +42,7 @@ function onEnd(errorMeter, callback) {
 }
 
 function lint(jsfiles, opts, callback) {
-    var uberLintStream = lintStream(jsfiles, opts.stdin);
+    var uberLintStream = lintStream(jsfiles, opts);
     var errorMeter = makeErrorMeter();
     var writer;
     var r = opts.reporter;
@@ -68,8 +68,14 @@ function run(opts, callback) {
     opts = extend({
         files: [],
         reporter: 'stylish',
-        stdin: false
+        stdin: false,
+        lineLength: 80
     }, opts);
+
+    if (opts.lineLength > 120) {
+        var errMsg = 'Line length limit cannot be greater than 120 characters';
+        return callback(new Error(errMsg));
+    }
 
     if (opts.stdin) {
         lint(['stdin'], opts, callback);

@@ -4,6 +4,7 @@ var extend = require('extend');
 var path = require('path');
 var fs = require('fs');
 var jf = require('jsonfile');
+var dotty = require('dotty');
 var process = require('process');
 jf.spaces = 4;
 
@@ -31,12 +32,17 @@ function findReferenceFile(rootPath, firstFile, callback) {
     });
 }
 
-function updateJSON(jsonPath, diff, callback) {
+function updateJSON(jsonPath, diffs, callback) {
     jf.readFile(jsonPath, function readFileCallback(err, content) {
         if (err) {
             return callback(err);
         }
-        content = extend(content, diff);
+
+        Object.keys(diffs).forEach(function applyDiff(diffKey) {
+            var value = diffs[diffKey];
+            dotty.put(content, diffKey, value);
+        });
+
         jf.writeFile(jsonPath, content, callback);
     });
 }
@@ -66,4 +72,41 @@ function setIndentRule(rootPath, firstFile, callback) {
     findReferenceFile(rootPath, firstFile, findReferenceFileCallback);
 }
 
-module.exports = setIndentRule;
+function setLineLengthRule(lineLength, callback) {
+
+    var jscsrcPath = path.resolve(__dirname, './rc/.jscsrc');
+
+    var jscsdiff = {
+        'maximumLineLength.value' : lineLength
+    };
+
+    updateJSON(jscsrcPath, jscsdiff, updateEslint);
+
+    function updateEslint(err) {
+        if (err) {
+            return callback(err);
+        }
+        var eslintrcPath = path.resolve(__dirname, './rc/.eslintrc');
+        var eslintdiff = {
+            'rules.max-len': [2, lineLength, 4]
+        };
+        updateJSON(eslintrcPath, eslintdiff, callback);
+    }
+}
+
+function setRules(dir, files, lineLength, callback) {
+    setIndentRule(dir, files[0], function setIndentRuleCallback(err) {
+        if (err) {
+            return callback(err);
+        }
+
+        setLineLengthRule(lineLength, function setLineLengthRuleCallback(err) {
+            if (err) {
+                return callback(err);
+            }
+            callback();
+        });
+    });
+}
+
+module.exports = setRules;
