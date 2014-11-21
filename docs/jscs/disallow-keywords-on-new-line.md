@@ -4,9 +4,9 @@
         "else"
     ]
 
-Since the `requireBlocksOnNewline` rule is already enforced, allowing `else` to
-occur on a newline would reduce readability. Our if statements should be
-consistent.
+Since the `requireBlocksOnNewline` rule is already enforced,
+allowing `else` to occur on a newline would reduce
+readability. Our if statements should be consistent.
 
 Favour:
 

@@ -2,8 +2,8 @@
 
     "max-depth": [2, 4]
 
-Maximum depth is set to force you to not indent forever. Deeply indented
-code is generally a smell of bad code.
+Maximum depth is set to force you to not indent forever.
+Deeply indented code is generally a smell of bad code.
 
 You should break code out into helper functions.
 

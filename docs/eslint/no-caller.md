@@ -2,8 +2,9 @@
 
     "no-caller": 2
 
-Banning calls to `arguments.caller` or `arguments.callee` is general
-performance hygiene. These features are banned in strict mode as well.
+Banning calls to `arguments.caller` or `arguments.callee` is
+general performance hygiene. These features are banned in
+strict mode as well.
 
 [Official `no-caller` ESLint Rule Documentation][no-caller-docs]
 
