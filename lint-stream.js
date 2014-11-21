@@ -6,7 +6,7 @@ var es = require('event-stream');
 var which = require('npm-which');
 var commondir = require('commondir');
 var through2 = require('through2');
-var setIndentRule = require('./set-indent-rule');
+var setRules = require('./set-rules');
 var makeFileStream = require('./error-to-file-transform');
 var clusterFileMessages = require('./group-file-messages-transform');
 var severityTransform = require('./severity-transform');
@@ -60,62 +60,64 @@ function makeRelativePathTransform(makeRelativePath) {
     });
 }
 
-function execLinter(type, dir, files, readFromStdin) {
+function execLinter(type, dir, files, opts) {
 
     var makeRelativePath = makeRelativePathFn(dir);
 
     var lintMessages = makeRelativePathTransform(makeRelativePath);
 
-    setIndentRule(dir, files[0], function setIndentRuleCallback(err) {
+    setRules(dir, files, opts.lineLength, setIndentRuleCallback);
+
+    function setIndentRuleCallback(err) {
+        if (err) {
+            return lintMessages.emit('error', err);
+        }
+        getBinPath(type, getBinPathCallback);
+    }
+
+    function getBinPathCallback(err, binPath) {
         if (err) {
             return lintMessages.emit('error', err);
         }
 
-        getBinPath(type, function getBinPathCallback(err, binPath) {
-            if (err) {
-                return lintMessages.emit('error', err);
-            }
+        var args = makeArgs(type, files, opts.stdin);
+        var onError = makeErrorEmitter(type, lintMessages);
+        var lintProcess = spawn(binPath, args);
 
-            var args = makeArgs(type, files, readFromStdin);
-            var onError = makeErrorEmitter(type, lintMessages);
-            var lintProcess = spawn(binPath, args);
+        if (opts.stdin) {
+            process.stdin.pipe(lintProcess.stdin);
 
-            if (readFromStdin) {
-                process.stdin.pipe(lintProcess.stdin);
+            process.stdin.once('end', function onStdinEnd() {
+                lintProcess.stdin.end();
+            });
+        }
 
-                process.stdin.once('end', function onStdinEnd() {
-                    lintProcess.stdin.end();
-                });
-            }
+        lintProcess.stdout
+            .pipe(JSONStream.parse('*'))
+            .pipe(severityTransform())
+            .pipe(lintMessages)
+            .on('error', onError);
 
-            lintProcess.stdout
-                .pipe(JSONStream.parse('*'))
-                .pipe(severityTransform())
-                .pipe(lintMessages)
-                .on('error', onError);
-
-            lintProcess.stderr.on('data', onError);
-        });
-
-    });
+        lintProcess.stderr.on('data', onError);
+    }
 
     return lintMessages;
 }
 
-function lintStream(type, files, readFromStdin) {
+function lintStream(type, files, opts) {
     var dir = commondir(files);
     var fileStream = makeFileStream(type, files.map(makeRelativePathFn(dir)));
-    execLinter(type, dir, files, readFromStdin).pipe(fileStream);
+    execLinter(type, dir, files, opts).pipe(fileStream);
     return fileStream;
 }
 
 function lintTrapStream(linters) {
     linters = linters || ['jscs', 'jshint', 'eslint'];
 
-    return function lint(files, readFromStdin) {
+    return function lint(files, opts) {
         files.sort();
         var streams = linters.map(function initLinter(linterName) {
-            var stream = lintStream(linterName, files, readFromStdin);
+            var stream = lintStream(linterName, files, opts);
             return stream;
         });
 

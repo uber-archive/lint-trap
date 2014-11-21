@@ -1,11 +1,8 @@
-/*eslint no-console:0 */
 'use strict';
 var table = require('text-table');
-var console = require('console');
 var process = require('process');
 var isTTY = process.stdout.isTTY;
 var chalk = require('chalk');
-var spy = require('through2-spy');
 
 function createTableRow(message) {
     var linter = (message.linter + '   ').slice(0, 6);
@@ -26,12 +23,14 @@ function createTableRow(message) {
 }
 
 function printFilePath(filePath) {
-    console.log(!isTTY ? filePath : chalk.underline.cyan((filePath)));
+    var s = !isTTY ? filePath : chalk.underline.cyan((filePath));
+    return s + '\n';
 }
 
 function printTable(data) {
+    var output = '';
     if (!isTTY) {
-        console.log(table(data) + '\n');
+        output = table(data) + '\n';
     } else {
         data = data.map(function colorize(row) {
             return [
@@ -43,23 +42,26 @@ function printTable(data) {
                 chalk.yellow(row[5])
             ];
         });
-        console.log(table(data) + '\n');
+        output = table(data) + '\n';
     }
+    return output;
 }
 
 function printFileErrorTable(message) {
-    if (message.type === 'file') {
-        var fileTableData = message.errors.map(createTableRow);
+    var output = '';
+    var fileTableData = message.errors.map(createTableRow);
+    output += printFilePath(message.file);
+    output += printTable(fileTableData);
+    return output;
+}
 
-        if (fileTableData.length > 0) {
-            printFilePath(message.file);
-            printTable(fileTableData);
-        }
+function printStylish(fileMessages) {
+    fileMessages = fileMessages.filter(removeEmpty);
+
+    function removeEmpty(fileMessage) {
+        return fileMessage.errors.length > 0;
     }
+    return fileMessages.map(printFileErrorTable).join('\n');
 }
 
-function makeStylishStreamWriter() {
-    return spy.obj(printFileErrorTable);
-}
-
-module.exports = makeStylishStreamWriter;
+module.exports = printStylish;

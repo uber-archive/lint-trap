@@ -1,6 +1,6 @@
 'use strict';
 require('array.prototype.find');
-var lint = require('../lint-stream')();
+var makeLintStream = require('../lint-stream')();
 var path = require('path');
 var getJavaScriptFiles = require('../get-javascript-files');
 var fixturesPath = path.join(__dirname, 'fixtures/rules');
@@ -16,11 +16,12 @@ test('lint-trap JSON stream results', function testStream(t) {
             return t.fail(err);
         }
         var streamMessages = [];
-        var uberLintStream = lint(jsfiles);
+        var opts = { stdin: false, lineLength: 80 };
+        var lintStream = makeLintStream(jsfiles, opts);
 
-        uberLintStream.on('data', streamMessages.push.bind(streamMessages));
-        uberLintStream.on('error', t.fail.bind(t));
-        uberLintStream.on('end', onEnd);
+        lintStream.on('data', streamMessages.push.bind(streamMessages));
+        lintStream.on('error', t.fail.bind(t));
+        lintStream.on('end', onEnd);
 
         function onEnd() {
             t.equal(streamMessages.length, testResults.length,

@@ -14,6 +14,7 @@ function readFromStdin(argv) {
 }
 
 var opts = {
+    lineLength: argv['line-length'] || 80,
     reporter: argv.reporter || argv.r || 'stylish',
     files: files,
     stdin: readFromStdin(argv)

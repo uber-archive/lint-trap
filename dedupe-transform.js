@@ -25,7 +25,7 @@ function dedupe(possibleDupes, error, index, array) {
             dedupeMap[maybeDupes[key]] &&
             error.linter !== 'eslint';
     }
-
+    isDupe = !!isDupe;
     return !isDupe;
 }
 
