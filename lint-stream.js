@@ -66,7 +66,7 @@ function execLinter(type, dir, files, opts) {
 
     var lintMessages = makeRelativePathTransform(makeRelativePath);
 
-    setRules(dir, files[0], opts.lineLength, setIndentRuleCallback);
+    setRules(dir, files, opts.lineLength, setIndentRuleCallback);
 
     function setIndentRuleCallback(err) {
         if (err) {
@@ -114,10 +114,10 @@ function lintStream(type, files, opts) {
 function lintTrapStream(linters) {
     linters = linters || ['jscs', 'jshint', 'eslint'];
 
-    return function lint(files, readFromStdin) {
+    return function lint(files, opts) {
         files.sort();
         var streams = linters.map(function initLinter(linterName) {
-            var stream = lintStream(linterName, files, readFromStdin);
+            var stream = lintStream(linterName, files, opts);
             return stream;
         });
 

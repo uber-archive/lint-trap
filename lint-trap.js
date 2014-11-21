@@ -1,6 +1,6 @@
 'use strict';
 var lintStream = require('./lint-stream')();
-var makeStylishStreamWriter = require('./stylish-stream-reporter');
+var printStylish = require('./stylish-reporter');
 var printCheckstyle = require('./checkstyle-reporter');
 var printJSON = require('./json-reporter');
 var async = require('async');
@@ -29,7 +29,8 @@ function makeWriter(printer, callback) {
             return callback(err);
         }
 
-        process.stdout.write(printer(fileMessages));
+        var output = printer(fileMessages);
+        process.stdout.write(output);
     }
     return es.writeArray(writer);
 }
@@ -47,7 +48,7 @@ function lint(jsfiles, opts, callback) {
     var writer;
     var r = opts.reporter;
 
-    writer = (r === 'stylish') ? makeStylishStreamWriter() :
+    writer = (r === 'stylish') ? makeWriter(printStylish, callback) :
              (r === 'checkstyle') ? makeWriter(printCheckstyle, callback) :
              (r === 'json') ? makeWriter(printJSON, callback) :
              (r === 'compact') ? makeWriter(printCompact, callback) : null;
@@ -60,7 +61,6 @@ function lint(jsfiles, opts, callback) {
         .pipe(errorMeter.meter)
         .pipe(writer);
 
-    uberLintStream.once('error', callback);
     uberLintStream.once('end', partial(onEnd, errorMeter, callback));
 }
 

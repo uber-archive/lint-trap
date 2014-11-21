@@ -1,6 +1,5 @@
 'use strict';
 var detectIndent = require('detect-indent');
-var extend = require('extend');
 var path = require('path');
 var fs = require('fs');
 var jf = require('jsonfile');
@@ -32,19 +31,15 @@ function findReferenceFile(rootPath, firstFile, callback) {
     });
 }
 
-function updateJSON(jsonPath, diffs, callback) {
-    jf.readFile(jsonPath, function readFileCallback(err, content) {
-        if (err) {
-            return callback(err);
-        }
-
-        Object.keys(diffs).forEach(function applyDiff(diffKey) {
-            var value = diffs[diffKey];
-            dotty.put(content, diffKey, value);
-        });
-
-        jf.writeFile(jsonPath, content, callback);
+function updateJSON(jsonPath, diffs) {
+    // Synchronous method to be safe since multiple rules might touch the
+    // same file.
+    var content = jf.readFileSync(jsonPath);
+    Object.keys(diffs).forEach(function applyDiff(diffKey) {
+        var value = diffs[diffKey];
+        dotty.put(content, diffKey, value);
     });
+    jf.writeFileSync(jsonPath, content);
 }
 
 function setIndentRule(rootPath, firstFile, callback) {
@@ -59,7 +54,8 @@ function setIndentRule(rootPath, firstFile, callback) {
         var indent = detectIndent(content).indent || '    ';
         var jscsrcPath = path.resolve(__dirname, './rc/.jscsrc');
         var diff = { validateIndentation: indent.length };
-        updateJSON(jscsrcPath, diff, callback);
+        updateJSON(jscsrcPath, diff);
+        callback();
     }
 
     function findReferenceFileCallback(err, referenceFile) {
@@ -77,24 +73,24 @@ function setLineLengthRule(lineLength, callback) {
     var jscsrcPath = path.resolve(__dirname, './rc/.jscsrc');
 
     var jscsdiff = {
-        'maximumLineLength.value' : lineLength
+        'maximumLineLength.value': lineLength
     };
 
-    updateJSON(jscsrcPath, jscsdiff, updateEslint);
+    updateJSON(jscsrcPath, jscsdiff);
+    updateEslint();
 
-    function updateEslint(err) {
-        if (err) {
-            return callback(err);
-        }
+    function updateEslint() {
         var eslintrcPath = path.resolve(__dirname, './rc/.eslintrc');
         var eslintdiff = {
             'rules.max-len': [2, lineLength, 4]
         };
-        updateJSON(eslintrcPath, eslintdiff, callback);
+        updateJSON(eslintrcPath, eslintdiff);
+        callback();
     }
 }
 
 function setRules(dir, files, lineLength, callback) {
+
     setIndentRule(dir, files[0], function setIndentRuleCallback(err) {
         if (err) {
             return callback(err);

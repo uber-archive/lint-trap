@@ -12,4 +12,3 @@ globals-invalid.js
     error  eslint    15:8    'clearTimeout' is not defined.   no-undef
     error  eslint    16:8    'setTimeout' is not defined.     no-undef
     error  eslint    17:8    'Buffer' is not defined.         no-undef
-
