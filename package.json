@@ -50,16 +50,23 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "tape": "~3.0.0",
     "array.prototype.find": "^1.0.0",
-    "which": "^1.0.5",
+    "istanbul": "^0.3.2",
     "mkdirp": "^0.5.0",
+    "pre-commit": "0.0.9",
     "rimraf": "^2.2.8",
-    "temp": "^0.8.1"
+    "tape": "~3.0.0",
+    "temp": "^0.8.1",
+    "which": "^1.0.5"
   },
   "scripts": {
+    "cover": "istanbul cover --report cobertura --print detail tape -- test/**/*.tape.js",
+    "lint": "./bin/lint-trap.js",
     "test": "npm run lint && tape test/**/*.tape.js",
-    "lint": "./bin/lint-trap.js"
+    "view-cover": "istanbul report html && opn ./coverage/index.html"
   },
+  "pre-commit": [
+    "test"
+  ],
   "license": "MIT"
 }
