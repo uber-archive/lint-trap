@@ -42,11 +42,17 @@ function printHelp() {
         'lint-trap',
         '',
         'usage:',
+        '  lint-trap <file(s) & folder(s)> <options>',
         '',
         'options:',
         '  -h --help                   Print help information',
-        '     --line-length <length>   Set line-length limit to <length>',
         '  -v --version                Print version',
+        '     --line-length <length>   Set line-length limit to <length>',
+        '',
+        'example:',
+        '  lint-trap "test/*.js" --line-length 120',
+        '',
+        '  (nb: quote globstar patterns to prevent shell expansion)',
         ''
     ].join('\n');
     process.stdout.write(helpMsg);
