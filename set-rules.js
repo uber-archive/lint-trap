@@ -5,6 +5,7 @@ var fs = require('fs');
 var jf = require('jsonfile');
 var dotty = require('dotty');
 var process = require('process');
+var resolve = require('resolve');
 jf.spaces = 4;
 
 function findReferenceFile(rootPath, firstFile, callback) {
@@ -15,8 +16,11 @@ function findReferenceFile(rootPath, firstFile, callback) {
                 if (err) {
                     return callback(err);
                 }
-                var main = path.resolve(rootPath, manifest.main || 'index.js');
-                callback(undefined, main);
+                if (manifest.name === 'lint-trap' && __dirname === rootPath) {
+                    callback(undefined, path.join(__dirname, manifest.main));
+                } else {
+                    resolve(manifest.name, { basedir: rootPath }, callback);
+                }
             });
         } else {
             var indexPath = path.join(rootPath, 'index.js');
