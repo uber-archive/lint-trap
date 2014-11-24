@@ -102,10 +102,29 @@ editing recently and with which you are currently familiar.
 Use a lint plugins for your code editor
 ---------------------------------------
 
+lint-trap can be use in any code editor. A plugin already
+exists for SublimeLinter3 in Sublime Text 3 and a plugin for
+syntastic in vim is in progress. Plugins for flycheck in
+emacs and for WebStorm are planned.
 
+For more information on existing code editor plugins and
+workarounds for code editors for there isn't yet support,
+please see out [code editor support][code-editor-tools]
+docs. 
 
 Use an .editorconfig file
 -------------------------
 
+Consider adding an [editorconfig][editorconfig] file to your
+project and setting up your code editor to be
+[.editorconfig aware.] This plugin goes a long way in terms
+of making your test editor fix up whitespace issues in every
+file you open and save.
+You won't regret adding such a tool to your project.
+
+
+
+[editorconfig]: http://editorconfig.org/
+[code editor support]: code-editor-support.md
 [sublimeLinter-contrib-lint-trap]: https://github.com/uber/SublimeLinter-contrib-lint-trap
 [email-aandrade]: mailto:aandrade@uber.com?subject=lint-trap-emacs-flycheck-support

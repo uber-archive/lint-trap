@@ -30,7 +30,6 @@ function dedupe(possibleDupes, error, index, array) {
 }
 
 function makeDedupeTransform() {
-    /*jshint validthis:true */
 
     function transform(fileMessage, enc, callback) {
 
