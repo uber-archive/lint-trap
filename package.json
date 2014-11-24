@@ -22,7 +22,6 @@
     "lint-trap": "./bin/lint-trap.js"
   },
   "dependencies": {
-    "JSONStream": "~0.9.0",
     "async": "~0.9.0",
     "chalk": "^0.5.1",
     "commondir": "0.0.1",
