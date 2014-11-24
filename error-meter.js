@@ -9,7 +9,6 @@ function only(severity) {
 }
 
 function makeErrorMeter() {
-    /*jshint validthis:true */
 
     var metrics = {
         errorCode: 0,

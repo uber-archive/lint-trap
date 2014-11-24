@@ -2,5 +2,4 @@ fixture.js
     warning  eslint     3:10   Missing function expression name.  func-names
 
 subfolder/fixture.js
-    warning  eslint     3:4    Unexpected dangling '_' in '_foo'.  no-underscore-dangle
-    error    eslint     5:10   Missing function expression name.   func-names
+    error  eslint     5:10   Missing function expression name.  func-names

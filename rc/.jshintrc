@@ -2,6 +2,8 @@
     "globalstrict": true,
     "indent": 4,
     "undef": true,
+    "validthis": true,
+    "newcap": false,
     "globals": {
         "__dirname": false,
         "__filename": false,

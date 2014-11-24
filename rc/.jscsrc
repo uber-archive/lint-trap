@@ -40,7 +40,6 @@
         "do",
         "try",
         "catch",
-        "case",
         "default"
     ],
     "disallowMultipleVarDecl": true,

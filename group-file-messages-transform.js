@@ -17,7 +17,6 @@ var through = require('through2');
  * @return {[type]}         [description]
  */
 function clusterFileMessages(linters) {
-    /*jshint validthis:true */
 
     var fileMessages = {};
 

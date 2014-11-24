@@ -1,6 +1,6 @@
 {
   "name": "lint-trap",
-  "version": "0.4.4",
+  "version": "0.4.6",
   "description": "JavaScript linter module for Uber projects",
   "author": "Andrew de Andrade <aandrade@uber.com>",
   "repository": {
@@ -22,13 +22,12 @@
     "lint-trap": "./bin/lint-trap.js"
   },
   "dependencies": {
-    "JSONStream": "~0.9.0",
     "async": "~0.9.0",
     "chalk": "^0.5.1",
     "commondir": "0.0.1",
     "debug": "^2.1.0",
     "deep-extend": "~0.3.2",
-    "detect-indent": "^2.0.0",
+    "detect-indent": "^3.0.0",
     "dotty": "0.0.2",
     "eslint": "~0.9.1",
     "event-stream": "^3.1.7",
@@ -42,7 +41,7 @@
     "minimist": "~1.1.0",
     "npm-which": "^1.0.1",
     "partial": "0.0.3",
-    "pluralize": "^1.0.2",
+    "pluralize": "^1.1.0",
     "process": "^0.9.0",
     "text-table": "^0.2.0",
     "through2": "^0.6.3",
@@ -50,16 +49,23 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "tape": "~3.0.0",
     "array.prototype.find": "^1.0.0",
-    "which": "^1.0.5",
+    "istanbul": "^0.3.2",
     "mkdirp": "^0.5.0",
+    "pre-commit": "0.0.9",
     "rimraf": "^2.2.8",
-    "temp": "^0.8.1"
+    "tape": "~3.0.0",
+    "temp": "^0.8.1",
+    "which": "^1.0.5"
   },
   "scripts": {
+    "cover": "istanbul cover --report cobertura --print detail tape -- test/**/*.tape.js",
+    "lint": "./bin/lint-trap.js",
     "test": "npm run lint && tape test/**/*.tape.js",
-    "lint": "./bin/lint-trap.js"
+    "view-cover": "istanbul report html && opn ./coverage/index.html"
   },
+  "pre-commit": [
+    "test"
+  ],
   "license": "MIT"
 }

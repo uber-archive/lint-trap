@@ -2,7 +2,6 @@
 var through = require('through2');
 
 function makeFileStream(type, files) {
-    /*jshint validthis:true */
     var currentFile = null;
     var fileErrors = [];
 

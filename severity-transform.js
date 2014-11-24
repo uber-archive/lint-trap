@@ -4,7 +4,6 @@ var loadLintRC = require('./load-lintrc');
 var attenuateSeverity = require('./attenuate-severity');
 
 function makeSeverityTransform() {
-    /*jshint validthis:true */
 
     function transform(message, enc, callback) {
 
