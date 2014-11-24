@@ -9,22 +9,35 @@ var fmt = require('util').format;
 
 var files = argv._.length === 0 ? [process.cwd()] : argv._;
 
+if (argv.v || argv.version) {
+    printVersion();
+} else if (argv.h || argv.help) {
+    printHelp();
+} else {
+    var opts = {
+        lineLength: argv['line-length'] || 80,
+        reporter: argv.reporter || argv.r || 'stylish',
+        files: files,
+        stdin: readFromStdin(argv)
+    };
+    lintTrap(opts, run);
+}
+
 function readFromStdin(argv) {
     return argv._.length === 1 && argv._[0] === '-';
 }
 
-var opts = {
-    lineLength: argv['line-length'] || 80,
-    reporter: argv.reporter || argv.r || 'stylish',
-    files: files,
-    stdin: readFromStdin(argv)
-};
-
-if (argv.v || argv.version) {
-    var pkg = require('../package.json');
-    console.error(fmt('lint-trap v%s', pkg.version));
+function run(err) {
+    if (err) {
+        if (err.message !== 'Lint errors encountered') {
+            console.error(err.message);
+        }
+        return process.exit(1);
+    }
     process.exit(0);
-} else if (argv.h || argv.help) {
+}
+
+function printHelp() {
     var helpMsg = [
         'lint-trap',
         '',
@@ -38,16 +51,10 @@ if (argv.v || argv.version) {
     ].join('\n');
     process.stdout.write(helpMsg);
     process.exit(0);
-} else {
-    lintTrap(opts, run);
 }
 
-function run(err) {
-    if (err) {
-        if (err.message !== 'Lint errors encountered') {
-            console.error(err.message);
-        }
-        return process.exit(1);
-    }
+function printVersion() {
+    var pkg = require('../package.json');
+    console.error(fmt('lint-trap v%s', pkg.version));
     process.exit(0);
 }
