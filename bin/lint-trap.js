@@ -20,9 +20,23 @@ var opts = {
     stdin: readFromStdin(argv)
 };
 
-if (argv.version) {
+if (argv.v || argv.version) {
     var pkg = require('../package.json');
     console.error(fmt('lint-trap v%s', pkg.version));
+    process.exit(0);
+} else if (argv.h || argv.help) {
+    var helpMsg = [
+        'lint-trap',
+        '',
+        'usage:',
+        '',
+        'options:',
+        '  -h --help                   Print help information',
+        '     --line-length <length>   Set line-length limit to <length>',
+        '  -v --version                Print version',
+        ''
+    ].join('\n');
+    process.stdout.write(helpMsg);
     process.exit(0);
 } else {
     lintTrap(opts, run);
