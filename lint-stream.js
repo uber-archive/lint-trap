@@ -117,8 +117,7 @@ function lintTrapStream(linters) {
     return function lint(files, opts) {
         files.sort();
         var streams = linters.map(function initLinter(linterName) {
-            var stream = lintStream(linterName, files, opts);
-            return stream;
+            return lintStream(linterName, files, opts);
         });
 
         var mergedLintStream = es.merge.apply(es, streams);

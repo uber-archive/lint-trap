@@ -1,0 +1,129 @@
+a.js
+    warning  eslint     0:0    no-alert message             no-alert
+    warning  jshint     0:0    indent message               indent
+    warning  jscs       0:0    validateIndentation message  validateIndentation
+
+b.js
+    error  eslint     1:1    no-array-constructor message  no-array-constructor
+    error  jshint     1:1    undef message                 undef
+    error  jscs       1:1    maximumLineLength message     maximumLineLength
+
+c.js
+    warning  eslint     2:2    no-bitwise message                 no-bitwise
+    warning  jshint     2:2    validthis message                  validthis
+    warning  jscs       2:2    requireSpaceAfterKeywords message  requireSpaceAfterKeywords
+
+d.js
+    error  eslint     3:3    no-caller message                            no-caller
+    error  jshint     3:3    newcap message                               newcap
+    error  jscs       3:3    disallowSpacesInFunctionDeclaration message  disallowSpacesInFunctionDeclaration
+
+e.js
+    warning  eslint     4:4    no-catch-shadow message                          no-catch-shadow
+    warning  jshint     4:4    indent message                                   indent
+    warning  jscs       4:4    disallowSpacesInNamedFunctionExpression message  disallowSpacesInNamedFunctionExpression
+
+f.js
+    error  eslint     5:5    no-comma-dangle message                     no-comma-dangle
+    error  jshint     5:5    undef message                               undef
+    error  jscs       5:5    requireSpacesInFunctionDeclaration message  requireSpacesInFunctionDeclaration
+
+g.js
+    warning  eslint     6:6    no-cond-assign message                          no-cond-assign
+    warning  jshint     6:6    validthis message                               validthis
+    warning  jscs       6:6    requireSpacesInNamedFunctionExpression message  requireSpacesInNamedFunctionExpression
+
+h.js
+    error  eslint     7:7    no-console message             no-console
+    error  jshint     7:7    newcap message                 newcap
+    error  jscs       7:7    disallowTrailingComma message  disallowTrailingComma
+
+i.js
+    warning  eslint     8:8    no-constant-condition message   no-constant-condition
+    warning  jshint     8:8    indent message                  indent
+    warning  jscs       8:8    requireBlocksOnNewline message  requireBlocksOnNewline
+
+j.js
+    error  eslint     9:9    no-control-regex message  no-control-regex
+    error  jshint     9:9    undef message             undef
+    error  jscs       9:9    excludeFiles message      excludeFiles
+
+k.js
+    warning  eslint    10:10   no-debugger message         no-debugger
+    warning  jshint    10:10   validthis message           validthis
+    warning  jscs      10:10   requireCurlyBraces message  requireCurlyBraces
+
+l.js
+    error  eslint    11:11   no-delete-var message            no-delete-var
+    error  jshint    11:11   newcap message                   newcap
+    error  jscs      11:11   disallowMultipleVarDecl message  disallowMultipleVarDecl
+
+m.js
+    warning  eslint    12:12   no-div-regex message         no-div-regex
+    warning  jshint    12:12   indent message               indent
+    warning  jscs      12:12   disallowEmptyBlocks message  disallowEmptyBlocks
+
+n.js
+    error  eslint    13:13   no-dupe-keys message                  no-dupe-keys
+    error  jshint    13:13   undef message                         undef
+    error  jscs      13:13   disallowSpaceAfterObjectKeys message  disallowSpaceAfterObjectKeys
+
+o.js
+    warning  eslint    14:14   no-else-return message               no-else-return
+    warning  jshint    14:14   validthis message                    validthis
+    warning  jscs      14:14   requireCommaBeforeLineBreak message  requireCommaBeforeLineBreak
+
+p.js
+    error  eslint    15:15   no-empty message                           no-empty
+    error  jshint    15:15   newcap message                             newcap
+    error  jscs      15:15   requireSpaceBeforeBinaryOperators message  requireSpaceBeforeBinaryOperators
+
+q.js
+    warning  eslint    16:16   no-empty-class message                        no-empty-class
+    warning  jshint    16:16   indent message                                indent
+    warning  jscs      16:16   requireSpacesInConditionalExpression message  requireSpacesInConditionalExpression
+
+r.js
+    error  eslint    17:17   no-empty-label message                    no-empty-label
+    error  jshint    17:17   undef message                             undef
+    error  jscs      17:17   requireSpaceAfterBinaryOperators message  requireSpaceAfterBinaryOperators
+
+s.js
+    warning  eslint    18:18   no-eq-null message                              no-eq-null
+    warning  jshint    18:18   validthis message                               validthis
+    warning  jscs      18:18   disallowSpaceAfterPrefixUnaryOperators message  disallowSpaceAfterPrefixUnaryOperators
+
+t.js
+    error  eslint    19:19   no-eval message           no-eval
+    error  jshint    19:19   newcap message            newcap
+    error  jscs      19:19   disallowKeywords message  disallowKeywords
+
+u.js
+    warning  eslint    20:20   no-ex-assign message                no-ex-assign
+    warning  jshint    20:20   indent message                      indent
+    warning  jscs      20:20   disallowMultipleLineBreaks message  disallowMultipleLineBreaks
+
+v.js
+    error  eslint    21:21   no-extend-native message    no-extend-native
+    error  jshint    21:21   undef message               undef
+    error  jscs      21:21   validateLineBreaks message  validateLineBreaks
+
+w.js
+    warning  eslint    22:22   no-extra-bind message       no-extra-bind
+    warning  jshint    22:22   validthis message           validthis
+    warning  jscs      22:22   validateQuoteMarks message  validateQuoteMarks
+
+x.js
+    error  eslint    23:23   no-extra-boolean-cast message       no-extra-boolean-cast
+    error  jshint    23:23   newcap message                      newcap
+    error  jscs      23:23   disallowMixedSpacesAndTabs message  disallowMixedSpacesAndTabs
+
+y.js
+    warning  eslint    24:24   no-extra-parens message             no-extra-parens
+    warning  jshint    24:24   indent message                      indent
+    warning  jscs      24:24   disallowTrailingWhitespace message  disallowTrailingWhitespace
+
+z.js
+    error  eslint    25:25   no-extra-semi message              no-extra-semi
+    error  jshint    25:25   undef message                      undef
+    error  jscs      25:25   disallowKeywordsOnNewLine message  disallowKeywordsOnNewLine

@@ -1,0 +1,862 @@
+{
+    "files": [
+        {
+            "type": "file",
+            "file": "a.js",
+            "errors": [
+                {
+                    "type": "warning",
+                    "linter": "eslint",
+                    "file": "a.js",
+                    "line": 0,
+                    "column": 0,
+                    "rule": "no-alert",
+                    "message": "no-alert message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jshint",
+                    "file": "a.js",
+                    "line": 0,
+                    "column": 0,
+                    "rule": "indent",
+                    "message": "indent message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jscs",
+                    "file": "a.js",
+                    "line": 0,
+                    "column": 0,
+                    "rule": "validateIndentation",
+                    "message": "validateIndentation message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "b.js",
+            "errors": [
+                {
+                    "type": "error",
+                    "linter": "eslint",
+                    "file": "b.js",
+                    "line": 1,
+                    "column": 1,
+                    "rule": "no-array-constructor",
+                    "message": "no-array-constructor message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jshint",
+                    "file": "b.js",
+                    "line": 1,
+                    "column": 1,
+                    "rule": "undef",
+                    "message": "undef message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jscs",
+                    "file": "b.js",
+                    "line": 1,
+                    "column": 1,
+                    "rule": "maximumLineLength",
+                    "message": "maximumLineLength message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "c.js",
+            "errors": [
+                {
+                    "type": "warning",
+                    "linter": "eslint",
+                    "file": "c.js",
+                    "line": 2,
+                    "column": 2,
+                    "rule": "no-bitwise",
+                    "message": "no-bitwise message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jshint",
+                    "file": "c.js",
+                    "line": 2,
+                    "column": 2,
+                    "rule": "validthis",
+                    "message": "validthis message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jscs",
+                    "file": "c.js",
+                    "line": 2,
+                    "column": 2,
+                    "rule": "requireSpaceAfterKeywords",
+                    "message": "requireSpaceAfterKeywords message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "d.js",
+            "errors": [
+                {
+                    "type": "error",
+                    "linter": "eslint",
+                    "file": "d.js",
+                    "line": 3,
+                    "column": 3,
+                    "rule": "no-caller",
+                    "message": "no-caller message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jshint",
+                    "file": "d.js",
+                    "line": 3,
+                    "column": 3,
+                    "rule": "newcap",
+                    "message": "newcap message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jscs",
+                    "file": "d.js",
+                    "line": 3,
+                    "column": 3,
+                    "rule": "disallowSpacesInFunctionDeclaration",
+                    "message": "disallowSpacesInFunctionDeclaration message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "e.js",
+            "errors": [
+                {
+                    "type": "warning",
+                    "linter": "eslint",
+                    "file": "e.js",
+                    "line": 4,
+                    "column": 4,
+                    "rule": "no-catch-shadow",
+                    "message": "no-catch-shadow message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jshint",
+                    "file": "e.js",
+                    "line": 4,
+                    "column": 4,
+                    "rule": "indent",
+                    "message": "indent message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jscs",
+                    "file": "e.js",
+                    "line": 4,
+                    "column": 4,
+                    "rule": "disallowSpacesInNamedFunctionExpression",
+                    "message": "disallowSpacesInNamedFunctionExpression message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "f.js",
+            "errors": [
+                {
+                    "type": "error",
+                    "linter": "eslint",
+                    "file": "f.js",
+                    "line": 5,
+                    "column": 5,
+                    "rule": "no-comma-dangle",
+                    "message": "no-comma-dangle message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jshint",
+                    "file": "f.js",
+                    "line": 5,
+                    "column": 5,
+                    "rule": "undef",
+                    "message": "undef message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jscs",
+                    "file": "f.js",
+                    "line": 5,
+                    "column": 5,
+                    "rule": "requireSpacesInFunctionDeclaration",
+                    "message": "requireSpacesInFunctionDeclaration message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "g.js",
+            "errors": [
+                {
+                    "type": "warning",
+                    "linter": "eslint",
+                    "file": "g.js",
+                    "line": 6,
+                    "column": 6,
+                    "rule": "no-cond-assign",
+                    "message": "no-cond-assign message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jshint",
+                    "file": "g.js",
+                    "line": 6,
+                    "column": 6,
+                    "rule": "validthis",
+                    "message": "validthis message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jscs",
+                    "file": "g.js",
+                    "line": 6,
+                    "column": 6,
+                    "rule": "requireSpacesInNamedFunctionExpression",
+                    "message": "requireSpacesInNamedFunctionExpression message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "h.js",
+            "errors": [
+                {
+                    "type": "error",
+                    "linter": "eslint",
+                    "file": "h.js",
+                    "line": 7,
+                    "column": 7,
+                    "rule": "no-console",
+                    "message": "no-console message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jshint",
+                    "file": "h.js",
+                    "line": 7,
+                    "column": 7,
+                    "rule": "newcap",
+                    "message": "newcap message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jscs",
+                    "file": "h.js",
+                    "line": 7,
+                    "column": 7,
+                    "rule": "disallowTrailingComma",
+                    "message": "disallowTrailingComma message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "i.js",
+            "errors": [
+                {
+                    "type": "warning",
+                    "linter": "eslint",
+                    "file": "i.js",
+                    "line": 8,
+                    "column": 8,
+                    "rule": "no-constant-condition",
+                    "message": "no-constant-condition message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jshint",
+                    "file": "i.js",
+                    "line": 8,
+                    "column": 8,
+                    "rule": "indent",
+                    "message": "indent message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jscs",
+                    "file": "i.js",
+                    "line": 8,
+                    "column": 8,
+                    "rule": "requireBlocksOnNewline",
+                    "message": "requireBlocksOnNewline message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "j.js",
+            "errors": [
+                {
+                    "type": "error",
+                    "linter": "eslint",
+                    "file": "j.js",
+                    "line": 9,
+                    "column": 9,
+                    "rule": "no-control-regex",
+                    "message": "no-control-regex message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jshint",
+                    "file": "j.js",
+                    "line": 9,
+                    "column": 9,
+                    "rule": "undef",
+                    "message": "undef message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jscs",
+                    "file": "j.js",
+                    "line": 9,
+                    "column": 9,
+                    "rule": "excludeFiles",
+                    "message": "excludeFiles message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "k.js",
+            "errors": [
+                {
+                    "type": "warning",
+                    "linter": "eslint",
+                    "file": "k.js",
+                    "line": 10,
+                    "column": 10,
+                    "rule": "no-debugger",
+                    "message": "no-debugger message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jshint",
+                    "file": "k.js",
+                    "line": 10,
+                    "column": 10,
+                    "rule": "validthis",
+                    "message": "validthis message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jscs",
+                    "file": "k.js",
+                    "line": 10,
+                    "column": 10,
+                    "rule": "requireCurlyBraces",
+                    "message": "requireCurlyBraces message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "l.js",
+            "errors": [
+                {
+                    "type": "error",
+                    "linter": "eslint",
+                    "file": "l.js",
+                    "line": 11,
+                    "column": 11,
+                    "rule": "no-delete-var",
+                    "message": "no-delete-var message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jshint",
+                    "file": "l.js",
+                    "line": 11,
+                    "column": 11,
+                    "rule": "newcap",
+                    "message": "newcap message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jscs",
+                    "file": "l.js",
+                    "line": 11,
+                    "column": 11,
+                    "rule": "disallowMultipleVarDecl",
+                    "message": "disallowMultipleVarDecl message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "m.js",
+            "errors": [
+                {
+                    "type": "warning",
+                    "linter": "eslint",
+                    "file": "m.js",
+                    "line": 12,
+                    "column": 12,
+                    "rule": "no-div-regex",
+                    "message": "no-div-regex message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jshint",
+                    "file": "m.js",
+                    "line": 12,
+                    "column": 12,
+                    "rule": "indent",
+                    "message": "indent message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jscs",
+                    "file": "m.js",
+                    "line": 12,
+                    "column": 12,
+                    "rule": "disallowEmptyBlocks",
+                    "message": "disallowEmptyBlocks message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "n.js",
+            "errors": [
+                {
+                    "type": "error",
+                    "linter": "eslint",
+                    "file": "n.js",
+                    "line": 13,
+                    "column": 13,
+                    "rule": "no-dupe-keys",
+                    "message": "no-dupe-keys message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jshint",
+                    "file": "n.js",
+                    "line": 13,
+                    "column": 13,
+                    "rule": "undef",
+                    "message": "undef message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jscs",
+                    "file": "n.js",
+                    "line": 13,
+                    "column": 13,
+                    "rule": "disallowSpaceAfterObjectKeys",
+                    "message": "disallowSpaceAfterObjectKeys message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "o.js",
+            "errors": [
+                {
+                    "type": "warning",
+                    "linter": "eslint",
+                    "file": "o.js",
+                    "line": 14,
+                    "column": 14,
+                    "rule": "no-else-return",
+                    "message": "no-else-return message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jshint",
+                    "file": "o.js",
+                    "line": 14,
+                    "column": 14,
+                    "rule": "validthis",
+                    "message": "validthis message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jscs",
+                    "file": "o.js",
+                    "line": 14,
+                    "column": 14,
+                    "rule": "requireCommaBeforeLineBreak",
+                    "message": "requireCommaBeforeLineBreak message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "p.js",
+            "errors": [
+                {
+                    "type": "error",
+                    "linter": "eslint",
+                    "file": "p.js",
+                    "line": 15,
+                    "column": 15,
+                    "rule": "no-empty",
+                    "message": "no-empty message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jshint",
+                    "file": "p.js",
+                    "line": 15,
+                    "column": 15,
+                    "rule": "newcap",
+                    "message": "newcap message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jscs",
+                    "file": "p.js",
+                    "line": 15,
+                    "column": 15,
+                    "rule": "requireSpaceBeforeBinaryOperators",
+                    "message": "requireSpaceBeforeBinaryOperators message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "q.js",
+            "errors": [
+                {
+                    "type": "warning",
+                    "linter": "eslint",
+                    "file": "q.js",
+                    "line": 16,
+                    "column": 16,
+                    "rule": "no-empty-class",
+                    "message": "no-empty-class message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jshint",
+                    "file": "q.js",
+                    "line": 16,
+                    "column": 16,
+                    "rule": "indent",
+                    "message": "indent message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jscs",
+                    "file": "q.js",
+                    "line": 16,
+                    "column": 16,
+                    "rule": "requireSpacesInConditionalExpression",
+                    "message": "requireSpacesInConditionalExpression message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "r.js",
+            "errors": [
+                {
+                    "type": "error",
+                    "linter": "eslint",
+                    "file": "r.js",
+                    "line": 17,
+                    "column": 17,
+                    "rule": "no-empty-label",
+                    "message": "no-empty-label message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jshint",
+                    "file": "r.js",
+                    "line": 17,
+                    "column": 17,
+                    "rule": "undef",
+                    "message": "undef message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jscs",
+                    "file": "r.js",
+                    "line": 17,
+                    "column": 17,
+                    "rule": "requireSpaceAfterBinaryOperators",
+                    "message": "requireSpaceAfterBinaryOperators message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "s.js",
+            "errors": [
+                {
+                    "type": "warning",
+                    "linter": "eslint",
+                    "file": "s.js",
+                    "line": 18,
+                    "column": 18,
+                    "rule": "no-eq-null",
+                    "message": "no-eq-null message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jshint",
+                    "file": "s.js",
+                    "line": 18,
+                    "column": 18,
+                    "rule": "validthis",
+                    "message": "validthis message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jscs",
+                    "file": "s.js",
+                    "line": 18,
+                    "column": 18,
+                    "rule": "disallowSpaceAfterPrefixUnaryOperators",
+                    "message": "disallowSpaceAfterPrefixUnaryOperators message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "t.js",
+            "errors": [
+                {
+                    "type": "error",
+                    "linter": "eslint",
+                    "file": "t.js",
+                    "line": 19,
+                    "column": 19,
+                    "rule": "no-eval",
+                    "message": "no-eval message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jshint",
+                    "file": "t.js",
+                    "line": 19,
+                    "column": 19,
+                    "rule": "newcap",
+                    "message": "newcap message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jscs",
+                    "file": "t.js",
+                    "line": 19,
+                    "column": 19,
+                    "rule": "disallowKeywords",
+                    "message": "disallowKeywords message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "u.js",
+            "errors": [
+                {
+                    "type": "warning",
+                    "linter": "eslint",
+                    "file": "u.js",
+                    "line": 20,
+                    "column": 20,
+                    "rule": "no-ex-assign",
+                    "message": "no-ex-assign message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jshint",
+                    "file": "u.js",
+                    "line": 20,
+                    "column": 20,
+                    "rule": "indent",
+                    "message": "indent message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jscs",
+                    "file": "u.js",
+                    "line": 20,
+                    "column": 20,
+                    "rule": "disallowMultipleLineBreaks",
+                    "message": "disallowMultipleLineBreaks message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "v.js",
+            "errors": [
+                {
+                    "type": "error",
+                    "linter": "eslint",
+                    "file": "v.js",
+                    "line": 21,
+                    "column": 21,
+                    "rule": "no-extend-native",
+                    "message": "no-extend-native message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jshint",
+                    "file": "v.js",
+                    "line": 21,
+                    "column": 21,
+                    "rule": "undef",
+                    "message": "undef message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jscs",
+                    "file": "v.js",
+                    "line": 21,
+                    "column": 21,
+                    "rule": "validateLineBreaks",
+                    "message": "validateLineBreaks message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "w.js",
+            "errors": [
+                {
+                    "type": "warning",
+                    "linter": "eslint",
+                    "file": "w.js",
+                    "line": 22,
+                    "column": 22,
+                    "rule": "no-extra-bind",
+                    "message": "no-extra-bind message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jshint",
+                    "file": "w.js",
+                    "line": 22,
+                    "column": 22,
+                    "rule": "validthis",
+                    "message": "validthis message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jscs",
+                    "file": "w.js",
+                    "line": 22,
+                    "column": 22,
+                    "rule": "validateQuoteMarks",
+                    "message": "validateQuoteMarks message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "x.js",
+            "errors": [
+                {
+                    "type": "error",
+                    "linter": "eslint",
+                    "file": "x.js",
+                    "line": 23,
+                    "column": 23,
+                    "rule": "no-extra-boolean-cast",
+                    "message": "no-extra-boolean-cast message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jshint",
+                    "file": "x.js",
+                    "line": 23,
+                    "column": 23,
+                    "rule": "newcap",
+                    "message": "newcap message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jscs",
+                    "file": "x.js",
+                    "line": 23,
+                    "column": 23,
+                    "rule": "disallowMixedSpacesAndTabs",
+                    "message": "disallowMixedSpacesAndTabs message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "y.js",
+            "errors": [
+                {
+                    "type": "warning",
+                    "linter": "eslint",
+                    "file": "y.js",
+                    "line": 24,
+                    "column": 24,
+                    "rule": "no-extra-parens",
+                    "message": "no-extra-parens message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jshint",
+                    "file": "y.js",
+                    "line": 24,
+                    "column": 24,
+                    "rule": "indent",
+                    "message": "indent message"
+                },
+                {
+                    "type": "warning",
+                    "linter": "jscs",
+                    "file": "y.js",
+                    "line": 24,
+                    "column": 24,
+                    "rule": "disallowTrailingWhitespace",
+                    "message": "disallowTrailingWhitespace message"
+                }
+            ]
+        },
+        {
+            "type": "file",
+            "file": "z.js",
+            "errors": [
+                {
+                    "type": "error",
+                    "linter": "eslint",
+                    "file": "z.js",
+                    "line": 25,
+                    "column": 25,
+                    "rule": "no-extra-semi",
+                    "message": "no-extra-semi message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jshint",
+                    "file": "z.js",
+                    "line": 25,
+                    "column": 25,
+                    "rule": "undef",
+                    "message": "undef message"
+                },
+                {
+                    "type": "error",
+                    "linter": "jscs",
+                    "file": "z.js",
+                    "line": 25,
+                    "column": 25,
+                    "rule": "disallowKeywordsOnNewLine",
+                    "message": "disallowKeywordsOnNewLine message"
+                }
+            ]
+        }
+    ]
+}
