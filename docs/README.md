@@ -118,7 +118,7 @@ checking until eslint supports proper indentation checking.
 * [space-in-parens][space-in-parens] - require or disallow spaces inside parentheses
 * [space-infix-ops][space-infix-ops] - require spaces around operators
 * [space-return-throw-case][space-return-throw-case] - require a space after `return`, `throw`, and `case`
-* [space-unary-word-ops][space-unary-word-ops] - require a space around word operators such as `typeof`
+* [space-unary-ops][space-unary-ops] - Require or disallow spaces before/after unary operators (words on, nonwords off)
 * [spaced-line-comment][spaced-line-comment] - require or disallow a space immediately following the `//` in a line comment
 * [strict][strict] - require that all functions are run in strict mode
 * [use-isnan][use-isnan] - disallow comparisons with the value `NaN`
@@ -332,7 +332,7 @@ are documented in our [JSHint Documentation][jshint-docs].
 [space-in-parens]: https://github.com/eslint/eslint/blob/master/docs/rules/space-in-parens.md
 [space-infix-ops]: https://github.com/eslint/eslint/blob/master/docs/rules/space-infix-ops.md
 [space-return-throw-case]: https://github.com/eslint/eslint/blob/master/docs/rules/space-return-throw-case.md
-[space-unary-word-ops]: https://github.com/eslint/eslint/blob/master/docs/rules/space-unary-word-ops.md
+[space-unary-ops]: https://github.com/eslint/eslint/blob/master/docs/rules/space-unary-ops.md
 [spaced-line-comment]: https://github.com/eslint/eslint/blob/master/docs/rules/spaced-line-comment.md
 [strict]: https://github.com/eslint/eslint/blob/master/docs/rules/strict.md
 [use-isnan]: https://github.com/eslint/eslint/blob/master/docs/rules/use-isnan.md
