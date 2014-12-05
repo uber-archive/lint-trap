@@ -17,7 +17,7 @@ function writeError(result) {
     process.stdout.write(',');
 }
 
-function reporter(results /*, data, opts */) {
+function reporter(results, data, opts) {
     process.stdout.write('[');
     results.forEach(writeError);
     process.stdout.write(']');

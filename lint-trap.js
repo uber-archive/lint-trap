@@ -51,8 +51,6 @@ function makeWriter(printer, callback) {
         }
 
         var output = printer(fileMessages);
-        var fs = require('fs');
-        fs.writeFileSync(path.join(__dirname, 'out.stdout'), output);
         process.stdout.write(output);
     }
     return es.writeArray(writer);

@@ -29,7 +29,7 @@
     "deep-extend": "~0.3.2",
     "detect-indent": "^3.0.0",
     "dotty": "0.0.2",
-    "eslint": "~0.9.1",
+    "eslint": "~0.10.0",
     "event-stream": "^3.1.7",
     "extend": "^2.0.0",
     "find-parent-dir": "^0.3.0",
