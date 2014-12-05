@@ -19,7 +19,11 @@ function findReferenceFile(rootPath, firstFile, callback) {
                 if (manifest.name === 'lint-trap' && __dirname === rootPath) {
                     callback(undefined, path.join(__dirname, manifest.main));
                 } else {
-                    resolve(manifest.name, { basedir: rootPath }, callback);
+                    var opts = {
+                        basedir: rootPath,
+                        moduleDirectory: ['', 'node_modules']
+                    };
+                    resolve(manifest.name, opts, callback);
                 }
             });
         } else {
