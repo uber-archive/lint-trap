@@ -56,6 +56,7 @@ function printFileErrorTable(message) {
 }
 
 function printStylish(fileMessages) {
+    isTTY = process.stdout.isTTY;
     fileMessages = fileMessages.filter(removeEmpty);
 
     function removeEmpty(fileMessage) {

@@ -11,6 +11,8 @@ var extend = require('xtend');
 var makeErrorMeter = require('./error-meter');
 var partial = require('partial');
 var printCompact = require('./compact-reporter');
+var path = require('path');
+var commondir = require('commondir');
 
 function findFiles(paths, callback) {
     async.reduce(paths, [], function accumulator(memo, pathArg, done) {
@@ -23,10 +25,29 @@ function findFiles(paths, callback) {
     }, callback);
 }
 
+function isRelativePath(p) {
+    return p.charAt(0) === '/';
+}
+
 function makeWriter(printer, callback) {
     function writer(err, fileMessages) {
         if (err) {
             return callback(err);
+        }
+
+        // Convert absolute paths to relative paths so that
+        // syntastic plugin works properly.
+        var files = fileMessages.map(function getFilepath(msg) {
+            return msg.file;
+        });
+
+        if (files.every(isRelativePath)) {
+            var dir = commondir(files);
+
+            fileMessages.forEach(function fixPaths(msg) {
+                var p = path.relative(dir, msg.file);
+                msg.file = p.length > 0 ? p : path.basename(msg.file);
+            });
         }
 
         var output = printer(fileMessages);

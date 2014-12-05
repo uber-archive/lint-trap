@@ -37,6 +37,7 @@ checking until eslint supports proper indentation checking.
 * [no-floating-decimal][no-floating-decimal] - disallow the use of leading or trailing decimal points in numeric literals
 * [no-func-assign][no-func-assign] - disallow overwriting functions written as function declarations
 * [no-implied-eval][no-implied-eval] - disallow use of `eval()`-like methods
+* [no-inline-comments][no-inline-comments] - disallow comments inline after code
 * [no-inner-declarations][no-inner-declarations] - disallow function or variable declarations in nested blocks
 * [no-invalid-regexp][no-invalid-regexp] - disallow invalid regular expression strings in the `RegExp` constructor
 * [no-irregular-whitespace][no-irregular-whitespace] - disallow irregular whitespace outside of strings and comments
@@ -117,7 +118,7 @@ checking until eslint supports proper indentation checking.
 * [space-in-parens][space-in-parens] - require or disallow spaces inside parentheses
 * [space-infix-ops][space-infix-ops] - require spaces around operators
 * [space-return-throw-case][space-return-throw-case] - require a space after `return`, `throw`, and `case`
-* [space-unary-word-ops][space-unary-word-ops] - require a space around word operators such as `typeof`
+* [space-unary-ops][space-unary-ops] - Require or disallow spaces before/after unary operators (words on, nonwords off)
 * [spaced-line-comment][spaced-line-comment] - require or disallow a space immediately following the `//` in a line comment
 * [strict][strict] - require that all functions are run in strict mode
 * [use-isnan][use-isnan] - disallow comparisons with the value `NaN`
@@ -150,6 +151,7 @@ checking until eslint supports proper indentation checking.
 
 * [func-style][func-style] - enforces use of function declarations or expressions
 * [one-var][one-var] - allow just one var statement per function
+* [operator-assignment][operator-assignment] - require assignment operator shorthand where possible or prohibit it entirely
 * [padded-blocks][padded-blocks] - enforce padding within blocks
 * [quote-props][quote-props] - require quotes around object literal property names
 * [sort-vars][sort-vars] - sort variables within the same declaration block
@@ -231,6 +233,7 @@ are documented in our [JSHint Documentation][jshint-docs].
 [no-floating-decimal]: https://github.com/eslint/eslint/blob/master/docs/rules/no-floating-decimal.md
 [no-func-assign]: https://github.com/eslint/eslint/blob/master/docs/rules/no-func-assign.md
 [no-implied-eval]: https://github.com/eslint/eslint/blob/master/docs/rules/no-implied-eval.md
+[no-inline-comments]: https://github.com/eslint/eslint/blob/master/docs/rules/no-inline-comments.md
 [no-inner-declarations]: https://github.com/eslint/eslint/blob/master/docs/rules/no-inner-declarations.md
 [no-invalid-regexp]: https://github.com/eslint/eslint/blob/master/docs/rules/no-invalid-regexp.md
 [no-irregular-whitespace]: https://github.com/eslint/eslint/blob/master/docs/rules/no-irregular-whitespace.md
@@ -316,6 +319,7 @@ are documented in our [JSHint Documentation][jshint-docs].
 [new-cap]: eslint/new-cap.md
 [new-parens]: https://github.com/eslint/eslint/blob/master/docs/rules/new-parens.md
 [one-var]: https://github.com/eslint/eslint/blob/master/docs/rules/one-var.md
+[operator-assignment]: https://github.com/eslint/eslint/blob/master/docs/rules/operator-assignment.md
 [padded-blocks]: https://github.com/eslint/eslint/blob/master/docs/rules/padded-blocks.md
 [quote-props]: https://github.com/eslint/eslint/blob/master/docs/rules/quote-props.md
 [quotes]: https://github.com/eslint/eslint/blob/master/docs/rules/quotes.md
@@ -328,7 +332,7 @@ are documented in our [JSHint Documentation][jshint-docs].
 [space-in-parens]: https://github.com/eslint/eslint/blob/master/docs/rules/space-in-parens.md
 [space-infix-ops]: https://github.com/eslint/eslint/blob/master/docs/rules/space-infix-ops.md
 [space-return-throw-case]: https://github.com/eslint/eslint/blob/master/docs/rules/space-return-throw-case.md
-[space-unary-word-ops]: https://github.com/eslint/eslint/blob/master/docs/rules/space-unary-word-ops.md
+[space-unary-ops]: https://github.com/eslint/eslint/blob/master/docs/rules/space-unary-ops.md
 [spaced-line-comment]: https://github.com/eslint/eslint/blob/master/docs/rules/spaced-line-comment.md
 [strict]: https://github.com/eslint/eslint/blob/master/docs/rules/strict.md
 [use-isnan]: https://github.com/eslint/eslint/blob/master/docs/rules/use-isnan.md

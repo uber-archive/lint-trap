@@ -1,6 +1,6 @@
 'use strict';
 var path = require('path');
-var fs = require('fs');
+var mockfs = require('mock-fs');
 var async = require('async');
 var mkdirp = require('mkdirp');
 
@@ -44,28 +44,38 @@ var data = [
 ];
 
 function createJavaScriptFixtures(destination, callback) {
-    var fixtureFolder = path.resolve(destination, 'files--');
-    fs.exists(fixtureFolder, function existsCallback(exists) {
+    var xfs = mockfs.fs();
+    var fixtureFolder = path.resolve(destination);
+    xfs.exists(fixtureFolder, function existsCallback(exists) {
         if (exists) {
             return callback(new Error('destination folder exists'));
         }
-        mkdirp(fixtureFolder, function mkdirpCallback(err) {
+        mkdirp(fixtureFolder, { fs: xfs, mode: '0755' }, mkdirpCallback);
+    });
+
+    function mkdirpCallback(err) {
+        if (err) {
+            return callback(err);
+        }
+        async.each(data, writeFixture, function foo(err) {
             if (err) {
                 return callback(err);
             }
-            async.each(data, function writeFixture(file, done) {
-                var filename = file[0] + '.js';
-                var filePath = path.resolve(fixtureFolder, filename);
-                var fileContent = [
-                    file[1] ? '' : disable.jscs,
-                    file[2] ? '' : disable.jshint,
-                    file[3] ? '' : disable.eslint,
-                    baseContent
-                ].join('\n');
-                fs.writeFile(filePath, fileContent, 'utf8', done);
-            }, callback);
+            callback(null, xfs);
         });
-    });
+    }
+
+    function writeFixture(file, done) {
+        var filename = file[0] + '.js';
+        var filePath = path.resolve(fixtureFolder, filename);
+        var fileContent = [
+            file[1] ? '' : disable.jscs,
+            file[2] ? '' : disable.jshint,
+            file[3] ? '' : disable.eslint,
+            baseContent
+        ].join('\n');
+        xfs.writeFile(filePath, fileContent, 'utf8', done);
+    }
 }
 
 module.exports = createJavaScriptFixtures;
