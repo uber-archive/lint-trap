@@ -8,8 +8,11 @@ var lintTrap = require('../lint-trap');
 var fmt = require('util').format;
 
 // hack. sad.
-setTimeout(function () {
-    if (argv._[0] === '-') process.exit(1);
+var setTimeout = require('timers').setTimeout;
+setTimeout(function onTimer() {
+    if (argv._[0] === '-') {
+        process.exit(1);
+    }
 }, 5000);
 
 var files = argv._.length === 0 ? [process.cwd()] : argv._;
