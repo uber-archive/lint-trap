@@ -113,9 +113,10 @@ checking until eslint supports proper indentation checking.
 * [quotes][quotes] - specify whether double or single quotes should be used
 * [radix][radix] - require use of the second argument for `parseInt()`
 * [semi][semi] - require or disallow use of semicolons instead of ASI
+* [space-after-function-name][space-after-function-name] - disallow a space after function names
 * [space-after-keywords][space-after-keywords] - require a space after certain keywords
-* [space-before-blocks][space-before-blocks] - require or disallow space before blocks
-* [space-in-parens][space-in-parens] - require or disallow spaces inside parentheses
+* [space-before-blocks][space-before-blocks] - disallow space before blocks
+* [space-in-parens][space-in-parens] - disallow spaces inside parentheses
 * [space-infix-ops][space-infix-ops] - require spaces around operators
 * [space-return-throw-case][space-return-throw-case] - require a space after `return`, `throw`, and `case`
 * [space-unary-ops][space-unary-ops] - Require or disallow spaces before/after unary operators (words on, nonwords off)
@@ -326,6 +327,7 @@ are documented in our [JSHint Documentation][jshint-docs].
 [radix]: https://github.com/eslint/eslint/blob/master/docs/rules/radix.md
 [semi]: https://github.com/eslint/eslint/blob/master/docs/rules/semi.md
 [sort-vars]: https://github.com/eslint/eslint/blob/master/docs/rules/sort-vars.md
+[space-after-function-name]: https://github.com/eslint/eslint/blob/master/docs/rules/space-after-function-name.md
 [space-after-keywords]: https://github.com/eslint/eslint/blob/master/docs/rules/space-after-keywords.md
 [space-before-blocks]: https://github.com/eslint/eslint/blob/master/docs/rules/space-before-blocks.md
 [space-in-brackets]: https://github.com/eslint/eslint/blob/master/docs/rules/space-in-brackets.md
