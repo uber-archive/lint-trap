@@ -28,6 +28,8 @@ function getJavaScriptFiles(folderPath, callback) {
                 ignoreFiles: ignoreFiles
             });
 
+            fstream.addIgnoreRules(['node_modules/']);
+
             fstream.on('child', function onChild(c) {
                 var f = c.path.substr(c.root.path.length + 1);
                 if (jsFileRE.test(f) && !dotGitFileRE.test(f)) {
