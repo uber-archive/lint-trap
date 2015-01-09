@@ -5,21 +5,21 @@
         "errors": [
             {
                 "type": "error",
-                "linter": "jscs",
-                "file": "func-names-invalid.js",
-                "line": 7,
-                "column": 19,
-                "rule": "disallowSpacesInNamedFunctionExpression",
-                "message": "Illegal space before opening round brace"
-            },
-            {
-                "type": "error",
                 "linter": "eslint",
                 "file": "func-names-invalid.js",
                 "line": 4,
                 "column": 10,
                 "rule": "func-names",
                 "message": "Missing function expression name."
+            },
+            {
+                "type": "error",
+                "linter": "eslint",
+                "file": "func-names-invalid.js",
+                "line": 7,
+                "column": 10,
+                "rule": "space-after-function-name",
+                "message": "Function name \"baz\" must not be followed by whitespace."
             }
         ]
     },

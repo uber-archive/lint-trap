@@ -50,15 +50,15 @@ function createJavaScriptFixtures(destination, callback) {
         if (exists) {
             return callback(new Error('destination folder exists'));
         }
-        mkdirp(fixtureFolder, { fs: xfs, mode: '0755' }, mkdirpCallback);
+        mkdirp(fixtureFolder, {fs: xfs, mode: '0755'}, mkdirpCallback);
     });
 
     function mkdirpCallback(err) {
         if (err) {
             return callback(err);
         }
-        async.each(data, writeFixture, function foo(err) {
-            if (err) {
+        async.each(data, writeFixture, function asyncEachEnd(asyncErr) {
+            if (asyncErr) {
                 return callback(err);
             }
             callback(null, xfs);

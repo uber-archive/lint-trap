@@ -12,6 +12,7 @@ var clusterFileMessages = require('./group-file-messages-transform');
 var severityTransform = require('./severity-transform');
 var process = require('process');
 var makeDedupeTransform = require('./dedupe-transform');
+var console = require('console');
 
 function makeArgs(type, files, readFromStdin) {
     var args = [
@@ -28,13 +29,6 @@ function makeArgs(type, files, readFromStdin) {
     }
 
     return args;
-}
-
-function makeErrorEmitter(type, lintErrorStream) {
-    return function emitError(error) {
-        error.linter = type;
-        lintErrorStream.emit('error', error);
-    };
 }
 
 function getBinPath(type, callback) {
@@ -81,7 +75,6 @@ function execLinter(type, dir, files, opts) {
         }
 
         var args = makeArgs(type, files, opts.stdin);
-        var onError = makeErrorEmitter(type, lintMessages);
         var lintProcess = spawn(binPath, args);
 
         if (opts.stdin) {
@@ -99,6 +92,14 @@ function execLinter(type, dir, files, opts) {
             .on('error', onError);
 
         lintProcess.stderr.on('data', onError);
+
+        function onError(linterErr) {
+            /*eslint-disable*/
+            console.error('linting failed for', type);
+            console.error(linterErr);
+            process.exit(1);
+            /*eslint-enable*/
+        }
     }
 
     return lintMessages;

@@ -1,6 +1,6 @@
 func-names-invalid.js
-    error  jscs       7:19   Illegal space before opening round brace  disallowSpacesInNamedFunctionExpression
-    error  eslint     4:10   Missing function expression name.         func-names
+    error  eslint     4:10   Missing function expression name.                        func-names
+    error  eslint     7:10   Function name "baz" must not be followed by whitespace.  space-after-function-name
 
 globals-invalid.js
     error  eslint     9:8    'process' is not defined.        no-undef

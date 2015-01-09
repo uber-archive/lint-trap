@@ -72,7 +72,7 @@ function makeFileStream(type, files) {
         callback();
     }
 
-    return through({ objectMode: true }, transform, flush);
+    return through({objectMode: true}, transform, flush);
 }
 
 module.exports = makeFileStream;

@@ -6,5 +6,6 @@
     "eslint.no-trailing-spaces": "jscs.disallowTrailingWhitespace",
     "eslint.semi": "jshint.W033",
     "eslint.no-multiple-empty-lines": "jscs.disallowMultipleLineBreaks",
-    "eslint.max-len": "jscs.maximumLineLength"
+    "eslint.max-len": "jscs.maximumLineLength",
+    "eslint.space-after-function-name": "jscs.disallowSpacesInNamedFunctionExpression"
 }

@@ -10,8 +10,8 @@ jf.spaces = 4;
 
 function findReferenceFile(rootPath, firstFile, callback) {
     var manifestPath = path.join(rootPath, 'package.json');
-    fs.exists(manifestPath, function manifestExistsCallback(exists) {
-        if (exists) {
+    fs.exists(manifestPath, function manifestExistsCallback(manifestExists) {
+        if (manifestExists) {
             jf.readFile(manifestPath, function readFileCallback(err, manifest) {
                 if (err) {
                     return callback(err);
@@ -24,8 +24,8 @@ function findReferenceFile(rootPath, firstFile, callback) {
             });
         } else {
             var indexPath = path.join(rootPath, 'index.js');
-            fs.exists(indexPath, function indexExistsCallback(exists) {
-                if (exists) {
+            fs.exists(indexPath, function indexExistsCallback(indexExists) {
+                if (indexExists) {
                     callback(undefined, indexPath);
                 } else {
                     callback(undefined, firstFile);
@@ -57,7 +57,7 @@ function setIndentRule(rootPath, firstFile, callback) {
         }
         var indent = detectIndent(content).indent || '    ';
         var jscsrcPath = path.resolve(__dirname, './rc/.jscsrc');
-        var diff = { validateIndentation: indent.length };
+        var diff = {validateIndentation: indent.length};
         updateJSON(jscsrcPath, diff);
         callback();
     }
@@ -95,9 +95,9 @@ function setLineLengthRule(lineLength, callback) {
 
 function setRules(dir, files, lineLength, callback) {
 
-    setIndentRule(dir, files[0], function setIndentRuleCallback(err) {
-        if (err) {
-            return callback(err);
+    setIndentRule(dir, files[0], function setIndentRuleCallback(indentErr) {
+        if (indentErr) {
+            return callback(indentErr);
         }
 
         setLineLengthRule(lineLength, function setLineLengthRuleCallback(err) {
