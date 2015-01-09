@@ -31,8 +31,8 @@ if (argv.v || argv.version) {
     lintTrap(opts, run);
 }
 
-function readFromStdin(argv) {
-    return argv._.length === 1 && argv._[0] === '-';
+function readFromStdin(minimistArgv) {
+    return minimistArgv._.length === 1 && minimistArgv._[0] === '-';
 }
 
 function run(err) {

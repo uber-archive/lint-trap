@@ -58,8 +58,8 @@ function installLintTrap(fixturePath, cb) {
         }
         var rootPath = path.resolve(__dirname, '..');
 
-        var args = [ 'install', '--save-dev', rootPath ];
-        var opts = { cwd: fixturePath };
+        var args = ['install', '--save-dev', rootPath];
+        var opts = {cwd: fixturePath};
 
         execFile(npmPath, args, opts, npmInstallExecFileCallback);
     });
@@ -70,9 +70,9 @@ function main(cb) {
         'git@github.com:uber/sirvice.git'
     ];
 
-    makeFixtures(fixtures, function lintFixtures(err, fixturePaths) {
-        if (err) {
-            return cb(err);
+    makeFixtures(fixtures, function lintFixtures(fixturesErr, fixturePaths) {
+        if (fixturesErr) {
+            return cb(fixturesErr);
         }
         async.eachSeries(fixturePaths, installLintTrap, eachCallback);
 

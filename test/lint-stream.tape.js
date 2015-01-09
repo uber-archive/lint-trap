@@ -16,7 +16,7 @@ test('lint-trap JSON stream results', function testStream(t) {
             return t.fail(err);
         }
         var streamMessages = [];
-        var opts = { stdin: false, lineLength: 80 };
+        var opts = {stdin: false, lineLength: 80};
         var lintStream = makeLintStream(jsfiles, opts);
 
         lintStream.on('data', streamMessages.push.bind(streamMessages));
