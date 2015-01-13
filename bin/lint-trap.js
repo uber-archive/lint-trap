@@ -7,6 +7,14 @@ var argv = require('minimist')(process.argv.slice(2));
 var lintTrap = require('../lint-trap');
 var fmt = require('util').format;
 
+// hack. sad.
+var setTimeout = require('timers').setTimeout;
+setTimeout(function onTimer() {
+    if (argv._[0] === '-') {
+        process.exit(1);
+    }
+}, 5000);
+
 var files = argv._.length === 0 ? [process.cwd()] : argv._;
 
 if (argv.v || argv.version) {
