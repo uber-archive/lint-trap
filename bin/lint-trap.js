@@ -6,6 +6,14 @@ var console = require('console');
 var argv = require('minimist')(process.argv.slice(2));
 var lintTrap = require('../lint-trap');
 var fmt = require('util').format;
+var setTimeout = require('timers').setTimeout;
+
+// hack. sad.
+setTimeout(function stdinTimeout() {
+    if (readFromStdin(argv)) {
+        process.exit(1);
+    }
+}, 5000);
 
 var files = argv._.length === 0 ? [process.cwd()] : argv._;
 
