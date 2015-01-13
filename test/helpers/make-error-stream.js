@@ -19,10 +19,10 @@ rules.jshint = rules.jshint.slice(1, rules.jshint.indexOf('globals'));
 
 function makeFiles() {
     // one more than the quantity you want.
-    return Array(26 + 1).join(' ').split('').map(filename);
+    return Array(26 + 1).join(' ').split('').map(generateFilename);
 }
 
-function filename(value, index) {
+function generateFilename(value, index) {
     return String.fromCharCode(97 + index) + '.js';
 }
 

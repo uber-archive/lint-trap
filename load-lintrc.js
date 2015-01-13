@@ -9,18 +9,18 @@ var memoizedReadJSONFile = async.memoize(jf.readFile);
 
 function loadSeverityConfig(folder, callback) {
 
-    findParentDir(folder, '.lintrc', function findCallback(err, dir) {
-        if (err) {
-            return callback(err);
+    findParentDir(folder, '.lintrc', function findCallback(findErr, dir) {
+        if (findErr) {
+            return callback(findErr);
         }
 
         if (!dir) {
             return callback(null, {});
         }
 
-        function readJSONCallback(err, config) {
-            if (err) {
-                return callback(err);
+        function readJSONCallback(jsonErr, config) {
+            if (jsonErr) {
+                return callback(jsonErr);
             }
             var parent = path.dirname(dir);
 
@@ -29,9 +29,9 @@ function loadSeverityConfig(folder, callback) {
                 return callback(null, config);
             }
 
-            function recurCallback(err, parentConfig) {
-                if (err) {
-                    return callback(err);
+            function recurCallback(recurErr, parentConfig) {
+                if (recurErr) {
+                    return callback(recurErr);
                 }
 
                 callback(null, deepExtend(parentConfig, config));
