@@ -13,6 +13,7 @@ var partial = require('partial');
 var printCompact = require('./compact-reporter');
 var path = require('path');
 var commondir = require('commondir');
+var setRules = require('./set-rules');
 
 function findFiles(paths, callback) {
     async.reduce(paths, [], function accumulator(memo, pathArg, done) {
@@ -64,25 +65,35 @@ function onEnd(errorMeter, callback) {
 }
 
 function lint(jsfiles, opts, callback) {
-    var uberLintStream = lintStream(jsfiles, opts);
-    var errorMeter = makeErrorMeter();
-    var writer;
-    var r = opts.reporter;
+    jsfiles.sort();
+    var dir = commondir(jsfiles);
+    setRules(dir, opts.lineLength, onRulesSet);
 
-    writer = (r === 'stylish') ? makeWriter(printStylish, callback) :
-             (r === 'checkstyle') ? makeWriter(printCheckstyle, callback) :
-             (r === 'json') ? makeWriter(printJSON, callback) :
-             (r === 'compact') ? makeWriter(printCompact, callback) : null;
+    function onRulesSet(err) {
+        if (err) {
+            return callback(err);
+        }
 
-    if (!writer) {
-        return callback(new Error('Unknown reporter: ' + r));
+        var uberLintStream = lintStream(jsfiles, dir, opts);
+        var errorMeter = makeErrorMeter();
+        var writer;
+        var r = opts.reporter;
+
+        writer = (r === 'stylish') ? makeWriter(printStylish, callback) :
+                 (r === 'checkstyle') ? makeWriter(printCheckstyle, callback) :
+                 (r === 'json') ? makeWriter(printJSON, callback) :
+                 (r === 'compact') ? makeWriter(printCompact, callback) : null;
+
+        if (!writer) {
+            return callback(new Error('Unknown reporter: ' + r));
+        }
+
+        uberLintStream
+            .pipe(errorMeter.meter)
+            .pipe(writer);
+
+        uberLintStream.once('end', partial(onEnd, errorMeter, callback));
     }
-
-    uberLintStream
-        .pipe(errorMeter.meter)
-        .pipe(writer);
-
-    uberLintStream.once('end', partial(onEnd, errorMeter, callback));
 }
 
 function run(opts, callback) {
