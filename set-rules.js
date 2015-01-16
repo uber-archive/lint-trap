@@ -45,7 +45,11 @@ function setIndentRule(rootPath, callback) {
         }
 
         var jscsrcPath = path.resolve(__dirname, './rc/.jscsrc');
-        var indent = parseInt(rules[0].indent_size, 10);
+        var indent = parseInt(rules[1].indent_size, 10);
+        if (!indent) {
+            var indentError = new Error('Invalid indent from editorconfig');
+            return callback(indentError);
+        }
         var diff = {validateIndentation: indent};
         updateJSON(jscsrcPath, diff);
         callback();
@@ -59,24 +63,12 @@ function setIndentRule(rootPath, callback) {
 }
 
 function setLineLengthRule(lineLength, callback) {
-
-    var jscsrcPath = path.resolve(__dirname, './rc/.jscsrc');
-
-    var jscsdiff = {
-        'maximumLineLength.value': lineLength
+    var eslintrcPath = path.resolve(__dirname, './rc/.eslintrc');
+    var eslintdiff = {
+        'rules.max-len': [2, lineLength, 4]
     };
-
-    updateJSON(jscsrcPath, jscsdiff);
-    updateEslint();
-
-    function updateEslint() {
-        var eslintrcPath = path.resolve(__dirname, './rc/.eslintrc');
-        var eslintdiff = {
-            'rules.max-len': [2, lineLength, 4]
-        };
-        updateJSON(eslintrcPath, eslintdiff);
-        callback();
-    }
+    updateJSON(eslintrcPath, eslintdiff);
+    callback();
 }
 
 function setRules(dir, lineLength, callback) {
