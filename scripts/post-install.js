@@ -82,7 +82,6 @@ function symlinkLinterConfigurationFiles(modulePath, cb) {
  * @param  {String}    modulePath  file path to the repo to which lint-trap was
  *                                 installed
  * @param  {Function}  callback    callback function
- * @return {undefined}             undefined
  */
 function cleanRepo(modulePath, callback) {
     var manifestPath = path.join(modulePath, 'package.json');
