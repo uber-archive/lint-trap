@@ -1,5 +1,4 @@
 'use strict';
-require('array.prototype.find');
 var path = require('path');
 var jf = require('jsonfile');
 var dotty = require('dotty');
@@ -24,7 +23,8 @@ function setIndentRule(rootPath, callback) {
 
     function onEditorConfigDir(err, editorConfigDir) {
         if (err) {
-            return callback(err);
+            // If no editorconfig found, swallow the error and default to 4.
+            return callback();
         }
         var editorConfigPath = path.join(editorConfigDir, '.editorconfig');
         editorConfigParse(editorConfigPath, onEditorConfigParse);
@@ -32,22 +32,29 @@ function setIndentRule(rootPath, callback) {
 
     function onEditorConfigParse(parseErr, parsed) {
         if (parseErr) {
+            // If we can't parse .editorconfig, throw an error since there may
+            // be a *.js indent rule we want to respect.
             return callback(parseErr);
         }
-        var jsRules = parsed.find(function getJsRuleSet(ruleset) {
-            return ruleset[0] === '*.js';
-        })[1];
+        var rules = getRuleset(parsed, '*.js') || getRuleset(parsed, '*');
 
-        if (!jsRules) {
-            var noJsRuleError = new Error('No [*.js] ruleset in .editorconfig');
-            return callback(noJsRuleError);
+        if (!rules || rules[0].indent_size) {
+            // There is no ruleset that applies to *.js files or there is no
+            // indent_size defined, don't change indent rule.
+            return callback();
         }
 
         var jscsrcPath = path.resolve(__dirname, './rc/.jscsrc');
-        var indent = parseInt(jsRules.indent_size, 10);
+        var indent = parseInt(rules[0].indent_size, 10);
         var diff = {validateIndentation: indent};
         updateJSON(jscsrcPath, diff);
         callback();
+    }
+
+    function getRuleset(parsed, id) {
+        return parsed.filter(function getJsRuleSet(ruleset) {
+            return ruleset[0] === id;
+        })[0];
     }
 }
 
