@@ -1,5 +1,4 @@
 'use strict';
-require('array.prototype.find');
 var makeLintStream = require('../lint-stream')();
 var path = require('path');
 var getJavaScriptFiles = require('../get-javascript-files');
@@ -33,9 +32,9 @@ test('lint-trap JSON stream results', function testStream(t) {
         }
 
         function checkTestResult(expected) {
-            var actual = streamMessages.find(function match(message) {
+            var actual = streamMessages.filter(function match(message) {
                 return message.file === expected.file;
-            });
+            })[0];
             t.deepEqual(actual, expected, path.relative(root, expected.file));
         }
 
