@@ -19,7 +19,7 @@
         "no-array-constructor": 2,
         "no-bitwise": 0,
         "no-caller": 2,
-        "no-catch-shadow": 2,
+        "no-catch-shadow": 0,
         "no-comma-dangle": 2,
         "no-cond-assign": 2,
         "no-console": 1,
