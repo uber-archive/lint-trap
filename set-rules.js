@@ -1,39 +1,11 @@
 'use strict';
-var detectIndent = require('detect-indent');
 var path = require('path');
-var fs = require('fs');
 var jf = require('jsonfile');
 var dotty = require('dotty');
-var process = require('process');
-var resolve = require('resolve');
-jf.spaces = 4;
+var findParentDir = require('find-parent-dir');
+var editorConfigParse = require('editorconfig/lib/ini').parse;
 
-function findReferenceFile(rootPath, firstFile, callback) {
-    var manifestPath = path.join(rootPath, 'package.json');
-    fs.exists(manifestPath, function manifestExistsCallback(manifestExists) {
-        if (manifestExists) {
-            jf.readFile(manifestPath, function readFileCallback(err, manifest) {
-                if (err) {
-                    return callback(err);
-                }
-                var opts = {
-                    basedir: rootPath,
-                    moduleDirectory: ['', 'node_modules']
-                };
-                resolve('.', opts, callback);
-            });
-        } else {
-            var indexPath = path.join(rootPath, 'index.js');
-            fs.exists(indexPath, function indexExistsCallback(indexExists) {
-                if (indexExists) {
-                    callback(undefined, indexPath);
-                } else {
-                    callback(undefined, firstFile);
-                }
-            });
-        }
-    });
-}
+jf.spaces = 4;
 
 function updateJSON(jsonPath, diffs) {
     // Synchronous method to be safe since multiple rules might touch the
@@ -46,56 +18,62 @@ function updateJSON(jsonPath, diffs) {
     jf.writeFileSync(jsonPath, content);
 }
 
-function setIndentRule(rootPath, firstFile, callback) {
-    if (firstFile === 'stdin') {
-        return process.nextTick(callback);
+function setIndentRule(rootPath, callback) {
+    findParentDir(rootPath, '.editorconfig', onEditorConfigDir);
+
+    function onEditorConfigDir(err, editorConfigDir) {
+        if (err || !editorConfigDir) {
+            // If no editorconfig found, swallow the error and default to 4.
+            return callback();
+        }
+        var editorConfigPath = path.join(editorConfigDir, '.editorconfig');
+        editorConfigParse(editorConfigPath, onEditorConfigParse);
     }
 
-    function readFileCallback(err, content) {
-        if (err) {
-            return callback(err);
+    function onEditorConfigParse(parseErr, parsed) {
+        if (parseErr) {
+            // If we can't parse .editorconfig, throw an error since there may
+            // be a *.js indent rule we want to respect.
+            return callback(parseErr);
         }
-        var indent = detectIndent(content).indent || '    ';
+        var rules = getRuleset(parsed, '*.js') || getRuleset(parsed, '*');
+
+        if (!rules || rules[0].indent_size) {
+            // There is no ruleset that applies to *.js files or there is no
+            // indent_size defined, don't change indent rule.
+            return callback();
+        }
+
         var jscsrcPath = path.resolve(__dirname, './rc/.jscsrc');
-        var diff = {validateIndentation: indent.length};
+        var indent = parseInt(rules[1].indent_size, 10);
+        if (!indent) {
+            var indentError = new Error('Invalid indent from editorconfig');
+            return callback(indentError);
+        }
+        var diff = {validateIndentation: indent};
         updateJSON(jscsrcPath, diff);
         callback();
     }
 
-    function findReferenceFileCallback(err, referenceFile) {
-        if (err) {
-            return callback(err);
-        }
-        fs.readFile(referenceFile, 'utf8', readFileCallback);
+    function getRuleset(parsed, id) {
+        return parsed.filter(function getJsRuleSet(ruleset) {
+            return ruleset[0] === id;
+        })[0];
     }
-
-    findReferenceFile(rootPath, firstFile, findReferenceFileCallback);
 }
 
 function setLineLengthRule(lineLength, callback) {
-
-    var jscsrcPath = path.resolve(__dirname, './rc/.jscsrc');
-
-    var jscsdiff = {
-        'maximumLineLength.value': lineLength
+    var eslintrcPath = path.resolve(__dirname, './rc/.eslintrc');
+    var eslintdiff = {
+        'rules.max-len': [2, lineLength, 4]
     };
-
-    updateJSON(jscsrcPath, jscsdiff);
-    updateEslint();
-
-    function updateEslint() {
-        var eslintrcPath = path.resolve(__dirname, './rc/.eslintrc');
-        var eslintdiff = {
-            'rules.max-len': [2, lineLength, 4]
-        };
-        updateJSON(eslintrcPath, eslintdiff);
-        callback();
-    }
+    updateJSON(eslintrcPath, eslintdiff);
+    callback();
 }
 
-function setRules(dir, files, lineLength, callback) {
+function setRules(dir, lineLength, callback) {
 
-    setIndentRule(dir, files[0], function setIndentRuleCallback(indentErr) {
+    setIndentRule(dir, function setIndentRuleCallback(indentErr) {
         if (indentErr) {
             return callback(indentErr);
         }

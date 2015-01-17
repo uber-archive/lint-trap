@@ -7,6 +7,7 @@ var argv = require('minimist')(process.argv.slice(2));
 var lintTrap = require('../lint-trap');
 var fmt = require('util').format;
 var setTimeout = require('timers').setTimeout;
+var path = require('path');
 
 // hack. sad.
 setTimeout(function stdinTimeout() {
@@ -15,7 +16,14 @@ setTimeout(function stdinTimeout() {
     }
 }, 5000);
 
-var files = argv._.length === 0 ? [process.cwd()] : argv._;
+var files = argv._.length === 0 ? [process.cwd()] : absolutePaths(argv._);
+
+function absolutePaths(args) {
+    return args.map(function absolutePath(file) {
+        return file.charAt(0) === '/' || file === '-' ?
+            file : path.resolve(process.cwd(), file);
+    });
+}
 
 if (argv.v || argv.version) {
     printVersion();

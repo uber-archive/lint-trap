@@ -1,6 +1,6 @@
 {
   "name": "lint-trap",
-  "version": "0.4.13",
+  "version": "1.0.0",
   "description": "JavaScript linter module for Uber projects",
   "author": "Andrew de Andrade <aandrade@uber.com>",
   "repository": {
@@ -27,8 +27,8 @@
     "commondir": "0.0.1",
     "debug": "^2.1.1",
     "deep-extend": "~0.3.2",
-    "detect-indent": "^3.0.0",
     "dotty": "0.0.2",
+    "editorconfig": "^0.12.1",
     "eslint": "~0.11.0",
     "event-stream": "^3.2.1",
     "extend": "^2.0.0",
@@ -43,14 +43,12 @@
     "partial": "0.0.3",
     "pluralize": "^1.1.0",
     "process": "^0.10.0",
-    "resolve": "^1.0.0",
     "text-table": "^0.2.0",
     "through2": "^0.6.3",
     "through2-spy": "^1.2.0",
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "array.prototype.find": "^1.0.0",
     "istanbul": "^0.3.5",
     "mkdirp": "^0.5.0",
     "mock-fs": "^2.3.2",

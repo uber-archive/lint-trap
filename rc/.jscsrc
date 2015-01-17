@@ -39,8 +39,7 @@
         "while",
         "do",
         "try",
-        "catch",
-        "default"
+        "catch"
     ],
     "disallowMultipleVarDecl": true,
     "disallowEmptyBlocks": true,

@@ -8,12 +8,31 @@ will be developed next. If you work with emacs and
 JavaScript [email me][email-aandrade] to let me know so I
 can prioritize.
 
+## SublimeText - SublimeLinter3
+
 - [SublimeLinter-contrib-lint-trap][sublimeLinter-contrib-lint-trap]
 
+The SublimeLinter plugin is not published yet in the 
+PackageControl channel for SublimeLinter. In the meantime,
+you can install it by git cloning it to the Plugins folder:
 
-With linting rules moved to an npm module, linters such as
-[SublimeLinter][sl] for Sublime Text, [syntastic][syn] for
-vim and [flycheck][fc] for emacs, will be unable to to find
+```
+cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
+git clone git@github.com:uber/SublimeLinter-contrib-lint-trap.git
+```
+
+## vim - syntastic
+
+There is a plugin for syntastic, but it is not yet in 
+syntastic. Just copy [`linttrap.vim`][linttrap.vim] to the 
+following folder in syntastic in your `~/.vim/` folder.
+
+`syntastic/syntax_checkers/javascript/`
+
+## Other Editors
+
+With linting rules moved to an npm module, other linters 
+such as [flycheck][fc] for emacs, will be unable to to find 
 the lint-trap linting rules for the project.
 
 In the short term this can be fixed by copying those files
@@ -27,13 +46,16 @@ from lint-trap to your project and adding them to your
 Symlinking was preferred here, but SublimeLinter won't load
 symlinked linter configuration files.
 
-In the future, we will have lint-trap plugin for lint-trap
-so that you don't need to install plugins for all the
-linters that lint-trap supports. In the meantime, you should
-consult the documentation for the linting engine available
-for your code editor to discover how to enable support for
-jscs, jshint and eslint.
+In the future, we will have lint-trap plugin for all the 
+linting engines so that you don't need to install plugins 
+for all the three linters that lint-trap supports. In the 
+meantime, you should consult the documentation for the 
+linting engine available for your code editor to discover 
+how to enable support for jscs, jshint and eslint.
 
+
+[sublimeLinter-contrib-lint-trap]: https://github.com/uber/SublimeLinter-contrib-lint-trap
+[linttrap.vim]: https://github.com/uber/lint-trap/blob/master/extras/linttrap.vim
 
 [sl]: http://sublimelinter.readthedocs.org/
 [syn]: https://github.com/scrooloose/syntastic

@@ -4,9 +4,7 @@ var JSONStream = require('jsonstream2');
 var path = require('path');
 var es = require('event-stream');
 var which = require('npm-which');
-var commondir = require('commondir');
 var through2 = require('through2');
-var setRules = require('./set-rules');
 var makeFileStream = require('./error-to-file-transform');
 var clusterFileMessages = require('./group-file-messages-transform');
 var severityTransform = require('./severity-transform');
@@ -60,14 +58,7 @@ function execLinter(type, dir, files, opts) {
 
     var lintMessages = makeRelativePathTransform(makeRelativePath);
 
-    setRules(dir, files, opts.lineLength, setIndentRuleCallback);
-
-    function setIndentRuleCallback(err) {
-        if (err) {
-            return lintMessages.emit('error', err);
-        }
-        getBinPath(type, getBinPathCallback);
-    }
+    getBinPath(type, getBinPathCallback);
 
     function getBinPathCallback(err, binPath) {
         if (err) {
@@ -96,7 +87,7 @@ function execLinter(type, dir, files, opts) {
         function onError(linterErr) {
             /*eslint-disable*/
             console.error('linting failed for', type);
-            console.error(linterErr);
+            console.error(linterErr.toString());
             process.exit(1);
             /*eslint-enable*/
         }
@@ -105,8 +96,7 @@ function execLinter(type, dir, files, opts) {
     return lintMessages;
 }
 
-function lintStream(type, files, opts) {
-    var dir = commondir(files);
+function lintStream(type, dir, files, opts) {
     var fileStream = makeFileStream(type, files.map(makeRelativePathFn(dir)));
     execLinter(type, dir, files, opts).pipe(fileStream);
     return fileStream;
@@ -115,10 +105,9 @@ function lintStream(type, files, opts) {
 function lintTrapStream(linters) {
     linters = linters || ['jscs', 'jshint', 'eslint'];
 
-    return function lint(files, opts) {
-        files.sort();
+    return function lint(files, dir, opts) {
         var streams = linters.map(function initLinter(linterName) {
-            return lintStream(linterName, files, opts);
+            return lintStream(linterName, dir, files, opts);
         });
 
         var mergedLintStream = es.merge.apply(es, streams);
