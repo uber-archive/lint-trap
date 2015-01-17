@@ -22,7 +22,7 @@ function setIndentRule(rootPath, callback) {
     findParentDir(rootPath, '.editorconfig', onEditorConfigDir);
 
     function onEditorConfigDir(err, editorConfigDir) {
-        if (err) {
+        if (err || !editorConfigDir) {
             // If no editorconfig found, swallow the error and default to 4.
             return callback();
         }
