@@ -150,7 +150,7 @@
         "spaced-line-comment": [2, "always"],
         "strict": 2,
         "use-isnan": 2,
-        "valid-jsdoc": [2, { "requireReturn": false }],
+        "valid-jsdoc": [2, { "requireReturn": false, "requireParamDescription": false }],
         "valid-typeof": 2,
         "vars-on-top": 0,
         "wrap-iife": 2,
