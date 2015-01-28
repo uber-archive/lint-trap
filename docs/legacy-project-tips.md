@@ -161,7 +161,7 @@ file you open and save.
 You won't regret adding such a tool to your project.
 
 
-
+[husky]: https://github.com/typicode/husky
 [editorconfig]: http://editorconfig.org/
 [code editor support]: code-editor-support.md
 [sublimeLinter-contrib-lint-trap]: https://github.com/uber/SublimeLinter-contrib-lint-trap
