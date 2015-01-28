@@ -63,6 +63,44 @@ linting process more manageable, we're going to provide a
 some tips of tricks to break things down into bite size
 chunks.
 
+Pre-commit hook to lint only changed files
+------------------------------------------
+
+Using npm-scripts, some bash-fu and the [husky][husky] 
+module, you can have lint-trap only lint changed *.js files
+as a pre-commit hook. To do this, first install husky as a
+dev dependency:
+
+    $ npm install --save-dev husky
+
+Then add the following to your `package.json` file:
+
+    "scripts": {
+        ...
+        "lint-changed": "lint-trap `git diff HEAD --name-only --diff-filter=ACMRTU | awk '/\.js$/' | awk  -v path=$(git rev-parse --show-toplevel)/ '{print path$1}'`",
+        "precommit": "npm run lint-changed",
+        ...
+    },
+
+Husky will install git-hooks, including a pre-commit hook
+that will run `npm run precommit`, which in turn runs the
+`lint-changed` script.
+
+This script works like so:
+
+    # show the files names of staged and unstaged changes
+    # not including deleted files.
+    git diff HEAD --name-only --diff-filter=ACMRTU
+
+    # pipe that list to an awk filter that reduces that list
+    # to javascript files only (*.js)
+    | awk '/\.js$/'
+
+    # pipe that list to an awk filter that expands the file
+    # names to the full path from the top-level git directory.
+    | awk  -v path=$(git rev-parse --show-toplevel)/ '{print path$1}'`
+
+
 Use a .lintignore file
 ----------------------
 
