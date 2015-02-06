@@ -1,6 +1,6 @@
 {
   "name": "lint-trap",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JavaScript linter module for Uber projects",
   "author": "Andrew de Andrade <aandrade@uber.com>",
   "repository": {
