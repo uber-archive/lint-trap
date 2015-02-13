@@ -27,7 +27,6 @@ function! SyntaxCheckers_javascript_linttrap_IsAvailable() dict
     endif
 
     let ver = syntastic#util#getVersion(self.getExecEscaped() . ' --version')
-    call self.log(self.getExec() . ' version =', ver)
 
     return syntastic#util#versionIsAtLeast(ver, [0, 4, 0])
 endfunction
@@ -35,7 +34,7 @@ endfunction
 function! SyntaxCheckers_javascript_linttrap_GetLocList() dict
 
     let makeprg = self.makeprgBuild({ 'args_before': '--reporter=compact' })
-    
+
     let errorformat =
         \ '%E%f: line %l\, col %c\, Error - %m,' .
         \ '%W%f: line %l\, col %c\, Warning - %m'
