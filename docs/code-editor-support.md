@@ -23,11 +23,12 @@ git clone git@github.com:uber/SublimeLinter-contrib-lint-trap.git
 
 ## vim - syntastic
 
-There is a plugin for syntastic, but it is not yet in 
-syntastic. Just copy [`linttrap.vim`][linttrap.vim] to the 
-following folder in syntastic in your `~/.vim/` folder.
-
-`syntastic/syntax_checkers/javascript/`
+There is a plugin for syntastic, but it is not yet in syntastic. To use it:
+- copy [`linttrap.vim`][linttrap.vim] to the `syntax\_checkers/javascript/`
+  folder within the syntastic plugin folder
+  - if you're using pathogen, this should be
+    `~/.vim/bundle/syntastic/syntax\_checkers/javascript/`
+- enable the linttrap checker by adding this line to your vimrc: `let g:syntastic\_javascript\_checkers = ["linttrap"]`
 
 ## Other Editors
 
