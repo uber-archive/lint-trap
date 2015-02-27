@@ -30,6 +30,7 @@ There is a plugin for syntastic, but it is not yet in syntastic. To use it:
     `~/.vim/bundle/syntastic/syntax\_checkers/javascript/`
 - enable the linttrap checker by adding this line to your vimrc: `let g:syntastic\_javascript\_checkers = ["linttrap"]`
 - make sure you have lint trap installed globally: `npm i -g lint-trap`
+
 ## Other Editors
 
 With linting rules moved to an npm module, other linters
