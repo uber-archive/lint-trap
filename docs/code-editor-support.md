@@ -12,7 +12,7 @@ can prioritize.
 
 - [SublimeLinter-contrib-lint-trap][sublimeLinter-contrib-lint-trap]
 
-The SublimeLinter plugin is not published yet in the 
+The SublimeLinter plugin is not published yet in the
 PackageControl channel for SublimeLinter. In the meantime,
 you can install it by git cloning it to the Plugins folder:
 
@@ -29,11 +29,11 @@ There is a plugin for syntastic, but it is not yet in syntastic. To use it:
   - if you're using pathogen, this should be
     `~/.vim/bundle/syntastic/syntax\_checkers/javascript/`
 - enable the linttrap checker by adding this line to your vimrc: `let g:syntastic\_javascript\_checkers = ["linttrap"]`
-
+- make sure you have lint trap installed globally: `npm i -g lint-trap`
 ## Other Editors
 
-With linting rules moved to an npm module, other linters 
-such as [flycheck][fc] for emacs, will be unable to to find 
+With linting rules moved to an npm module, other linters
+such as [flycheck][fc] for emacs, will be unable to to find
 the lint-trap linting rules for the project.
 
 In the short term this can be fixed by copying those files
@@ -47,11 +47,11 @@ from lint-trap to your project and adding them to your
 Symlinking was preferred here, but SublimeLinter won't load
 symlinked linter configuration files.
 
-In the future, we will have lint-trap plugin for all the 
-linting engines so that you don't need to install plugins 
-for all the three linters that lint-trap supports. In the 
-meantime, you should consult the documentation for the 
-linting engine available for your code editor to discover 
+In the future, we will have lint-trap plugin for all the
+linting engines so that you don't need to install plugins
+for all the three linters that lint-trap supports. In the
+meantime, you should consult the documentation for the
+linting engine available for your code editor to discover
 how to enable support for jscs, jshint and eslint.
 
 

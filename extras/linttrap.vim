@@ -26,7 +26,7 @@ function! SyntaxCheckers_javascript_linttrap_IsAvailable() dict
         return 0
     endif
 
-    let ver = syntastic#util#getVersion(self.getExecEscaped() . ' --version')
+    let ver = self.getVersion()
 
     return syntastic#util#versionIsAtLeast(ver, [0, 4, 0])
 endfunction
