@@ -38,9 +38,8 @@ Linting Support in Text Editors
 
 lint-trap is very new so support for text editor plugin is
 still immature. Plugin support already exists for
-SublimeText 3. Plugin support for syntastic is currently
-being worked on. Plugin support for flycheck in emacs is
-planned.
+SublimeText 3 and Syntastic (vim). Plugin support for
+flycheck in emacs is planned.
 
 For more information and workarounds if your editor is not
 yet supported, see the documentation on
