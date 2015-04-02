@@ -35,6 +35,10 @@ function! SyntaxCheckers_javascript_linttrap_GetLocList() dict
 
     let makeprg = self.makeprgBuild({ 'args_before': '--reporter=compact' })
 
+    if !exists('b:syntastic_checkers')
+        let b:syntastic_checkers = ["linttrap"]
+    endif
+
     let errorformat =
         \ '%E%f: line %l\, col %c\, Error - %m,' .
         \ '%W%f: line %l\, col %c\, Warning - %m'
