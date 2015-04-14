@@ -20,6 +20,10 @@ function makeArgs(type, files, readFromStdin) {
         path.resolve(__dirname, 'reporters', type + '.js')
     ];
 
+    if (type === 'jscs') {
+        args.push('--esnext');
+    }
+
     if (readFromStdin) {
         args.push(type === 'eslint' ? '--stdin' : '-');
     } else {

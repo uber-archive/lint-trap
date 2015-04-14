@@ -20,82 +20,82 @@ d.js
 
 e.js
     warning  eslint     4:4    no-catch-shadow message                          no-catch-shadow
-    warning  jshint     4:4    indent message                                   indent
+    warning  jshint     4:4    esnext message                                   esnext
     warning  jscs       4:4    disallowSpacesInNamedFunctionExpression message  disallowSpacesInNamedFunctionExpression
 
 f.js
     error  eslint     5:5    no-comma-dangle message                     no-comma-dangle
-    error  jshint     5:5    undef message                               undef
+    error  jshint     5:5    indent message                              indent
     error  jscs       5:5    requireSpacesInFunctionDeclaration message  requireSpacesInFunctionDeclaration
 
 g.js
     warning  eslint     6:6    no-cond-assign message                          no-cond-assign
-    warning  jshint     6:6    validthis message                               validthis
+    warning  jshint     6:6    undef message                                   undef
     warning  jscs       6:6    requireSpacesInNamedFunctionExpression message  requireSpacesInNamedFunctionExpression
 
 h.js
     error  eslint     7:7    no-console message             no-console
-    error  jshint     7:7    newcap message                 newcap
+    error  jshint     7:7    validthis message              validthis
     error  jscs       7:7    disallowTrailingComma message  disallowTrailingComma
 
 i.js
     warning  eslint     8:8    no-constant-condition message   no-constant-condition
-    warning  jshint     8:8    indent message                  indent
+    warning  jshint     8:8    newcap message                  newcap
     warning  jscs       8:8    requireBlocksOnNewline message  requireBlocksOnNewline
 
 j.js
     error  eslint     9:9    no-control-regex message  no-control-regex
-    error  jshint     9:9    undef message             undef
+    error  jshint     9:9    esnext message            esnext
     error  jscs       9:9    excludeFiles message      excludeFiles
 
 k.js
     warning  eslint    10:10   no-debugger message         no-debugger
-    warning  jshint    10:10   validthis message           validthis
+    warning  jshint    10:10   indent message              indent
     warning  jscs      10:10   requireCurlyBraces message  requireCurlyBraces
 
 l.js
     error  eslint    11:11   no-delete-var message            no-delete-var
-    error  jshint    11:11   newcap message                   newcap
+    error  jshint    11:11   undef message                    undef
     error  jscs      11:11   disallowMultipleVarDecl message  disallowMultipleVarDecl
 
 m.js
     warning  eslint    12:12   no-div-regex message         no-div-regex
-    warning  jshint    12:12   indent message               indent
+    warning  jshint    12:12   validthis message            validthis
     warning  jscs      12:12   disallowEmptyBlocks message  disallowEmptyBlocks
 
 n.js
     error  eslint    13:13   no-dupe-keys message                  no-dupe-keys
-    error  jshint    13:13   undef message                         undef
+    error  jshint    13:13   newcap message                        newcap
     error  jscs      13:13   disallowSpaceAfterObjectKeys message  disallowSpaceAfterObjectKeys
 
 o.js
     warning  eslint    14:14   no-else-return message               no-else-return
-    warning  jshint    14:14   validthis message                    validthis
+    warning  jshint    14:14   esnext message                       esnext
     warning  jscs      14:14   requireCommaBeforeLineBreak message  requireCommaBeforeLineBreak
 
 p.js
     error  eslint    15:15   no-empty message                           no-empty
-    error  jshint    15:15   newcap message                             newcap
+    error  jshint    15:15   indent message                             indent
     error  jscs      15:15   requireSpaceBeforeBinaryOperators message  requireSpaceBeforeBinaryOperators
 
 q.js
     warning  eslint    16:16   no-empty-class message                        no-empty-class
-    warning  jshint    16:16   indent message                                indent
+    warning  jshint    16:16   undef message                                 undef
     warning  jscs      16:16   requireSpacesInConditionalExpression message  requireSpacesInConditionalExpression
 
 r.js
     error  eslint    17:17   no-empty-label message                    no-empty-label
-    error  jshint    17:17   undef message                             undef
+    error  jshint    17:17   validthis message                         validthis
     error  jscs      17:17   requireSpaceAfterBinaryOperators message  requireSpaceAfterBinaryOperators
 
 s.js
     warning  eslint    18:18   no-eq-null message                              no-eq-null
-    warning  jshint    18:18   validthis message                               validthis
+    warning  jshint    18:18   newcap message                                  newcap
     warning  jscs      18:18   disallowSpaceAfterPrefixUnaryOperators message  disallowSpaceAfterPrefixUnaryOperators
 
 t.js
     error  eslint    19:19   no-eval message           no-eval
-    error  jshint    19:19   newcap message            newcap
+    error  jshint    19:19   esnext message            esnext
     error  jscs      19:19   disallowKeywords message  disallowKeywords
 
 u.js
@@ -120,10 +120,10 @@ x.js
 
 y.js
     warning  eslint    24:24   no-extra-parens message             no-extra-parens
-    warning  jshint    24:24   indent message                      indent
+    warning  jshint    24:24   esnext message                      esnext
     warning  jscs      24:24   disallowTrailingWhitespace message  disallowTrailingWhitespace
 
 z.js
     error  eslint    25:25   no-extra-semi message              no-extra-semi
-    error  jshint    25:25   undef message                      undef
+    error  jshint    25:25   indent message                     indent
     error  jscs      25:25   disallowKeywordsOnNewLine message  disallowKeywordsOnNewLine

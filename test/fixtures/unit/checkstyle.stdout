@@ -22,82 +22,82 @@
 	</file>
 	<file name="e.js">
 		<error line="4" column="4" severity="warning" message="no-catch-shadow message" source="eslint.no-catch-shadow" />
-		<error line="4" column="4" severity="warning" message="indent message" source="jshint.indent" />
+		<error line="4" column="4" severity="warning" message="esnext message" source="jshint.esnext" />
 		<error line="4" column="4" severity="warning" message="disallowSpacesInNamedFunctionExpression message" source="jscs.disallowSpacesInNamedFunctionExpression" />
 	</file>
 	<file name="f.js">
 		<error line="5" column="5" severity="error" message="no-comma-dangle message" source="eslint.no-comma-dangle" />
-		<error line="5" column="5" severity="error" message="undef message" source="jshint.undef" />
+		<error line="5" column="5" severity="error" message="indent message" source="jshint.indent" />
 		<error line="5" column="5" severity="error" message="requireSpacesInFunctionDeclaration message" source="jscs.requireSpacesInFunctionDeclaration" />
 	</file>
 	<file name="g.js">
 		<error line="6" column="6" severity="warning" message="no-cond-assign message" source="eslint.no-cond-assign" />
-		<error line="6" column="6" severity="warning" message="validthis message" source="jshint.validthis" />
+		<error line="6" column="6" severity="warning" message="undef message" source="jshint.undef" />
 		<error line="6" column="6" severity="warning" message="requireSpacesInNamedFunctionExpression message" source="jscs.requireSpacesInNamedFunctionExpression" />
 	</file>
 	<file name="h.js">
 		<error line="7" column="7" severity="error" message="no-console message" source="eslint.no-console" />
-		<error line="7" column="7" severity="error" message="newcap message" source="jshint.newcap" />
+		<error line="7" column="7" severity="error" message="validthis message" source="jshint.validthis" />
 		<error line="7" column="7" severity="error" message="disallowTrailingComma message" source="jscs.disallowTrailingComma" />
 	</file>
 	<file name="i.js">
 		<error line="8" column="8" severity="warning" message="no-constant-condition message" source="eslint.no-constant-condition" />
-		<error line="8" column="8" severity="warning" message="indent message" source="jshint.indent" />
+		<error line="8" column="8" severity="warning" message="newcap message" source="jshint.newcap" />
 		<error line="8" column="8" severity="warning" message="requireBlocksOnNewline message" source="jscs.requireBlocksOnNewline" />
 	</file>
 	<file name="j.js">
 		<error line="9" column="9" severity="error" message="no-control-regex message" source="eslint.no-control-regex" />
-		<error line="9" column="9" severity="error" message="undef message" source="jshint.undef" />
+		<error line="9" column="9" severity="error" message="esnext message" source="jshint.esnext" />
 		<error line="9" column="9" severity="error" message="excludeFiles message" source="jscs.excludeFiles" />
 	</file>
 	<file name="k.js">
 		<error line="10" column="10" severity="warning" message="no-debugger message" source="eslint.no-debugger" />
-		<error line="10" column="10" severity="warning" message="validthis message" source="jshint.validthis" />
+		<error line="10" column="10" severity="warning" message="indent message" source="jshint.indent" />
 		<error line="10" column="10" severity="warning" message="requireCurlyBraces message" source="jscs.requireCurlyBraces" />
 	</file>
 	<file name="l.js">
 		<error line="11" column="11" severity="error" message="no-delete-var message" source="eslint.no-delete-var" />
-		<error line="11" column="11" severity="error" message="newcap message" source="jshint.newcap" />
+		<error line="11" column="11" severity="error" message="undef message" source="jshint.undef" />
 		<error line="11" column="11" severity="error" message="disallowMultipleVarDecl message" source="jscs.disallowMultipleVarDecl" />
 	</file>
 	<file name="m.js">
 		<error line="12" column="12" severity="warning" message="no-div-regex message" source="eslint.no-div-regex" />
-		<error line="12" column="12" severity="warning" message="indent message" source="jshint.indent" />
+		<error line="12" column="12" severity="warning" message="validthis message" source="jshint.validthis" />
 		<error line="12" column="12" severity="warning" message="disallowEmptyBlocks message" source="jscs.disallowEmptyBlocks" />
 	</file>
 	<file name="n.js">
 		<error line="13" column="13" severity="error" message="no-dupe-keys message" source="eslint.no-dupe-keys" />
-		<error line="13" column="13" severity="error" message="undef message" source="jshint.undef" />
+		<error line="13" column="13" severity="error" message="newcap message" source="jshint.newcap" />
 		<error line="13" column="13" severity="error" message="disallowSpaceAfterObjectKeys message" source="jscs.disallowSpaceAfterObjectKeys" />
 	</file>
 	<file name="o.js">
 		<error line="14" column="14" severity="warning" message="no-else-return message" source="eslint.no-else-return" />
-		<error line="14" column="14" severity="warning" message="validthis message" source="jshint.validthis" />
+		<error line="14" column="14" severity="warning" message="esnext message" source="jshint.esnext" />
 		<error line="14" column="14" severity="warning" message="requireCommaBeforeLineBreak message" source="jscs.requireCommaBeforeLineBreak" />
 	</file>
 	<file name="p.js">
 		<error line="15" column="15" severity="error" message="no-empty message" source="eslint.no-empty" />
-		<error line="15" column="15" severity="error" message="newcap message" source="jshint.newcap" />
+		<error line="15" column="15" severity="error" message="indent message" source="jshint.indent" />
 		<error line="15" column="15" severity="error" message="requireSpaceBeforeBinaryOperators message" source="jscs.requireSpaceBeforeBinaryOperators" />
 	</file>
 	<file name="q.js">
 		<error line="16" column="16" severity="warning" message="no-empty-class message" source="eslint.no-empty-class" />
-		<error line="16" column="16" severity="warning" message="indent message" source="jshint.indent" />
+		<error line="16" column="16" severity="warning" message="undef message" source="jshint.undef" />
 		<error line="16" column="16" severity="warning" message="requireSpacesInConditionalExpression message" source="jscs.requireSpacesInConditionalExpression" />
 	</file>
 	<file name="r.js">
 		<error line="17" column="17" severity="error" message="no-empty-label message" source="eslint.no-empty-label" />
-		<error line="17" column="17" severity="error" message="undef message" source="jshint.undef" />
+		<error line="17" column="17" severity="error" message="validthis message" source="jshint.validthis" />
 		<error line="17" column="17" severity="error" message="requireSpaceAfterBinaryOperators message" source="jscs.requireSpaceAfterBinaryOperators" />
 	</file>
 	<file name="s.js">
 		<error line="18" column="18" severity="warning" message="no-eq-null message" source="eslint.no-eq-null" />
-		<error line="18" column="18" severity="warning" message="validthis message" source="jshint.validthis" />
+		<error line="18" column="18" severity="warning" message="newcap message" source="jshint.newcap" />
 		<error line="18" column="18" severity="warning" message="disallowSpaceAfterPrefixUnaryOperators message" source="jscs.disallowSpaceAfterPrefixUnaryOperators" />
 	</file>
 	<file name="t.js">
 		<error line="19" column="19" severity="error" message="no-eval message" source="eslint.no-eval" />
-		<error line="19" column="19" severity="error" message="newcap message" source="jshint.newcap" />
+		<error line="19" column="19" severity="error" message="esnext message" source="jshint.esnext" />
 		<error line="19" column="19" severity="error" message="disallowKeywords message" source="jscs.disallowKeywords" />
 	</file>
 	<file name="u.js">
@@ -122,12 +122,12 @@
 	</file>
 	<file name="y.js">
 		<error line="24" column="24" severity="warning" message="no-extra-parens message" source="eslint.no-extra-parens" />
-		<error line="24" column="24" severity="warning" message="indent message" source="jshint.indent" />
+		<error line="24" column="24" severity="warning" message="esnext message" source="jshint.esnext" />
 		<error line="24" column="24" severity="warning" message="disallowTrailingWhitespace message" source="jscs.disallowTrailingWhitespace" />
 	</file>
 	<file name="z.js">
 		<error line="25" column="25" severity="error" message="no-extra-semi message" source="eslint.no-extra-semi" />
-		<error line="25" column="25" severity="error" message="undef message" source="jshint.undef" />
+		<error line="25" column="25" severity="error" message="indent message" source="jshint.indent" />
 		<error line="25" column="25" severity="error" message="disallowKeywordsOnNewLine message" source="jscs.disallowKeywordsOnNewLine" />
 	</file>
 </checkstyle>

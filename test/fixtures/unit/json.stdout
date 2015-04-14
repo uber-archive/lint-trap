@@ -151,8 +151,8 @@
                     "file": "e.js",
                     "line": 4,
                     "column": 4,
-                    "rule": "indent",
-                    "message": "indent message"
+                    "rule": "esnext",
+                    "message": "esnext message"
                 },
                 {
                     "type": "warning",
@@ -184,8 +184,8 @@
                     "file": "f.js",
                     "line": 5,
                     "column": 5,
-                    "rule": "undef",
-                    "message": "undef message"
+                    "rule": "indent",
+                    "message": "indent message"
                 },
                 {
                     "type": "error",
@@ -217,8 +217,8 @@
                     "file": "g.js",
                     "line": 6,
                     "column": 6,
-                    "rule": "validthis",
-                    "message": "validthis message"
+                    "rule": "undef",
+                    "message": "undef message"
                 },
                 {
                     "type": "warning",
@@ -250,8 +250,8 @@
                     "file": "h.js",
                     "line": 7,
                     "column": 7,
-                    "rule": "newcap",
-                    "message": "newcap message"
+                    "rule": "validthis",
+                    "message": "validthis message"
                 },
                 {
                     "type": "error",
@@ -283,8 +283,8 @@
                     "file": "i.js",
                     "line": 8,
                     "column": 8,
-                    "rule": "indent",
-                    "message": "indent message"
+                    "rule": "newcap",
+                    "message": "newcap message"
                 },
                 {
                     "type": "warning",
@@ -316,8 +316,8 @@
                     "file": "j.js",
                     "line": 9,
                     "column": 9,
-                    "rule": "undef",
-                    "message": "undef message"
+                    "rule": "esnext",
+                    "message": "esnext message"
                 },
                 {
                     "type": "error",
@@ -349,8 +349,8 @@
                     "file": "k.js",
                     "line": 10,
                     "column": 10,
-                    "rule": "validthis",
-                    "message": "validthis message"
+                    "rule": "indent",
+                    "message": "indent message"
                 },
                 {
                     "type": "warning",
@@ -382,8 +382,8 @@
                     "file": "l.js",
                     "line": 11,
                     "column": 11,
-                    "rule": "newcap",
-                    "message": "newcap message"
+                    "rule": "undef",
+                    "message": "undef message"
                 },
                 {
                     "type": "error",
@@ -415,8 +415,8 @@
                     "file": "m.js",
                     "line": 12,
                     "column": 12,
-                    "rule": "indent",
-                    "message": "indent message"
+                    "rule": "validthis",
+                    "message": "validthis message"
                 },
                 {
                     "type": "warning",
@@ -448,8 +448,8 @@
                     "file": "n.js",
                     "line": 13,
                     "column": 13,
-                    "rule": "undef",
-                    "message": "undef message"
+                    "rule": "newcap",
+                    "message": "newcap message"
                 },
                 {
                     "type": "error",
@@ -481,8 +481,8 @@
                     "file": "o.js",
                     "line": 14,
                     "column": 14,
-                    "rule": "validthis",
-                    "message": "validthis message"
+                    "rule": "esnext",
+                    "message": "esnext message"
                 },
                 {
                     "type": "warning",
@@ -514,8 +514,8 @@
                     "file": "p.js",
                     "line": 15,
                     "column": 15,
-                    "rule": "newcap",
-                    "message": "newcap message"
+                    "rule": "indent",
+                    "message": "indent message"
                 },
                 {
                     "type": "error",
@@ -547,8 +547,8 @@
                     "file": "q.js",
                     "line": 16,
                     "column": 16,
-                    "rule": "indent",
-                    "message": "indent message"
+                    "rule": "undef",
+                    "message": "undef message"
                 },
                 {
                     "type": "warning",
@@ -580,8 +580,8 @@
                     "file": "r.js",
                     "line": 17,
                     "column": 17,
-                    "rule": "undef",
-                    "message": "undef message"
+                    "rule": "validthis",
+                    "message": "validthis message"
                 },
                 {
                     "type": "error",
@@ -613,8 +613,8 @@
                     "file": "s.js",
                     "line": 18,
                     "column": 18,
-                    "rule": "validthis",
-                    "message": "validthis message"
+                    "rule": "newcap",
+                    "message": "newcap message"
                 },
                 {
                     "type": "warning",
@@ -646,8 +646,8 @@
                     "file": "t.js",
                     "line": 19,
                     "column": 19,
-                    "rule": "newcap",
-                    "message": "newcap message"
+                    "rule": "esnext",
+                    "message": "esnext message"
                 },
                 {
                     "type": "error",
@@ -811,8 +811,8 @@
                     "file": "y.js",
                     "line": 24,
                     "column": 24,
-                    "rule": "indent",
-                    "message": "indent message"
+                    "rule": "esnext",
+                    "message": "esnext message"
                 },
                 {
                     "type": "warning",
@@ -844,8 +844,8 @@
                     "file": "z.js",
                     "line": 25,
                     "column": 25,
-                    "rule": "undef",
-                    "message": "undef message"
+                    "rule": "indent",
+                    "message": "indent message"
                 },
                 {
                     "type": "error",
