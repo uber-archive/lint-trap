@@ -40,12 +40,13 @@ function! SyntaxCheckers_javascript_linttrap_GetLocList() dict
     endif
 
     let errorformat =
-        \ '%E%f: line %l\, col %c\, Error - %m,' .
-        \ '%W%f: line %l\, col %c\, Warning - %m'
+        \ '%E%.%#: line %l\, col %c\, Error - %m,' .
+        \ '%W%.%#: line %l\, col %c\, Warning - %m'
 
     let loclist = SyntasticMake({
         \ 'makeprg': makeprg,
         \ 'errorformat': errorformat,
+        \ 'defaults': { 'bufnr': bufnr('') },
         \ 'postprocess': ['guards'] })
 
     for e in loclist
