@@ -4,6 +4,7 @@
     "undef": true,
     "validthis": true,
     "newcap": false,
+    "esnext": true,
     "globals": {
         "__dirname": false,
         "__filename": false,
